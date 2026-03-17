@@ -7,6 +7,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.quiz.R
+import org.w3c.dom.Text
 
 val fredoka = FontFamily(
     Font(R.font.fredoka_semibold, FontWeight.SemiBold),
@@ -15,6 +16,31 @@ val fredoka = FontFamily(
     Font(R.font.fredoka_medium, FontWeight.Medium)
 )
 val Typography = Typography(
+    titleLarge = TextStyle(
+        fontFamily = fredoka,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 32.sp
+    ),
+    titleMedium = TextStyle(
+        fontFamily = fredoka,
+        fontWeight = FontWeight.Medium,
+        fontSize = 36.sp
+    ),
+    labelLarge = TextStyle(
+        fontFamily =  fredoka,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = fredoka,
+        fontWeight = FontWeight.Medium,
+        fontSize = 28.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = fredoka,
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp
+    ),
     bodyLarge = TextStyle(
         fontFamily = fredoka,
         fontWeight = FontWeight.SemiBold,
