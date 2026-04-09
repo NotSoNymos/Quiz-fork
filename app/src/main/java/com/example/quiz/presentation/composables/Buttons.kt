@@ -32,7 +32,8 @@ fun SimpleButton(modifier: Modifier, text: String, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         modifier = modifier,
-        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
+        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+        shape = RoundedCornerShape(30.dp)
     ) {
         Text(
             text = text,
@@ -83,7 +84,7 @@ fun ButtonAddParagraph(modifier: Modifier = Modifier, onClick: () -> Unit) {
 }
 
 @Composable
-fun ButtonCreate(modifier: Modifier, onClick: () -> Unit, title: String) {
+fun ButtonCreate(modifier: Modifier= Modifier, onClick: () -> Unit, title: String) {
     Button(
         onClick = onClick,
         modifier = modifier
@@ -104,10 +105,10 @@ fun ButtonCreate(modifier: Modifier, onClick: () -> Unit, title: String) {
 }
 
 @Composable
-fun ButtonNotification(onClick: () -> Unit) {
+fun ButtonNotification(modifier: Modifier= Modifier, onClick: () -> Unit) {
     IconButton(
         onClick = onClick,
-        modifier = Modifier.size(60.dp),
+        modifier = modifier.size(60.dp),
         colors = IconButtonDefaults.iconButtonColors(MaterialTheme.colorScheme.secondary)
     ) {
         Icon(

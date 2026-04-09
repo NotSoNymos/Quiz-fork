@@ -1,4 +1,4 @@
-package com.example.quiz.presentation.screen
+package com.example.quiz.presentation.screen.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
