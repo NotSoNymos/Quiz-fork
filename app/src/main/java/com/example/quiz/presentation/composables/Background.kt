@@ -28,14 +28,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.quiz.R
@@ -51,7 +48,6 @@ fun BackgroundLogin(title: String) {
         topBar = {
             TopAppBar(
                 modifier = Modifier
-                    .height(150.dp)
                     .padding(top = 80.dp, start = 5.dp),
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary
@@ -92,6 +88,68 @@ fun BackgroundLogin(title: String) {
 
         }
 
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Composable
+fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: String) {
+    Scaffold(containerColor = MaterialTheme.colorScheme.primary, topBar = {
+        TopAppBar(
+            title = {
+                Row(
+                    modifier = Modifier
+                        .padding(end = 25.dp, top = 42.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+
+                    Text(
+                        label,
+                        modifier = Modifier
+                            .padding(start = 17.dp)
+                            .width(140.dp),
+                        color = White
+                    )
+                    Image(
+                        painter = painterResource(if (type == "book") R.drawable.create_book else R.drawable.create_quiz),
+                        contentDescription = null, modifier = Modifier
+                            .width(135.dp)
+                            .height(100.dp)
+                    )
+                }
+
+            },
+            navigationIcon = {
+                Icon(
+                    painter = painterResource(R.drawable.ic_left),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(start = 20.dp, top = 55.dp)
+                        .width(43.dp)
+                        .height(34.dp),
+                    tint = White
+                )
+            },
+            modifier = Modifier.height(160.dp),
+            colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.primary)
+        )
+    }) { innerPadding ->
+
+
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+                .background(
+                    color = White,
+                    shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
+                )
+
+        ) {
+
+        }
     }
 }
 
@@ -198,10 +256,20 @@ fun SimpleCreateBackground(modifier: Modifier = Modifier, title: String) {
 
 @Preview
 @Composable
+private fun SimpleQuizBackgroundPreview() {
+    QuizTheme { SimpleQuizBackground(label = "Создать учебник", type = "quiz") }
+
+}
+
+@Preview
+@Composable
 private fun BackgroundProfilePrev() {
-    QuizTheme { BackgroundProfile(Modifier, R.drawable.ic_launcher_background,
-        { ContentProfileScreen(Modifier) }
-    ) }
+    QuizTheme {
+        BackgroundProfile(
+            Modifier, R.drawable.ic_launcher_background,
+            { ContentProfileScreen(Modifier) }
+        )
+    }
 }
 
 @Preview

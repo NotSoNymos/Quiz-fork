@@ -3,6 +3,7 @@ package com.example.quiz.presentation.screen.profile
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,13 +27,13 @@ fun ContentProfileScreen(modifier: Modifier = Modifier, viewModel: ProfileViewMo
     Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
 
 
-        SimpleOutlinedText(Modifier,surname,"Фамилия", viewModel::onSurnameChange)
-        SimpleOutlinedText(Modifier.padding(top = 15.dp),name,"Имя", viewModel::onNameChange)
-        SimpleOutlinedText(Modifier.padding(top = 15.dp),patronymic,"Отчество", viewModel::onPatrinymicChange)
-        SimpleOutlinedText(Modifier.padding(top = 15.dp),gender,"Пол",viewModel::onGenderChange)
-        SimpleOutlinedText(Modifier.padding(top = 15.dp),age,"Возраст", viewModel::onAgeChange)
-        SimpleOutlinedText(Modifier.padding(top = 15.dp),education,"Образование", viewModel::onEducationChange)
-        SimpleOutlinedText(Modifier.padding(top = 15.dp),town,"Город", viewModel::onTownChange)
+        SimpleOutlinedText(Modifier,surname,"Фамилия", viewModel::onSurnameChange, MaterialTheme.colorScheme.secondary)
+        SimpleOutlinedText(Modifier.padding(top = 15.dp),name,"Имя", viewModel::onNameChange, MaterialTheme.colorScheme.secondary)
+        SimpleOutlinedText(Modifier.padding(top = 15.dp),patronymic,"Отчество", viewModel::onPatrinymicChange, MaterialTheme.colorScheme.secondary)
+        SimpleOutlinedText(Modifier.padding(top = 15.dp),gender,"Пол",viewModel::onGenderChange, MaterialTheme.colorScheme.secondary)
+        SimpleOutlinedText(Modifier.padding(top = 15.dp),age,"Возраст", viewModel::onAgeChange, MaterialTheme.colorScheme.secondaryContainer)
+        SimpleOutlinedText(Modifier.padding(top = 15.dp),education,"Образование", viewModel::onEducationChange, MaterialTheme.colorScheme.secondary)
+        SimpleOutlinedText(Modifier.padding(top = 15.dp),town,"Город", viewModel::onTownChange, MaterialTheme.colorScheme.secondary)
 
 
 

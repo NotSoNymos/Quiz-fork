@@ -23,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,13 +43,14 @@ fun CardWork(
 
     ) {
     Box(
-        modifier = Modifier
+        modifier = Modifier.padding(bottom = 20.dp)
             .width(333.dp)
             .height(105.dp)
             .background(
                 color = MaterialTheme.colorScheme.secondary,
                 shape = RoundedCornerShape(20.dp)
             )
+
     ) {
         if (flagSettings) {
             Icon(
@@ -258,17 +258,17 @@ fun CardWorkQuiz(modifier: Modifier = Modifier, quiz: Quiz, onClick: () -> Unit,
 }
 
 
-@Preview
-@Composable
-private fun CardWorkQuizPreview(modifier: Modifier = Modifier) {
-    QuizTheme {
-        CardWorkQuiz(
-            modifier = Modifier,
-            Quiz("Title", "Description"),
-            count = "33",
-            onClick = {})
-    }
-}
+//@Preview
+//@Composable
+//private fun CardWorkQuizPreview(modifier: Modifier = Modifier) {
+//    QuizTheme {
+//        CardWorkQuiz(
+//            modifier = Modifier,
+//            Quiz("Title", "Description"),
+//            count = "33",
+//            onClick = {})
+//    }
+//}
 //@Preview
 //@Composable
 //private fun CardWorkPrev() {

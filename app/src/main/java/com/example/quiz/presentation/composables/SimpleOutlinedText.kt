@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -46,7 +47,7 @@ import com.example.quiz.ui.theme.QuizTheme
 
 
 @Composable
-fun SimpleOutlinedText(modifier: Modifier = Modifier,  text: String,label: String,  onTextChange: (String) -> Unit) {
+fun SimpleOutlinedText(modifier: Modifier = Modifier,  text: String,label: String,  onTextChange: (String) -> Unit, color: Color) {
     OutlinedTextField(
         textStyle = MaterialTheme.typography.labelSmall.copy(color = Black),
         value = text,
@@ -57,13 +58,16 @@ fun SimpleOutlinedText(modifier: Modifier = Modifier,  text: String,label: Strin
         label = { Text(text= label, style = MaterialTheme.typography.labelSmall.copy(fontSize = 20.sp)) },
         shape = RoundedCornerShape(20),
         colors = OutlinedTextFieldDefaults.colors(
-            focusedContainerColor = MaterialTheme.colorScheme.secondary,
-            unfocusedContainerColor = MaterialTheme.colorScheme.secondary,
-            unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
-            focusedBorderColor = MaterialTheme.colorScheme.secondary
+            focusedContainerColor = color,
+            unfocusedContainerColor = color,
+            unfocusedBorderColor = color,
+            focusedBorderColor = color
         )
     )
 }
+
+
+
 
 
 

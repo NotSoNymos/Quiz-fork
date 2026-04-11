@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.quiz.presentation.composables.BackgroundLogin
+
 import com.example.quiz.presentation.composables.EditLoginRegistration
 import com.example.quiz.presentation.composables.EditPasswordRegistration
 import com.example.quiz.presentation.composables.SimpleButton
