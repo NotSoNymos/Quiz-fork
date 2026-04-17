@@ -31,7 +31,7 @@ fun ContentProfileScreen(modifier: Modifier = Modifier, viewModel: ProfileViewMo
         SimpleOutlinedText(Modifier.padding(top = 15.dp),name,"Имя", viewModel::onNameChange, MaterialTheme.colorScheme.secondary)
         SimpleOutlinedText(Modifier.padding(top = 15.dp),patronymic,"Отчество", viewModel::onPatrinymicChange, MaterialTheme.colorScheme.secondary)
         SimpleOutlinedText(Modifier.padding(top = 15.dp),gender,"Пол",viewModel::onGenderChange, MaterialTheme.colorScheme.secondary)
-        SimpleOutlinedText(Modifier.padding(top = 15.dp),age,"Возраст", viewModel::onAgeChange, MaterialTheme.colorScheme.secondaryContainer)
+        SimpleOutlinedText(Modifier.padding(top = 15.dp),age,"Возраст", viewModel::onAgeChange, MaterialTheme.colorScheme.secondary)
         SimpleOutlinedText(Modifier.padding(top = 15.dp),education,"Образование", viewModel::onEducationChange, MaterialTheme.colorScheme.secondary)
         SimpleOutlinedText(Modifier.padding(top = 15.dp),town,"Город", viewModel::onTownChange, MaterialTheme.colorScheme.secondary)
 

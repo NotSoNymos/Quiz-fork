@@ -6,7 +6,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -23,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,7 +47,8 @@ fun CardWork(
 
     ) {
     Box(
-        modifier = Modifier.padding(bottom = 20.dp)
+        modifier = Modifier
+            .padding(bottom = 20.dp)
             .width(333.dp)
             .height(105.dp)
             .background(
@@ -81,6 +86,55 @@ fun CardWork(
     }
 
 }
+//@Composable
+//fun CardResolvedWork(
+//    modifier: Modifier = Modifier,
+//    title: String,
+//    text: String,
+//    onClick: () -> Unit,
+//    count,
+//
+//    ) {
+//    Box(
+//        modifier = Modifier
+//            .padding(bottom = 20.dp)
+//            .width(333.dp)
+//            .height(105.dp)
+//            .background(
+//                color = MaterialTheme.colorScheme.secondary,
+//                shape = RoundedCornerShape(20.dp)
+//            )
+//
+//    ) {
+//        if (flagSettings) {
+//            Icon(
+//                painter = painterResource(R.drawable.ic_setting_config),
+//                contentDescription = null,
+//                modifier = Modifier
+//                    .padding(start = 294.dp, top = 15.dp)
+//                    .size(24.dp),
+//                tint = Black
+//            )
+//        }
+//
+//
+//
+//        Column(
+//            modifier = Modifier
+//                .padding(start = 23.dp, top = 15.dp)
+//                .fillMaxSize()
+//
+//        ) {
+//            Text(text = title, style = MaterialTheme.typography.labelMedium)
+//            Text(
+//                text = text,
+//                style = MaterialTheme.typography.labelSmall,
+//                modifier = Modifier.padding(start = 20.dp)
+//            )
+//        }
+//    }
+//
+//}
 
 
 @Composable
@@ -177,16 +231,15 @@ fun CardNotFound(modifier: Modifier = Modifier) {
 
 
 @Composable
-fun CardTitle(modifier: Modifier = Modifier, title: String) {
+fun CardTitle(modifier: Modifier = Modifier, title: String, color: Color) {
     Box(
-        modifier = Modifier
-            .width(346.dp)
-            .height(71.dp)
+        modifier = modifier
             .background(
-                color = MaterialTheme.colorScheme.secondaryContainer,
+                color = color,
                 shape = RoundedCornerShape(15.dp)
             )
     ) {
+
         Text(
             text = title,
             style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp),
@@ -195,6 +248,7 @@ fun CardTitle(modifier: Modifier = Modifier, title: String) {
                 .fillMaxSize(),
             textAlign = TextAlign.Center
         )
+
     }
 }
 
@@ -232,7 +286,7 @@ fun ReadBookCard(modifier: Modifier = Modifier, description: String, title: Stri
                 .padding(top = 16.dp, start = 16.dp)
                 .width(335.dp)
         ) {
-            CardTitle(title = title)
+            CardTitle(title = title, color = MaterialTheme.colorScheme.primary)
         }
 
         Text(
@@ -245,18 +299,59 @@ fun ReadBookCard(modifier: Modifier = Modifier, description: String, title: Stri
 
 @Composable
 fun CardWorkQuiz(modifier: Modifier = Modifier, quiz: Quiz, onClick: () -> Unit, count: String) {
-    CardWork(title = quiz.title, text = quiz.description, onClick = {}, flagSettings = false)
-    Box(
-        modifier = Modifier
-            .padding(top = 24.dp, start = 206.dp)
-            .width(107.dp)
-            .height(58.dp)
-    ) {
-        CardTitle(title = count)
+    Box(){
+        CardWork(title = quiz.title, text = quiz.description, onClick = {}, flagSettings = false)
+        Box(
+            modifier = Modifier
+                .padding(top = 24.dp, start = 206.dp)
+                .width(107.dp)
+                .height(58.dp)
+        ) {
+            CardTitle(title = count, color = MaterialTheme.colorScheme.primary)
+        }
     }
+
 
 }
 
+
+@Composable
+fun CardVariableVariant(modifier: Modifier = Modifier, text: String) {
+    Box(
+        modifier = Modifier
+            .width(346.dp)
+            .height(68.dp)
+            .background(
+                color = MaterialTheme.colorScheme.primary,
+                shape = RoundedCornerShape(15.dp)
+            )
+    ) {
+        SimpleCheckbox(
+            Modifier
+                .padding(start = 11.dp, top = 3.dp)
+                .fillMaxSize(), {}
+        )
+        Text(
+            text = text,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 60.dp, top = 19.dp),
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun CardVariableVariantPreview() {
+    QuizTheme { CardVariableVariant(Modifier, "Вопрос") }
+}
+
+@Preview
+@Composable
+private fun Preview() {
+    QuizTheme { CardWorkQuiz(Modifier, Quiz("Title", "Description", listOf()), {}, "16") }
+}
 
 //@Preview
 //@Composable
@@ -398,7 +493,13 @@ fun SimpleCardNavigation(
 @Preview
 @Composable
 private fun CardTitlePreview() {
-    QuizTheme { CardTitle(title = "Title") }
+    QuizTheme {
+        CardTitle(
+            Modifier
+                .width(346.dp)
+                .height(71.dp), title = "Title", color = MaterialTheme.colorScheme.primary
+        )
+    }
 }
 
 @Preview

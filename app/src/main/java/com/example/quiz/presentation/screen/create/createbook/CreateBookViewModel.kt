@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class CreateBookViewModel: ViewModel() {
+    private val _isChecked = MutableStateFlow(false)
+    val isChecked: StateFlow<Boolean> = _isChecked
     private val _title = MutableStateFlow("")
     val login: StateFlow<String> = _title
     private var _description = MutableStateFlow("")
@@ -17,7 +19,9 @@ class CreateBookViewModel: ViewModel() {
     fun onTitleChange(newText: String){
         _title.value = newText
     }
-
+    fun onIsCheckedChange(newStatus: Boolean){
+        _isChecked.value = newStatus
+    }
     fun onDescriptionChange(newText: String){
         _description.value = newText
     }

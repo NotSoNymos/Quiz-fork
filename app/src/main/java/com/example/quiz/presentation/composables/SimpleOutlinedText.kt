@@ -2,9 +2,11 @@ package com.example.quiz.presentation.composables
 
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,9 +47,20 @@ import com.example.quiz.ui.theme.QuizTheme
 //    }
 //}
 
+@Composable
+fun QuestionOutlinedText(modifier: Modifier = Modifier) {
+
+}
+
 
 @Composable
-fun SimpleOutlinedText(modifier: Modifier = Modifier,  text: String,label: String,  onTextChange: (String) -> Unit, color: Color) {
+fun SimpleOutlinedText(
+    modifier: Modifier = Modifier,
+    text: String,
+    label: String,
+    onTextChange: (String) -> Unit,
+    color: Color
+) {
     OutlinedTextField(
         textStyle = MaterialTheme.typography.labelSmall.copy(color = Black),
         value = text,
@@ -55,7 +68,12 @@ fun SimpleOutlinedText(modifier: Modifier = Modifier,  text: String,label: Strin
         modifier = modifier
             .width(368.dp)
             .height(63.dp),
-        label = { Text(text= label, style = MaterialTheme.typography.labelSmall.copy(fontSize = 20.sp)) },
+        label = {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 20.sp)
+            )
+        },
         shape = RoundedCornerShape(20),
         colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = color,
@@ -67,8 +85,61 @@ fun SimpleOutlinedText(modifier: Modifier = Modifier,  text: String,label: Strin
 }
 
 
+@Composable
+fun SimpleAnswerText(
+    modifier: Modifier = Modifier,
+    text: String,
+    label: String,
+    onTextChange: (String) -> Unit,
+    color: Color
+) {
+    Box() {
 
+        OutlinedTextField(
+            textStyle = MaterialTheme.typography.labelSmall.copy(color = Black),
+            value = text,
+            onValueChange = onTextChange,
+            modifier = modifier
+                .width(368.dp)
+                .height(63.dp),
+            label = {
+                Text(
+                    text = label,
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 20.sp)
+                )
+            },
+            shape = RoundedCornerShape(20),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = color,
+                unfocusedContainerColor = color,
+                unfocusedBorderColor = color,
+                focusedBorderColor = color
+            )
+        )
+        Icon(
+            painter = painterResource(R.drawable.ic_delete_key),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(start = 300.dp, top = 10.dp)
+                .size(50.dp)
+        )
+    }
+}
 
+@Preview
+@Composable
+private fun AnswerTextPreview() {
+    QuizTheme {
+        SimpleAnswerText(
+            Modifier,
+            "",
+            "",
+            {},
+            color = MaterialTheme.colorScheme.secondary
+        )
+    }
+
+}
 
 
 @OptIn(ExperimentalMaterial3Api::class)

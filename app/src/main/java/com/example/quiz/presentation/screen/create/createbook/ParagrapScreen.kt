@@ -60,7 +60,7 @@ fun CreateParagraph(
             )
             ButtonAddParagraph(
                 Modifier.padding(top = 503.dp, start = 260.dp), {
-                    viewModel.onParagraphsChange(Paragraph(title.value, description.value))
+
                     title.value = ""
                     description.value = ""
                 })
@@ -71,7 +71,9 @@ fun CreateParagraph(
                     .padding(start = 20.dp, top = 9.dp)
                     .width(226.dp),
                 "Сохранить"
-            ) {}
+            ) {
+                viewModel.onParagraphsChange(Paragraph(title.value, description.value))
+            }
         }
     }
 }

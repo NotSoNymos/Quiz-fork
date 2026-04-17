@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.quiz.R
@@ -110,7 +111,9 @@ fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: Str
                         modifier = Modifier
                             .padding(start = 17.dp)
                             .width(140.dp),
-                        color = White
+                        color = White,
+                        textAlign = TextAlign.Center
+
                     )
                     Image(
                         painter = painterResource(if (type == "book") R.drawable.create_book else R.drawable.create_quiz),
@@ -121,6 +124,7 @@ fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: Str
                 }
 
             },
+
             navigationIcon = {
                 Icon(
                     painter = painterResource(R.drawable.ic_left),
@@ -137,7 +141,6 @@ fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: Str
         )
     }) { innerPadding ->
 
-
         Column(
             modifier = Modifier
                 .padding(innerPadding)
@@ -146,9 +149,7 @@ fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: Str
                     color = White,
                     shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
                 )
-
         ) {
-
         }
     }
 }

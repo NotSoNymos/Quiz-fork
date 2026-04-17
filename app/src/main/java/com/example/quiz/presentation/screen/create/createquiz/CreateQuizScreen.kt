@@ -32,6 +32,7 @@ fun CreateQuizScreen(modifier: Modifier = Modifier) {
             .background(color = White, shape = RoundedCornerShape(30.dp)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         Box(modifier = Modifier.width(346.dp)) {
             SimpleOutlinedText(
                 Modifier.padding(top = 41.dp),
@@ -41,16 +42,18 @@ fun CreateQuizScreen(modifier: Modifier = Modifier) {
                 MaterialTheme.colorScheme.secondary
             )
         }
+
         SimpleOutlinedText(
             Modifier.clip(shape = RoundedCornerShape(8.dp))
                 .padding(top = 12.dp)
-                .width(367.dp)
+                .width(355.dp)
                 .height(406.dp),
             "",
             "Описание",
             {},
             MaterialTheme.colorScheme.primaryContainer
         )
+
         SimpleButton(
             modifier = Modifier
                 .padding(top = 31.dp, start = 201.dp),

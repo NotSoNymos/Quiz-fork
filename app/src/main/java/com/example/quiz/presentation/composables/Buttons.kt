@@ -1,6 +1,6 @@
 package com.example.quiz.presentation.composables
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -22,10 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.quiz.R
 import com.example.quiz.ui.theme.Black
-import com.example.quiz.ui.theme.DeepAzure
 import com.example.quiz.ui.theme.QuizTheme
 import com.example.quiz.ui.theme.White
-import java.nio.file.WatchEvent
 
 @Composable
 fun SimpleButton(modifier: Modifier, text: String, onClick: () -> Unit) {
@@ -84,7 +82,7 @@ fun ButtonAddParagraph(modifier: Modifier = Modifier, onClick: () -> Unit) {
 }
 
 @Composable
-fun ButtonCreate(modifier: Modifier= Modifier, onClick: () -> Unit, title: String) {
+fun ButtonCreate(modifier: Modifier = Modifier, onClick: () -> Unit, title: String) {
     Button(
         onClick = onClick,
         modifier = modifier
@@ -92,7 +90,6 @@ fun ButtonCreate(modifier: Modifier= Modifier, onClick: () -> Unit, title: Strin
             .height(163.dp),
         colors = ButtonDefaults.buttonColors(White),
         shape = RoundedCornerShape(20.dp)
-
     ) {
         Text(
             title,
@@ -100,12 +97,11 @@ fun ButtonCreate(modifier: Modifier= Modifier, onClick: () -> Unit, title: Strin
             style = MaterialTheme.typography.titleMedium,
             color = Black
         )
-
     }
 }
 
 @Composable
-fun ButtonNotification(modifier: Modifier= Modifier, onClick: () -> Unit) {
+fun ButtonNotification(modifier: Modifier = Modifier, onClick: () -> Unit) {
     IconButton(
         onClick = onClick,
         modifier = modifier.size(60.dp),
@@ -115,15 +111,34 @@ fun ButtonNotification(modifier: Modifier= Modifier, onClick: () -> Unit) {
             painter = painterResource(R.drawable.ic_notification), contentDescription = null,
             modifier = Modifier.size(40.dp)
         )
-
     }
 }
 
+@Composable
+fun ButtonAddVariableAnswer(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    title: String
+) {
+    Button(
+        modifier = modifier.background(color = MaterialTheme.colorScheme.primary,shape = RoundedCornerShape(15.dp)),
 
+        onClick = onClick
+    ) {
+        Text(text = title, style = MaterialTheme.typography.bodyMedium, color = Black)
+    }
+}
 
 
 @Preview
 @Composable
 private fun PrevButtonNotification() {
-    MaterialTheme { ButtonNotification { {} } }
+    QuizTheme { ButtonNotification { {} } }
+}
+
+@Preview
+@Composable
+private fun ButtonAddVariableAnswerPreview() {
+    QuizTheme { ButtonAddVariableAnswer(Modifier, {}, "Description") }
+
 }
