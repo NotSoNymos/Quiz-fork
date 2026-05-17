@@ -16,12 +16,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.quiz.R
 import com.example.quiz.ui.theme.Black
+import com.example.quiz.ui.theme.LightAzure
 import com.example.quiz.ui.theme.QuizTheme
 import com.example.quiz.ui.theme.White
 
@@ -118,11 +120,15 @@ fun ButtonNotification(modifier: Modifier = Modifier, onClick: () -> Unit) {
 fun ButtonAddVariableAnswer(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    title: String
+    title: String,
+    color: Color
 ) {
     Button(
-        modifier = modifier.background(color = MaterialTheme.colorScheme.primary,shape = RoundedCornerShape(15.dp)),
-
+        modifier = modifier,
+        shape = RoundedCornerShape(15.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = color
+        ),
         onClick = onClick
     ) {
         Text(text = title, style = MaterialTheme.typography.bodyMedium, color = Black)
@@ -139,6 +145,6 @@ private fun PrevButtonNotification() {
 @Preview
 @Composable
 private fun ButtonAddVariableAnswerPreview() {
-    QuizTheme { ButtonAddVariableAnswer(Modifier, {}, "Description") }
+    QuizTheme { ButtonAddVariableAnswer(Modifier, {}, "Description", LightAzure) }
 
 }

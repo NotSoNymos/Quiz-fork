@@ -1,8 +1,10 @@
 package com.example.quiz.presentation.screen.create.createquiz
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -22,106 +24,133 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.quiz.data.model.InputField
+import com.example.quiz.presentation.composables.ButtonAddParagraph
 import com.example.quiz.presentation.composables.ButtonAddVariableAnswer
 import com.example.quiz.presentation.composables.SimpleAnswerText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun CreateQuestion(modifier: Modifier = Modifier) {
+fun CreateQuestion(modifier: Modifier = Modifier, viewModel: CreateQuizViewModel = viewModel()) {
     val fields = remember { mutableStateListOf<InputField>() }
     val question = remember { mutableStateOf("") }
     val answer = remember { mutableStateOf("") }
 
+
+    val listVariants = mutableListOf<String>()
     SimpleQuizBackground(Modifier, "Создать квиз", "quiz")
 
-    // Вместо Column используем LazyColumn для всего контента
 
     LazyColumn(
         modifier = Modifier
-            .padding(top = 210.dp) // Отступ под шапку
+            .padding(top = 210.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        contentPadding = PaddingValues(bottom = 32.dp) // Отступ снизу, чтобы кнопки не прилипали
+        contentPadding = PaddingValues(bottom = 32.dp)
     ) {
-        // 1. Поле "Вопрос"
         item {
             OutlinedTextField(
                 value = question.value,
                 onValueChange = { question.value = it },
-                modifier = modifier
-                    .width(368.dp)
-                    .height(63.dp),
+                modifier = Modifier
+                    .width(355.dp)
+                    .height(80.dp),
                 label = {
                     Text(
                         "Вопрос",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 20.sp)
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 24.sp)
                     )
                 },
                 shape = RoundedCornerShape(20),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = MaterialTheme.colorScheme.secondary,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.secondary
-                )
+                    unfocusedContainerColor = MaterialTheme.colorScheme.secondary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                    focusedBorderColor = MaterialTheme.colorScheme.secondary
+                ),
+                textStyle = MaterialTheme.typography.labelSmall.copy(
+                    fontSize = 24.sp
+                ),
             )
         }
 
-        // 2. Поле "Правильный ответ"
         item {
             OutlinedTextField(
                 value = answer.value,
                 onValueChange = { answer.value = it },
-                modifier = modifier
+                modifier = Modifier
                     .padding(top = 25.dp)
-                    .width(368.dp)
-                    .height(63.dp),
+                    .width(355.dp)
+                    .height(80.dp),
                 label = {
                     Text(
                         "Правильный ответ",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 20.sp)
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 24.sp)
                     )
                 },
                 shape = RoundedCornerShape(20),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                    unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                    focusedBorderColor = MaterialTheme.colorScheme.secondary
+                ),
+                textStyle = MaterialTheme.typography.labelSmall.copy(
+                    fontSize = 24.sp
+                ),
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
 
-        // 3. Список динамических вариантов ответа
+
+
 
         itemsIndexed(fields) { index, field ->
             SimpleAnswerText(
-                Modifier.width(355.dp)
+                Modifier
+                    .width(355.dp)
+                    .height(80.dp)
                     .padding(vertical = 4.dp),
                 field.text,
-                 "Вариант №${index + 1}" ,
-                {},
-                color = MaterialTheme.colorScheme.secondary
-            )
+                "Вариант №${index + 1}",
+                onTextChange = { newValue ->
+                    // Обновляем текст внутри конкретного объекта по индексу
+                    fields[index] = field.copy(text = newValue)
+                },
+                color = MaterialTheme.colorScheme.secondary,
+                onDeleteClick = {
+                    fields.removeAt(index)
+                },
+
+                )
         }
 
-        // 4. Кнопки управления
+
         item {
             ButtonAddVariableAnswer(
                 modifier = Modifier
-                    .padding(top = 30.dp)
-                    .width(368.dp)
-                    .height(60.dp),
+                    .padding(top = 7.dp)
+                    .width(355.dp)
+                    .height(70.dp),
                 { fields.add(InputField(id = fields.size)) },
-                "Добавить вариант ответа"
+                "Добавить вариант ответа",
+                MaterialTheme.colorScheme.primary
             )
+
+            Box(modifier = Modifier.fillMaxWidth()) {
+                ButtonAddParagraph(modifier = Modifier.padding(top = 30.dp, start = 280.dp)) { }
+            }
 
             ButtonAddVariableAnswer(
                 modifier = Modifier
-                    .padding(top = 15.dp)
-                    .width(368.dp)
-                    .height(60.dp),
-                { /* Логика сохранения */ },
-                "Сохранить квиз"
+                    .padding(top = 90.dp)
+                    .width(355.dp)
+                    .height(65.dp),
+                { },
+                "Сохранить квиз",
+                MaterialTheme.colorScheme.secondaryContainer
             )
         }
     }

@@ -46,7 +46,8 @@ fun CreateParagraph(
             title.value,
             "Название",
             { title.value = it },
-            MaterialTheme.colorScheme.primaryContainer
+            MaterialTheme.colorScheme.primaryContainer,
+            shape = 20
         )
         Box() {
             SimpleOutlinedText(
@@ -56,7 +57,8 @@ fun CreateParagraph(
                 description.value,
                 "Описание",
                 { description.value = it },
-                MaterialTheme.colorScheme.secondary
+                MaterialTheme.colorScheme.secondary,
+                shape = 20
             )
             ButtonAddParagraph(
                 Modifier.padding(top = 503.dp, start = 260.dp), {

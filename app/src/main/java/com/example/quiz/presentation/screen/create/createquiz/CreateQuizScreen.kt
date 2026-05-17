@@ -39,20 +39,25 @@ fun CreateQuizScreen(modifier: Modifier = Modifier) {
                 "",
                 "Название",
                 {},
-                MaterialTheme.colorScheme.secondary
+                MaterialTheme.colorScheme.secondary,
+                shape = 20
             )
         }
-
-        SimpleOutlinedText(
-            Modifier.clip(shape = RoundedCornerShape(8.dp))
-                .padding(top = 12.dp)
-                .width(355.dp)
-                .height(406.dp),
-            "",
-            "Описание",
-            {},
-            MaterialTheme.colorScheme.primaryContainer
-        )
+        Box(modifier = Modifier
+            .width(355.dp)
+            .height(406.dp)) {
+            SimpleOutlinedText(
+                Modifier
+                    .padding(top = 12.dp)
+                    .width(355.dp)
+                    .height(406.dp),
+                "",
+                "Описание",
+                {},
+                MaterialTheme.colorScheme.primaryContainer,
+                shape = 10
+            )
+        }
 
         SimpleButton(
             modifier = Modifier

@@ -1,14 +1,12 @@
-package com.example.quiz.presentation.screen.create.createquiz
+package com.example.quiz.presentation.screen.create.createbook
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.quiz.presentation.composables.SimpleButton
 
 import com.example.quiz.presentation.composables.SimpleOutlinedText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
@@ -46,7 +43,8 @@ fun CreateQuestionScreen(modifier: Modifier = Modifier) {
                 "",
                 "Название",
                 {},
-                MaterialTheme.colorScheme.primaryContainer
+                MaterialTheme.colorScheme.primaryContainer,
+                shape = 20
             )
             SimpleOutlinedText(
                 modifier = Modifier
@@ -55,7 +53,8 @@ fun CreateQuestionScreen(modifier: Modifier = Modifier) {
                 "",
                 "Описание",
                 {},
-                MaterialTheme.colorScheme.secondary
+                MaterialTheme.colorScheme.secondary,
+                shape = 20
             )
 
         }

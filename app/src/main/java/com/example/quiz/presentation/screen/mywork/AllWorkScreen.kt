@@ -1,4 +1,4 @@
-package com.example.quiz.presentation.screen.create
+package com.example.quiz.presentation.screen.mywork
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -20,38 +20,32 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.quiz.R
 import com.example.quiz.presentation.composables.ButtonCreate
-import com.example.quiz.presentation.navigation.Destinations
 import com.example.quiz.ui.theme.QuizTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun CreateScreen(
-    modifier: Modifier = Modifier,navHostController: NavHostController
-) {
+fun AllWorkScreen(modifier: Modifier = Modifier) {
     Scaffold(containerColor = MaterialTheme.colorScheme.primary) {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(R.string.create_name),
+                text = "Посмотреть",
                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 48.sp),
                 modifier = Modifier.padding(top = 81.dp)
             )
             Box(modifier = Modifier.padding(top = 52.dp)) {
-                ButtonCreate(title = stringResource(R.string.book_name), onClick = {
+                ButtonCreate(title = "Квиз", onClick = {
 //                    navHostController.navigate(
 //                        Destinations.CreateBookScreen.route
 //                    )
                 })
             }
             Box(modifier = Modifier.padding(top = 37.dp)) {
-                ButtonCreate(title = stringResource(R.string.quiz_name), onClick = {navHostController.navigate(
-                    Destinations.CreateQuizScreen)})
+                ButtonCreate(title = "Учебник", onClick = {})
             }
             Spacer(modifier = Modifier.weight(1f))
 
@@ -68,8 +62,8 @@ fun CreateScreen(
     }
 }
 
-//@Preview
-//@Composable
-//private fun CreateScreenPreview() {
-//    QuizTheme { CreateScreen(Modifier) }
-//}
+@Preview
+@Composable
+private fun AllWorkScreenPreview() {
+    QuizTheme { AllWorkScreen() }
+}

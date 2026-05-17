@@ -170,14 +170,14 @@ fun BackgroundProfile(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 53.dp)
+                .padding(top = 25.dp)
         ) {
             ButtonNotification(modifier = Modifier.padding(start = 300.dp), {})
             Image(
                 painter = painterResource(icon),
                 contentDescription = "",
                 modifier = Modifier
-                    .padding(top = 11.dp, start = 142.dp)
+                    .padding(top = 36.dp, start = 142.dp)
                     .size(117.dp)
                     .clip(
                         CircleShape
@@ -188,13 +188,12 @@ fun BackgroundProfile(
         Column(
             modifier = Modifier
 
-                .padding(top = 80.dp)
+                .padding(top = 55.dp)
                 .fillMaxSize()
                 .background(
                     color = White,
                     shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
                 )
-                .verticalScroll(state)
         ) {
             Spacer(Modifier.padding(top = 40.dp))
             body()

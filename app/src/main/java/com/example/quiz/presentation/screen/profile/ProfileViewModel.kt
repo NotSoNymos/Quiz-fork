@@ -30,6 +30,11 @@ class ProfileViewModel: ViewModel() {
     private val _town = MutableStateFlow("")
     val town: StateFlow<String> = _town
 
+
+
+
+
+
     fun onImageChange(newImage: Int){
         _image.value = newImage
     }

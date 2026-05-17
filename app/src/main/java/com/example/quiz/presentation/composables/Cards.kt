@@ -232,6 +232,7 @@ fun CardNotFound(modifier: Modifier = Modifier) {
 
 @Composable
 fun CardTitle(modifier: Modifier = Modifier, title: String, color: Color) {
+    
     Box(
         modifier = modifier
             .background(
@@ -292,7 +293,7 @@ fun ReadBookCard(modifier: Modifier = Modifier, description: String, title: Stri
         Text(
             text = description,
             style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.padding(top = 101.dp, start = 10.dp, end = 10.dp)
+            modifier = Modifier.padding(top = 101.dp, start = 10.dp, end = 10.dp).height(500.dp)
         )
     }
 }
@@ -352,24 +353,6 @@ private fun CardVariableVariantPreview() {
 private fun Preview() {
     QuizTheme { CardWorkQuiz(Modifier, Quiz("Title", "Description", listOf()), {}, "16") }
 }
-
-//@Preview
-//@Composable
-//private fun CardWorkQuizPreview(modifier: Modifier = Modifier) {
-//    QuizTheme {
-//        CardWorkQuiz(
-//            modifier = Modifier,
-//            Quiz("Title", "Description"),
-//            count = "33",
-//            onClick = {})
-//    }
-//}
-//@Preview
-//@Composable
-//private fun CardWorkPrev() {
-//    QuizTheme { CardWork(modifier = Modifier, "Названиеeeeeeeeeeeee", "Описание работы)))))))))))))))))))))))))))", {}) }
-//
-//}
 
 @Preview
 @Composable

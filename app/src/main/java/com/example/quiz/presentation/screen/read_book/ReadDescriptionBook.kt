@@ -27,6 +27,7 @@ fun ReadDescriptionBook(modifier: Modifier = Modifier, viewModel: ReadBookViewMo
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         CardTitle(
             Modifier
                 .width(346.dp)
@@ -34,6 +35,7 @@ fun ReadDescriptionBook(modifier: Modifier = Modifier, viewModel: ReadBookViewMo
             viewModel.title.collectAsState().value,
             color = MaterialTheme.colorScheme.primary
         )
+
         CardTitle(
             Modifier
                 .padding(top = 20.dp)
@@ -42,8 +44,8 @@ fun ReadDescriptionBook(modifier: Modifier = Modifier, viewModel: ReadBookViewMo
             viewModel.description.collectAsState().value,
             color = MaterialTheme.colorScheme.secondary
         )
-        SimpleButton(Modifier.padding(top = 30.dp, start = 160.dp), "Далее") { }
 
+        SimpleButton(Modifier.padding(top = 30.dp, start = 160.dp), "Далее") { }
     }
 }
 

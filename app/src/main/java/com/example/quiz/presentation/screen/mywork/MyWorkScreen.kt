@@ -16,35 +16,3 @@ import com.example.quiz.presentation.composables.CardWork
 import com.example.quiz.presentation.composables.SimpleCreateBackground
 import com.example.quiz.ui.theme.QuizTheme
 
-@Composable
-fun MyWorkScreen(modifier: Modifier = Modifier, listQuiz: List<Quiz> = listOf<Quiz>()) {
-    SimpleCreateBackground(Modifier, "Мои работы")
-    val state = rememberScrollState()
-    LazyColumn(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .padding(top = 150.dp, bottom = 100.dp)
-            .fillMaxSize()
-            .verticalScroll(state)
-    ) {
-        items(listQuiz) { item ->
-            CardWork(Modifier, item.title, item.description, {}, true)
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun Prev() {
-    QuizTheme {
-        MyWorkScreen(
-            modifier = Modifier,
-            listOf<Quiz>(
-                Quiz("Title", "description", listOf()),
-                Quiz("Title", "description", listOf()),
-                Quiz("Title", "description", listOf()),
-                Quiz("Title", "description", listOf())
-            )
-        )
-    }
-}

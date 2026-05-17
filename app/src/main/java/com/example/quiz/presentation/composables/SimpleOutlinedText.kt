@@ -59,7 +59,8 @@ fun SimpleOutlinedText(
     text: String,
     label: String,
     onTextChange: (String) -> Unit,
-    color: Color
+    color: Color,
+    shape: Int
 ) {
     OutlinedTextField(
         textStyle = MaterialTheme.typography.labelSmall.copy(color = Black),
@@ -74,7 +75,7 @@ fun SimpleOutlinedText(
                 style = MaterialTheme.typography.labelSmall.copy(fontSize = 20.sp)
             )
         },
-        shape = RoundedCornerShape(20),
+        shape = RoundedCornerShape(shape),
         colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = color,
             unfocusedContainerColor = color,
@@ -91,17 +92,16 @@ fun SimpleAnswerText(
     text: String,
     label: String,
     onTextChange: (String) -> Unit,
-    color: Color
+    color: Color,
+    onDeleteClick:()->Unit
 ) {
     Box() {
 
         OutlinedTextField(
-            textStyle = MaterialTheme.typography.labelSmall.copy(color = Black),
+
             value = text,
             onValueChange = onTextChange,
-            modifier = modifier
-                .width(368.dp)
-                .height(63.dp),
+            modifier = modifier,
             label = {
                 Text(
                     text = label,
@@ -114,15 +114,23 @@ fun SimpleAnswerText(
                 unfocusedContainerColor = color,
                 unfocusedBorderColor = color,
                 focusedBorderColor = color
-            )
+            ),
+            textStyle = MaterialTheme.typography.labelSmall.copy(
+                fontSize = 24.sp, color = Black
+            ),
         )
-        Icon(
-            painter = painterResource(R.drawable.ic_delete_key),
-            contentDescription = null,
+        IconButton(
+            onClick = onDeleteClick,
             modifier = Modifier
-                .padding(start = 300.dp, top = 10.dp)
-                .size(50.dp)
-        )
+                .padding(start = 300.dp,end = 12.dp, top = 14.dp) // Небольшой аккуратный отступ изнутри поля
+                .size(40.dp)
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.ic_delete_key),
+                contentDescription = "Удалить вариант",
+                tint = Color.Unspecified // Сохраняет оригинальный цвет вашей XML-иконки
+            )
+        }
     }
 }
 
@@ -135,7 +143,7 @@ private fun AnswerTextPreview() {
             "",
             "",
             {},
-            color = MaterialTheme.colorScheme.secondary
+            color = MaterialTheme.colorScheme.secondary,{}
         )
     }
 
