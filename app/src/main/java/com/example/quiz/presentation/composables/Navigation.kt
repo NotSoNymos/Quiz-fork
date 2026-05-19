@@ -45,7 +45,6 @@ enum class Destination(
 @Composable
 fun AppNavHost(
     navController: NavHostController,
-    mainNavController: NavHostController,
     startDestination: Destination,
     modifier: Modifier = Modifier
 ) {
@@ -59,7 +58,7 @@ fun AppNavHost(
                     Destination.SEARCH -> SerchScreen()
                     Destination.HOME -> MyWorkScreen()
                     Destination.LOOK -> ResolvedWorkScreen()
-                    Destination.ADD -> CreateScreen(Modifier, mainNavController)
+                    Destination.ADD -> CreateScreen(Modifier, navHostController = rememberNavController() )
                     Destination.PROFILE -> ProfileScreen()
                 }
             }
@@ -69,7 +68,7 @@ fun AppNavHost(
 
 
 @Composable
-fun NavigationBar(modifier: Modifier = Modifier, mainNavController: NavHostController) {
+fun NavigationBar(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val startDestination = Destination.HOME
     var selectedDestination by rememberSaveable { mutableIntStateOf(startDestination.ordinal) }
@@ -107,18 +106,13 @@ fun NavigationBar(modifier: Modifier = Modifier, mainNavController: NavHostContr
             }
         }
     ) { contentPadding ->
-        AppNavHost(
-            navController = navController,
-            mainNavController = mainNavController,
-            modifier = Modifier.padding(contentPadding),
-            startDestination = startDestination
-        )
+        AppNavHost(navController, startDestination, modifier = Modifier.padding(contentPadding))
     }
 }
 
 @Preview
 @Composable
 private fun Prev() {
-    QuizTheme { NavigationBar(Modifier, rememberNavController()) }
+    QuizTheme { NavigationBar(Modifier) }
 
 }
