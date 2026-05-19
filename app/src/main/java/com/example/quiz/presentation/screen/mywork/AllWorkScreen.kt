@@ -40,7 +40,7 @@ fun AllWorkScreen(modifier: Modifier = Modifier) {
             Box(modifier = Modifier.padding(top = 52.dp)) {
                 ButtonCreate(title = "Квиз", onClick = {
 //                    navHostController.navigate(
-//                        Destinations.CreateBookScreen.route
+//                        Destinations.CreateBookScreen
 //                    )
                 })
             }
