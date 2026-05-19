@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
 import com.example.quiz.presentation.composables.EditLoginRegistration
 import com.example.quiz.presentation.composables.EditPasswordRegistration
 import com.example.quiz.presentation.composables.SimpleButton
@@ -27,7 +28,7 @@ fun LoginScreen(
 ) {
     val password by viewModel.password.collectAsState()
     val login by viewModel.login.collectAsState()
-    SimpleCreateBackground(modifier = Modifier, "Вход")
+    SimpleCreateBackground(modifier = Modifier, "Вход", rememberNavController())
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
 
         Box(modifier = Modifier.padding(top = 140.dp)) {

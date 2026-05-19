@@ -11,14 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.quiz.presentation.composables.ReadBookCard
 import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun OneReadBookScreen(modifier: Modifier = Modifier, viewModel: ReadBookViewModel = viewModel()) {
-    SimpleQuizBackground(Modifier, "Чтение ", "book")
+fun OneReadBookScreen(modifier: Modifier = Modifier, viewModel: ReadBookViewModel = viewModel(), navHostController: NavHostController) {
+    SimpleQuizBackground(Modifier, "Чтение ", "book", navHostController)
     Column(
         modifier = Modifier
             .padding(top = 180.dp)
@@ -36,5 +38,5 @@ fun OneReadBookScreen(modifier: Modifier = Modifier, viewModel: ReadBookViewMode
 @Preview
 @Composable
 private fun OneReadBookScreenPreview() {
-    QuizTheme { OneReadBookScreen(Modifier) }
+    QuizTheme { OneReadBookScreen(Modifier, navHostController =rememberNavController()) }
 }

@@ -26,14 +26,19 @@ import androidx.navigation.compose.rememberNavController
 import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.presentation.composables.SimpleOutlinedText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
+import com.example.quiz.presentation.navigation.Destinations
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun CreateBookScreen(modifier: Modifier = Modifier, viewModel: CreateBookViewModel = viewModel(), navHostController: NavHostController) {
+fun CreateBookScreen(
+    modifier: Modifier = Modifier,
+    viewModel: CreateBookViewModel = viewModel(),
+    navHostController: NavHostController
+) {
     var checked by remember { mutableStateOf(false) }
     val title = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
-    SimpleQuizBackground(modifier = Modifier, "Создать учебник", "book")
+    SimpleQuizBackground(modifier = Modifier, "Создать учебник", "book", navHostController)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -83,6 +88,7 @@ fun CreateBookScreen(modifier: Modifier = Modifier, viewModel: CreateBookViewMod
                 .width(226.dp),
             "Далее"
         ) {
+            navHostController.navigate(Destinations.CreateParagraph)
             viewModel.onIsCheckedChange(checked)
             viewModel.onTitleChange(title.value)
             viewModel.onDescriptionChange(description.value)

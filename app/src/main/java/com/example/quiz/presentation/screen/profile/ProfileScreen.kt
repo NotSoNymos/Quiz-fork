@@ -22,13 +22,12 @@ import com.example.quiz.presentation.composables.BackgroundProfile
 import com.example.quiz.presentation.composables.BottomBarNavigation
 import com.example.quiz.ui.theme.QuizTheme
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation")
 @Composable
 fun ProfileScreen(modifier: Modifier = Modifier, viewModel: ProfileViewModel= viewModel()) {
     val image by viewModel.image.collectAsState()
-    Scaffold(bottomBar = { BottomAppBar( { BottomBarNavigation() }) }) {
-        BackgroundProfile(Modifier,icon = image, {ContentProfileScreen()})
-    }
+        BackgroundProfile(Modifier, icon = image, {ContentProfileScreen()})
+
 }
 
 @Preview

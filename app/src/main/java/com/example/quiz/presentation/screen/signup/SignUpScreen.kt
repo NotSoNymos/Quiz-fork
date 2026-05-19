@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.quiz.presentation.composables.BackgroundLogin
 
 import com.example.quiz.presentation.composables.EditLoginRegistration
@@ -25,8 +26,8 @@ import com.example.quiz.ui.theme.QuizTheme
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier, viewModel: SignUpViewModel = viewModel()) {
-    BackgroundLogin("Регистрация")
+fun SignUpScreen(modifier: Modifier = Modifier, viewModel: SignUpViewModel = viewModel(), navHostController: NavHostController) {
+    BackgroundLogin("Регистрация", navHostController )
     val password by viewModel.password.collectAsState()
     val password2 by viewModel.password2.collectAsState()
     val login by viewModel.login.collectAsState()
@@ -58,8 +59,8 @@ fun SignUpScreen(modifier: Modifier = Modifier, viewModel: SignUpViewModel = vie
 
 }
 
-@Preview
-@Composable
-private fun SignUpScreePreview() {
-    QuizTheme { SignUpScreen() }
-}
+//@Preview
+//@Composable
+//private fun SignUpScreePreview() {
+//    QuizTheme { SignUpScreen() }
+//}

@@ -14,13 +14,15 @@ import com.example.quiz.presentation.composables.CardVariableVariant
 import com.example.quiz.presentation.composables.SimpleQuizBackground
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.quiz.data.model.Question
 import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.ui.theme.QuizTheme
 @Composable
-fun ReadQuizScreen(modifier: Modifier = Modifier, viewModel: ReadQuizViewModel = viewModel()) {
+fun ReadQuizScreen(modifier: Modifier = Modifier, viewModel: ReadQuizViewModel = viewModel(), navHostController: NavHostController) {
     val variants = viewModel.variants.collectAsState().value
-    SimpleQuizBackground(Modifier, label = "Решить квиз", "quiz")
+    SimpleQuizBackground(Modifier, label = "Решить квиз", "quiz", navHostController )
     Column(
         modifier = Modifier
             .padding(top = 168.dp)
@@ -39,5 +41,5 @@ fun ReadQuizScreen(modifier: Modifier = Modifier, viewModel: ReadQuizViewModel =
 @Preview
 @Composable
 private fun ReadQuizScreenPreview() {
-    QuizTheme { ReadQuizScreen(Modifier) }
+    QuizTheme { ReadQuizScreen(Modifier, navHostController = rememberNavController()) }
 }

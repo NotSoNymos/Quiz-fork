@@ -15,21 +15,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.quiz.presentation.composables.SimpleButton
 
 import com.example.quiz.presentation.composables.SimpleOutlinedText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
+import com.example.quiz.presentation.navigation.Destinations
 import com.example.quiz.ui.theme.QuizTheme
 import com.example.quiz.ui.theme.White
 
 @Composable
-fun CreateQuizScreen(modifier: Modifier = Modifier) {
-    SimpleQuizBackground(modifier = Modifier, label = "Создать квиз", type = "quiz")
+fun CreateQuizScreen(modifier: Modifier = Modifier, navHostController: NavHostController) {
+    SimpleQuizBackground(modifier = Modifier, label = "Создать квиз", type = "quiz", navHostController)
     Column(
         modifier = Modifier
             .padding(top = 160.dp)
             .fillMaxSize()
-            .background(color = White, shape = RoundedCornerShape(30.dp)),
+            .background(color = White, shape = RoundedCornerShape(topEnd = 30.dp, topStart = 30.dp)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
@@ -63,12 +66,12 @@ fun CreateQuizScreen(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(top = 31.dp, start = 201.dp),
             text = "Далее"
-        ) { }
+        ) { navHostController.navigate(Destinations.CreateQuestion)}
     }
 }
 
 @Preview
 @Composable
 private fun CreateQuizScreenPreview() {
-    QuizTheme { CreateQuizScreen() }
+    QuizTheme { CreateQuizScreen(Modifier,rememberNavController()) }
 }

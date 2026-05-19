@@ -22,7 +22,6 @@ import com.example.quiz.ui.theme.QuizTheme
 @Composable
 fun AppBottomNavigationBar(navController: NavHostController) {
     val backStackEntry = navController.currentBackStackEntryAsState().value
-
     val whitelistedScreens = listOf(
         Destinations.Home,
         Destinations.Search,
@@ -30,7 +29,6 @@ fun AppBottomNavigationBar(navController: NavHostController) {
         Destinations.Look,
         Destinations.Profile
     )
-
     val isBarVisible =
         backStackEntry?.destination?.let { destination ->
             whitelistedScreens.any { screen ->

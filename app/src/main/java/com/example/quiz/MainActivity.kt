@@ -24,20 +24,21 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
-
             QuizTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
                         AppBottomNavigationBar(navController)
                     }
-                ) { contentPadding ->
+                ) {
+                    contentPadding ->
                     NavigationGraph(
                         modifier = Modifier
                             .padding(contentPadding)
                             .fillMaxSize(),
                         navController = navController
                     )
+
                 }
             }
         }

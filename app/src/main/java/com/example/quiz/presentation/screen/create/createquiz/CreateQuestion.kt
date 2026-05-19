@@ -25,6 +25,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.quiz.data.model.InputField
 import com.example.quiz.presentation.composables.ButtonAddParagraph
 import com.example.quiz.presentation.composables.ButtonAddVariableAnswer
@@ -33,14 +35,18 @@ import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun CreateQuestion(modifier: Modifier = Modifier, viewModel: CreateQuizViewModel = viewModel()) {
+fun CreateQuestion(
+    modifier: Modifier = Modifier,
+    viewModel: CreateQuizViewModel = viewModel(),
+    navHostController: NavHostController
+) {
     val fields = remember { mutableStateListOf<InputField>() }
     val question = remember { mutableStateOf("") }
     val answer = remember { mutableStateOf("") }
 
 
     val listVariants = mutableListOf<String>()
-    SimpleQuizBackground(Modifier, "Создать квиз", "quiz")
+    SimpleQuizBackground(Modifier, "Создать квиз", "quiz", navHostController)
 
 
     LazyColumn(
@@ -159,5 +165,5 @@ fun CreateQuestion(modifier: Modifier = Modifier, viewModel: CreateQuizViewModel
 @Preview
 @Composable
 private fun CreateQuestionScreen() {
-    QuizTheme { CreateQuestion(Modifier) }
+    QuizTheme { CreateQuestion(Modifier, navHostController = rememberNavController()) }
 }

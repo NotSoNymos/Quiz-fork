@@ -12,6 +12,9 @@ sealed class Destinations(val icon: Int? = null) {
     data object Login : Destinations()
 
     @Serializable
+    data object CreateQuestion : Destinations()
+
+    @Serializable
     data object CreateQuiz : Destinations()
 
     @Serializable
@@ -37,6 +40,9 @@ sealed class Destinations(val icon: Int? = null) {
 
     @Serializable
     data object CreateBook : Destinations()
+
+    @Serializable
+    data object CreateParagraph : Destinations()
 
     @Serializable
     data object Paragraph : Destinations()

@@ -4,6 +4,7 @@ package com.example.quiz.presentation.composables
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,6 +37,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.quiz.R
 import com.example.quiz.presentation.screen.profile.ContentProfileScreen
 import com.example.quiz.ui.theme.QuizTheme
@@ -44,7 +47,7 @@ import com.example.quiz.ui.theme.White
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BackgroundLogin(title: String) {
+fun BackgroundLogin(title: String, navHostController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -61,7 +64,7 @@ fun BackgroundLogin(title: String) {
 
                         )
                 }, navigationIcon = {
-                    IconButton(onClick = {}, modifier = Modifier.padding(start = 20.dp)) {
+                    IconButton(onClick = {navHostController.popBackStack()}, modifier = Modifier.padding(start = 20.dp)) {
                         Icon(
                             painter = painterResource(R.drawable.ic_left),
                             contentDescription = null,
@@ -95,7 +98,7 @@ fun BackgroundLogin(title: String) {
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: String) {
+fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: String, navHostController: NavHostController) {
     Scaffold(containerColor = MaterialTheme.colorScheme.primary, topBar = {
         TopAppBar(
             title = {
@@ -132,7 +135,8 @@ fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: Str
                     modifier = Modifier
                         .padding(start = 20.dp, top = 55.dp)
                         .width(43.dp)
-                        .height(34.dp),
+                        .height(34.dp)
+                        .clickable(onClick = {navHostController.popBackStack()}),
                     tint = White
                 )
             },
@@ -202,7 +206,7 @@ fun BackgroundProfile(
 }
 
 @Composable
-fun SimpleCreateBackground(modifier: Modifier = Modifier, title: String) {
+fun SimpleCreateBackground(modifier: Modifier = Modifier, title: String, navHostController: NavHostController                ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -213,7 +217,7 @@ fun SimpleCreateBackground(modifier: Modifier = Modifier, title: String) {
                 .padding(top = 46.dp)
                 .fillMaxWidth()
         ) {
-            IconButton(onClick = {}, modifier = Modifier.padding(start = 20.dp)) {
+            IconButton(onClick = {navHostController.popBackStack()}, modifier = Modifier.padding(start = 20.dp)) {
                 Icon(
                     painter = painterResource(R.drawable.ic_left),
                     contentDescription = null,
@@ -257,7 +261,7 @@ fun SimpleCreateBackground(modifier: Modifier = Modifier, title: String) {
 @Preview
 @Composable
 private fun SimpleQuizBackgroundPreview() {
-    QuizTheme { SimpleQuizBackground(label = "Создать учебник", type = "quiz") }
+    QuizTheme { SimpleQuizBackground(label = "Создать учебник", type = "quiz", navHostController = rememberNavController()) }
 
 }
 
@@ -275,5 +279,5 @@ private fun BackgroundProfilePrev() {
 @Preview
 @Composable
 private fun BackgroundSimplePrev() {
-    QuizTheme { SimpleCreateBackground(Modifier, "Title") }
+    QuizTheme { SimpleCreateBackground(Modifier, "Title", rememberNavController()) }
 }

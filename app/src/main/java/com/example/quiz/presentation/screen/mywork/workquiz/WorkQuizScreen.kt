@@ -10,14 +10,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.quiz.data.model.Quiz
 import com.example.quiz.presentation.composables.CardWork
 import com.example.quiz.presentation.composables.SimpleCreateBackground
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun MyWorkScreen(modifier: Modifier = Modifier, viewModel: MyWorkViewModel = viewModel()) {
-    SimpleCreateBackground(Modifier, "Мои работы")
+fun MyWorkScreen(modifier: Modifier = Modifier, viewModel: MyWorkViewModel = viewModel(), navHostController: NavHostController) {
+    SimpleCreateBackground(Modifier, "Мои работы", navHostController)
 
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -30,13 +31,12 @@ fun MyWorkScreen(modifier: Modifier = Modifier, viewModel: MyWorkViewModel = vie
         }
     }
 }
-
-@Preview
-@Composable
-private fun Prev() {
-    QuizTheme {
-        MyWorkScreen(
-            modifier = Modifier
-        )
-    }
-}
+//@Preview
+//@Composable
+//private fun Prev() {
+//    QuizTheme {
+//        MyWorkScreen(
+//            modifier = Modifier
+//        )
+//    }
+//}

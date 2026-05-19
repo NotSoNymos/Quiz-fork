@@ -15,12 +15,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun ReadDescriptionBook(modifier: Modifier = Modifier, viewModel: ReadBookViewModel = viewModel()) {
-    SimpleQuizBackground(Modifier, "Чтение ", "book")
+fun ReadDescriptionBook(modifier: Modifier = Modifier, viewModel: ReadBookViewModel = viewModel(), navHostController: NavHostController) {
+    SimpleQuizBackground(Modifier, "Чтение ", "book",navHostController)
     Column(
         modifier = Modifier
             .padding(top = 180.dp)
@@ -49,8 +50,8 @@ fun ReadDescriptionBook(modifier: Modifier = Modifier, viewModel: ReadBookViewMo
     }
 }
 
-@Preview
-@Composable
-private fun ReadDescriptionBookPreview() {
-    QuizTheme { ReadDescriptionBook(Modifier) }
-}
+//@Preview
+//@Composable
+//private fun ReadDescriptionBookPreview() {
+//    QuizTheme { ReadDescriptionBook(Modifier) }
+//}

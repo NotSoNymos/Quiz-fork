@@ -41,9 +41,9 @@ fun CreateScreen(
             )
             Box(modifier = Modifier.padding(top = 52.dp)) {
                 ButtonCreate(title = stringResource(R.string.book_name), onClick = {
-//                    navHostController.navigate(
-//                        Destinations.CreateBookScreen
-//                    )
+                    navHostController.navigate(
+                        Destinations.CreateBook
+                    )
                 })
             }
             Box(modifier = Modifier.padding(top = 37.dp)) {
