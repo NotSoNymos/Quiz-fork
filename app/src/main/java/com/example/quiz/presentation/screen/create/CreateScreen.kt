@@ -30,8 +30,7 @@ import com.example.quiz.ui.theme.QuizTheme
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun CreateScreen(
-    modifier: Modifier = Modifier,
-    navHostController: NavHostController
+    modifier: Modifier = Modifier,navHostController: NavHostController
 ) {
     Scaffold(containerColor = MaterialTheme.colorScheme.primary) {
         Column(
@@ -51,11 +50,8 @@ fun CreateScreen(
                 })
             }
             Box(modifier = Modifier.padding(top = 37.dp)) {
-                ButtonCreate(title = stringResource(R.string.quiz_name), onClick = {
-                    navHostController.navigate(
-                        Destinations.CreateQuizScreen.route
-                    )
-                })
+                ButtonCreate(title = stringResource(R.string.quiz_name), onClick = {navHostController.navigate(
+                    Destinations.CreateQuizScreen)})
             }
             Spacer(modifier = Modifier.weight(1f))
 

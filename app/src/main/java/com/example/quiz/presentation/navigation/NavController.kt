@@ -63,7 +63,7 @@ fun NavGraph(modifier: Modifier = Modifier, navController: NavHostController) {
             CreateScreen(Modifier,navController)
         }
         composable(Destinations.NavigationBar.route) {
-            NavigationBar(Modifier, navController)
+            NavigationBar(Modifier)
         }
         composable(Destinations.CreateBookScreen.route) {
             CreateBookScreen(Modifier, navHostController = navController)
