@@ -351,7 +351,7 @@ private fun CardVariableVariantPreview() {
 @Preview
 @Composable
 private fun Preview() {
-    QuizTheme { CardWorkQuiz(Modifier, Quiz("Title", "Description", listOf()), {}, "16") }
+    QuizTheme { CardWorkQuiz(Modifier, Quiz(0,"Title", "Description", listOf()), {}, "16") }
 }
 
 @Preview

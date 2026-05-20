@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 class ReadQuizViewModel : ViewModel() {
     private val _quiz =
         MutableStateFlow(
-            Quiz("", "", listOf(Question("Question", "Answer", listOf("Var1", "Var2"))))
+            Quiz(0,"", "", listOf(Question("Question", "Answer", listOf("Var1", "Var2"))))
         )
     val quiz: StateFlow<Quiz> = _quiz
 

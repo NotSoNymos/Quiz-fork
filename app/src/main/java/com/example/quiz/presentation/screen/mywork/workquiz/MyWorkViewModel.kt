@@ -2,42 +2,33 @@ package com.example.quiz.presentation.screen.mywork.workquiz
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.quiz.DemoViewModel
 import com.example.quiz.data.model.Question
 import com.example.quiz.data.model.Quiz
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class MyWorkViewModel(
     private val demoViewModel: DemoViewModel
 ) : ViewModel() {
+    private val _uiState = MutableStateFlow(MyWorkState())
 
-    private val _listQuiz = MutableStateFlow(listOf(Quiz(
-        "Quiz",
-        "quiz",
-        listOf(
-            Question("", "", listOf(""))
-        )
-    ),
-        Quiz(
-            "Quiz",
-            "quiz",
-            listOf(
-                Question("", "", listOf(""))
-            )
-        ),
-        Quiz(
-            "Quiz",
-            "quiz",
-            listOf(
-                Question("", "", listOf(""))
-            )
-        ))
+    val uiState = _uiState.asStateFlow()
 
-    )
-    val listQuiz: StateFlow<List<Quiz>> = _listQuiz
+    fun updateQuizList(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = demoViewModel.getQuizList()
 
-    fun onListQuizChange(newListQuiz: List<Quiz>) {
-        _listQuiz.value = newListQuiz
+            _uiState.update { it.copy(quizList = result) }
+        }
+    }
+
+    init {
+        updateQuizList()
     }
 }

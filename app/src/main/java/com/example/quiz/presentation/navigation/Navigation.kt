@@ -21,6 +21,7 @@ import com.example.quiz.presentation.screen.mywork.workquiz.MyWorkScreen
 import com.example.quiz.presentation.screen.mywork.workquiz.MyWorkViewModel
 import com.example.quiz.presentation.screen.noconnection.NoConnectionScreen
 import com.example.quiz.presentation.screen.profile.ProfileScreen
+import com.example.quiz.presentation.screen.profile.ProfileViewModel
 import com.example.quiz.presentation.screen.resolved.ResolvedWorkScreen
 import com.example.quiz.presentation.screen.resolved.ResolvedWorkViewModel
 import com.example.quiz.presentation.screen.search.SerchScreen
@@ -96,7 +97,17 @@ fun NavigationGraph(
         }
 
         composable<Destinations.Profile> {
-            ProfileScreen()
+            val profileViewModel: ProfileViewModel =
+                viewModel(factory = viewModelFactory {
+                    initializer {
+                        ProfileViewModel(demoViewModel)
+                    }
+                })
+
+            ProfileScreen(
+                modifier = Modifier,
+                viewModel = profileViewModel
+            )
         }
 
         composable<Destinations.Login> {

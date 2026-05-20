@@ -5,16 +5,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavHostController
-import com.example.quiz.DemoViewModel
+import androidx.navigation.compose.rememberNavController
+import com.example.quiz.data.model.Quiz
 import com.example.quiz.presentation.composables.CardWork
 import com.example.quiz.presentation.composables.SimpleCreateBackground
+import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
 fun MyWorkScreen(
@@ -22,7 +24,22 @@ fun MyWorkScreen(
     viewModel: MyWorkViewModel,
     navHostController: NavHostController,
 ) {
-    SimpleCreateBackground(Modifier, "Мои работы", navHostController)
+    val uiState by viewModel.uiState.collectAsState()
+
+    MyWorkScreenContent(
+        modifier = modifier,
+        uiState = uiState,
+        navHostController = navHostController
+    )
+}
+
+@Composable
+fun MyWorkScreenContent(
+    modifier: Modifier = Modifier,
+    uiState: MyWorkState,
+    navHostController: NavHostController,
+) {
+    SimpleCreateBackground(modifier, "Мои работы", navHostController)
 
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -30,18 +47,34 @@ fun MyWorkScreen(
             .padding(top = 150.dp, bottom = 100.dp)
             .fillMaxSize()
     ) {
-        items(viewModel.listQuiz.value) { item ->
-            CardWork(Modifier, item.title, item.description, {}, true)
+        items(uiState.quizList) { quiz ->
+            CardWork(
+                modifier = Modifier, title = quiz.title,
+                text = quiz.description,
+                onClick = {},
+                flagSettings = true
+            )
         }
     }
 }
 
-//@Preview
-//@Composable
-//private fun Prev() {
-//    QuizTheme {
-//        MyWorkScreen(
-//            modifier = Modifier
-//        )
-//    }
-//}
+@Preview
+@Composable
+private fun MyWorkPreview() {
+    QuizTheme {
+        MyWorkScreenContent(
+            modifier = Modifier,
+            uiState = MyWorkState(
+                quizList = listOf(
+                    Quiz(
+                        0,
+                        title = "Превосходный квиз",
+                        description = "Описание",
+                        questions = listOf()
+                    )
+                )
+            ),
+            navHostController = rememberNavController()
+        )
+    }
+}

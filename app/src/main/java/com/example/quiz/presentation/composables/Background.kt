@@ -39,7 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.quiz.R
-import com.example.quiz.presentation.screen.profile.ContentProfileScreen
+import com.example.quiz.presentation.screen.profile.ProfileScreenContent
+import com.example.quiz.presentation.screen.profile.ProfileState
 import com.example.quiz.ui.theme.QuizTheme
 import com.example.quiz.ui.theme.White
 
@@ -270,11 +271,11 @@ private fun SimpleQuizBackgroundPreview() {
 
 @Preview
 @Composable
-private fun BackgroundProfilePrev() {
+private fun BackgroundProfilePrevContent() {
     QuizTheme {
         BackgroundProfile(
             Modifier, R.drawable.ic_launcher_background,
-            { ContentProfileScreen(Modifier) }
+            { ProfileScreenContent(Modifier, ProfileState()) }
         )
     }
 }
