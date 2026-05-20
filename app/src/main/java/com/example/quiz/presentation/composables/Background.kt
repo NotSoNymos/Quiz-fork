@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -136,7 +135,7 @@ fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: Str
                         .padding(start = 20.dp, top = 55.dp)
                         .width(43.dp)
                         .height(34.dp)
-                        .clickable(onClick = {navHostController.popBackStack()}),
+                        .clickable(onClick = { navHostController.popBackStack() }),
                     tint = White
                 )
             },
@@ -206,7 +205,11 @@ fun BackgroundProfile(
 }
 
 @Composable
-fun SimpleCreateBackground(modifier: Modifier = Modifier, title: String, navHostController: NavHostController                ) {
+fun SimpleCreateBackground(
+    modifier: Modifier = Modifier,
+    title: String,
+    navHostController: NavHostController
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()

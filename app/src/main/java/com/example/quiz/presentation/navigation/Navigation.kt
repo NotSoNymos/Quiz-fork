@@ -3,9 +3,12 @@ package com.example.quiz.presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.quiz.DemoViewModel
 import com.example.quiz.presentation.screen.create.CreateScreen
 import com.example.quiz.presentation.screen.create.createbook.CreateBookScreen
 import com.example.quiz.presentation.screen.create.createbook.CreateBookViewModel
@@ -29,7 +32,8 @@ import com.example.quiz.presentation.screen.signup.SignUpViewModel
 fun NavigationGraph(
     modifier: Modifier,
     navController: NavHostController,
-    startDestination: Destinations = Destinations.Home
+    startDestination: Destinations = Destinations.Home,
+    demoViewModel: DemoViewModel
 ) {
     NavHost(
         modifier = modifier,
@@ -37,12 +41,32 @@ fun NavigationGraph(
         startDestination = startDestination
     ) {
         composable<Destinations.Home> {
-            val myWorkViewModel: MyWorkViewModel = viewModel()
-            MyWorkScreen(Modifier,myWorkViewModel,navController)
+            val myWorkViewModel: MyWorkViewModel =
+                viewModel(factory = viewModelFactory {
+                    initializer {
+                        MyWorkViewModel(demoViewModel)
+                    }
+                })
+
+            MyWorkScreen(
+                modifier = Modifier,
+                viewModel = myWorkViewModel,
+                navHostController = navController,
+            )
         }
         composable<Destinations.CreateQuestion> {
-            val  createQuizViewModel: CreateQuizViewModel = viewModel()
-            CreateQuestion(Modifier, createQuizViewModel, navController)
+            val createQuizViewModel: CreateQuizViewModel =
+                viewModel(factory = viewModelFactory {
+                    initializer {
+                        CreateQuizViewModel(demoViewModel)
+                    }
+                })
+
+            CreateQuestion(
+                modifier = Modifier,
+                viewModel = createQuizViewModel,
+                navHostController = navController,
+            )
         }
 
         composable<Destinations.Search> {
@@ -50,12 +74,25 @@ fun NavigationGraph(
         }
 
         composable<Destinations.Create> {
-            CreateScreen(Modifier, navController)
+            CreateScreen(
+                modifier = Modifier,
+                navHostController = navController,
+            )
         }
 
         composable<Destinations.Look> {
-            val resolvedWorkViewModel: ResolvedWorkViewModel = viewModel()
-            ResolvedWorkScreen(Modifier,resolvedWorkViewModel,navController)
+            val resolvedWorkViewModel: ResolvedWorkViewModel =
+                viewModel(factory = viewModelFactory {
+                    initializer {
+                        ResolvedWorkViewModel(demoViewModel)
+                    }
+                })
+
+            ResolvedWorkScreen(
+                modifier = Modifier,
+                viewModel = resolvedWorkViewModel,
+                navHostController = navController
+            )
         }
 
         composable<Destinations.Profile> {
@@ -67,7 +104,10 @@ fun NavigationGraph(
         }
 
         composable<Destinations.CreateQuiz> {
-            CreateQuizScreen(Modifier,navController)
+            CreateQuizScreen(
+                modifier = Modifier,
+                navHostController = navController
+            )
         }
 
         composable<Destinations.NoConnection> {
@@ -75,22 +115,54 @@ fun NavigationGraph(
         }
 
         composable<Destinations.SignUp> {
-            val signUpViewModel: SignUpViewModel = viewModel()
-            SignUpScreen(Modifier,signUpViewModel,navController)
+            val signUpViewModel: SignUpViewModel =
+                viewModel(factory = viewModelFactory {
+                    initializer {
+                        SignUpViewModel(demoViewModel)
+                    }
+                })
+
+            SignUpScreen(
+                modifier = Modifier,
+                viewModel = signUpViewModel,
+                navHostController = navController
+            )
         }
 
         composable<Destinations.CreateParagraph> {
-            val createBookViewModel: CreateBookViewModel = viewModel()
-            CreateParagraph(Modifier, createBookViewModel, navController)
+            val createBookViewModel: CreateBookViewModel =
+                viewModel(factory = viewModelFactory {
+                    initializer {
+                        CreateBookViewModel(demoViewModel)
+                    }
+                })
+
+            CreateParagraph(
+                modifier = Modifier,
+                viewModel = createBookViewModel,
+                navHostController = navController,
+            )
         }
 
         composable<Destinations.CreateBook> {
-            CreateBookScreen(Modifier, navHostController = navController)
+            CreateBookScreen(
+                modifier = Modifier,
+                navHostController = navController
+            )
         }
 
         composable<Destinations.Paragraph> {
-            val createBookViewModel: CreateBookViewModel = viewModel()
-            CreateParagraph(Modifier,createBookViewModel, navController)
+            val createBookViewModel: CreateBookViewModel =
+                viewModel(factory = viewModelFactory {
+                    initializer {
+                        CreateBookViewModel(demoViewModel)
+                    }
+                })
+
+            CreateParagraph(
+                viewModel = createBookViewModel,
+                navHostController = navController,
+            )
         }
     }
 }

@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.quiz.DemoViewModel
 import com.example.quiz.data.model.InputField
 import com.example.quiz.presentation.composables.ButtonAddParagraph
 import com.example.quiz.presentation.composables.ButtonAddVariableAnswer
@@ -38,7 +39,7 @@ import com.example.quiz.ui.theme.QuizTheme
 fun CreateQuestion(
     modifier: Modifier = Modifier,
     viewModel: CreateQuizViewModel = viewModel(),
-    navHostController: NavHostController
+    navHostController: NavHostController,
 ) {
     val fields = remember { mutableStateListOf<InputField>() }
     val question = remember { mutableStateOf("") }
@@ -165,5 +166,5 @@ fun CreateQuestion(
 @Preview
 @Composable
 private fun CreateQuestionScreen() {
-    QuizTheme { CreateQuestion(Modifier, navHostController = rememberNavController()) }
+    QuizTheme { CreateQuestion(navHostController = rememberNavController(),) }
 }

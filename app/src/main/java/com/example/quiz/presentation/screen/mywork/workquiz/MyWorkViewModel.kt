@@ -1,12 +1,16 @@
 package com.example.quiz.presentation.screen.mywork.workquiz
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.quiz.DemoViewModel
 import com.example.quiz.data.model.Question
 import com.example.quiz.data.model.Quiz
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class MyWorkViewModel : ViewModel() {
+class MyWorkViewModel(
+    private val demoViewModel: DemoViewModel
+) : ViewModel() {
 
     private val _listQuiz = MutableStateFlow(listOf(Quiz(
         "Quiz",

@@ -12,13 +12,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.quiz.presentation.composables.SimpleButton
-
 import com.example.quiz.presentation.composables.SimpleOutlinedText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.presentation.navigation.Destinations
@@ -26,8 +24,12 @@ import com.example.quiz.ui.theme.QuizTheme
 import com.example.quiz.ui.theme.White
 
 @Composable
-fun CreateQuizScreen(modifier: Modifier = Modifier, navHostController: NavHostController) {
+fun CreateQuizScreen(
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController,
+) {
     SimpleQuizBackground(modifier = Modifier, label = "Создать квиз", type = "quiz", navHostController)
+
     Column(
         modifier = Modifier
             .padding(top = 160.dp)

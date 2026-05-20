@@ -1,11 +1,12 @@
 package com.example.quiz.presentation.screen.create.createbook
 
 import androidx.lifecycle.ViewModel
+import com.example.quiz.DemoViewModel
 import com.example.quiz.data.model.Paragraph
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class CreateBookViewModel: ViewModel() {
+class CreateBookViewModel(demoViewModel: DemoViewModel) : ViewModel() {
     private val _isChecked = MutableStateFlow(false)
     val isChecked: StateFlow<Boolean> = _isChecked
     private val _title = MutableStateFlow("")

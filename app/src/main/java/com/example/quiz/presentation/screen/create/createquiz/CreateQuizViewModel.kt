@@ -1,12 +1,12 @@
 package com.example.quiz.presentation.screen.create.createquiz
 
 import androidx.lifecycle.ViewModel
-import com.example.quiz.data.model.Paragraph
+import com.example.quiz.DemoViewModel
 import com.example.quiz.data.model.Question
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class CreateQuizViewModel : ViewModel(){
+class CreateQuizViewModel(demoViewModel: DemoViewModel) : ViewModel(){
     private val _title = MutableStateFlow("")
     val login: StateFlow<String> = _title
 

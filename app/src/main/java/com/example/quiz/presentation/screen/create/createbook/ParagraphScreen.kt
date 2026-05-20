@@ -19,19 +19,19 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.quiz.DemoViewModel
 import com.example.quiz.data.model.Paragraph
 import com.example.quiz.presentation.composables.ButtonAddParagraph
 import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.presentation.composables.SimpleOutlinedText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
-import com.example.quiz.presentation.navigation.NavigationGraph
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
 fun CreateParagraph(
     modifier: Modifier = Modifier,
     viewModel: CreateBookViewModel = viewModel(),
-    navHostController: NavHostController
+    navHostController: NavHostController,
 ) {
     val title = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
@@ -89,6 +89,6 @@ fun CreateParagraph(
 @Preview
 @Composable
 private fun CreateParagraphPreview() {
-    QuizTheme { CreateParagraph(modifier = Modifier, navHostController = rememberNavController()) }
+    QuizTheme { CreateParagraph(navHostController = rememberNavController(),) }
 }
 
