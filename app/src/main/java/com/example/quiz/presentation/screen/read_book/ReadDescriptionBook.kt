@@ -15,12 +15,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun ReadDescriptionBook(modifier: Modifier = Modifier, viewModel: ReadBookViewModel = viewModel(), navHostController: NavHostController) {
+fun ReadDescriptionBook(modifier: Modifier = Modifier, viewModel: ReadBookViewModel = hiltViewModel(), navHostController: NavHostController) {
     SimpleQuizBackground(Modifier, "Чтение ", "book",navHostController)
     Column(
         modifier = Modifier

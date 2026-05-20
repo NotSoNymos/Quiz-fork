@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.quiz.data.model.Info
 import com.example.quiz.presentation.composables.SimpleButton
@@ -32,7 +33,7 @@ import com.example.quiz.ui.theme.QuizTheme
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun ContentProfileScreen(modifier: Modifier = Modifier, viewModel: ProfileViewModel = viewModel()) {
+fun ContentProfileScreen(modifier: Modifier = Modifier, viewModel: ProfileViewModel = hiltViewModel()) {
 
     val image by viewModel.image.collectAsState()
     val surname by viewModel.surname.collectAsState()

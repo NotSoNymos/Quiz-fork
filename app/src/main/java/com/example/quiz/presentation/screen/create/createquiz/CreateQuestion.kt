@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -37,7 +38,7 @@ import com.example.quiz.ui.theme.QuizTheme
 @Composable
 fun CreateQuestion(
     modifier: Modifier = Modifier,
-    viewModel: CreateQuizViewModel = viewModel(),
+    viewModel: CreateQuizViewModel = hiltViewModel(),
     navHostController: NavHostController
 ) {
     val fields = remember { mutableStateListOf<InputField>() }

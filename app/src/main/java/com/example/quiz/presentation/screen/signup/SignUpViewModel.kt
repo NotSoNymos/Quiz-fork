@@ -1,15 +1,13 @@
 package com.example.quiz.presentation.screen.signup
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.quiz.domain.validation.isStrongPassword
-import com.example.quiz.domain.validation.isValidEmail
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class SignUpViewModel: ViewModel() {
+@HiltViewModel
+class SignUpViewModel @Inject constructor(): ViewModel() {
     private val _login = MutableStateFlow("")
     val login: StateFlow<String> = _login
     private var _password = MutableStateFlow("")

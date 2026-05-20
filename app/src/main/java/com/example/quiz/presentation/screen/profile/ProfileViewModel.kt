@@ -2,10 +2,12 @@ package com.example.quiz.presentation.screen.profile
 
 import androidx.lifecycle.ViewModel
 import com.example.quiz.R
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-
-class ProfileViewModel: ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(): ViewModel() {
     private val _image = MutableStateFlow(R.drawable.ic_launcher_background)
     val image: StateFlow<Int> = _image
 

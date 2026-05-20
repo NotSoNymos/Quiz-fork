@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.quiz.presentation.composables.CardWork
@@ -20,7 +21,7 @@ import com.example.quiz.presentation.composables.SimpleCreateBackground
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun ResolvedWorkScreen(modifier: Modifier = Modifier, viewModel: ResolvedWorkViewModel= viewModel(), navHostController: NavHostController) {
+fun ResolvedWorkScreen(modifier: Modifier = Modifier, viewModel: ResolvedWorkViewModel= hiltViewModel(), navHostController: NavHostController) {
     SimpleCreateBackground(Modifier, "Мои работы", navHostController)
     Column(modifier = Modifier.fillMaxSize()) {
         val state = rememberScrollState()

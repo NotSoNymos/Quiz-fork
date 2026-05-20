@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.quiz.data.model.Quiz
 import com.example.quiz.presentation.composables.CardWork
@@ -17,8 +19,9 @@ import com.example.quiz.presentation.composables.SimpleCreateBackground
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun MyWorkScreen(modifier: Modifier = Modifier, viewModel: MyWorkViewModel = viewModel(), navHostController: NavHostController) {
+fun MyWorkScreen(modifier: Modifier = Modifier, viewModel: MyWorkViewModel = hiltViewModel(), navHostController: NavHostController) {
     SimpleCreateBackground(Modifier, "Мои работы", navHostController)
+    val listQuiz by viewModel.listQuiz.collectAsState()
 
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -26,7 +29,7 @@ fun MyWorkScreen(modifier: Modifier = Modifier, viewModel: MyWorkViewModel = vie
             .padding(top = 150.dp, bottom = 100.dp)
             .fillMaxSize()
     ) {
-        items(viewModel.listQuiz.value) { item ->
+        items(listQuiz) { item ->
             CardWork(Modifier, item.title, item.description, {}, true)
         }
     }

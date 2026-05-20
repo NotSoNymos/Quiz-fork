@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -24,7 +25,7 @@ import com.example.quiz.ui.theme.QuizTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation")
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier, viewModel: ProfileViewModel= viewModel()) {
+fun ProfileScreen(modifier: Modifier = Modifier, viewModel: ProfileViewModel= hiltViewModel()) {
     val image by viewModel.image.collectAsState()
         BackgroundProfile(Modifier, icon = image, {ContentProfileScreen()})
 
