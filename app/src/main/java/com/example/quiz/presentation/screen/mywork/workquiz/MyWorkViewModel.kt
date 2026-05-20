@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MyWorkViewModel(
-    private val demoViewModel: DemoViewModel
+    private val _demoViewModel: DemoViewModel
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(MyWorkState())
 
@@ -22,7 +22,7 @@ class MyWorkViewModel(
 
     fun updateQuizList(){
         viewModelScope.launch(Dispatchers.IO) {
-            val result = demoViewModel.getQuizList()
+            val result = _demoViewModel.getQuizList()
 
             _uiState.update { it.copy(quizList = result) }
         }

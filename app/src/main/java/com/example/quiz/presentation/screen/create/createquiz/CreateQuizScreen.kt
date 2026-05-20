@@ -28,6 +28,8 @@ fun CreateQuizScreen(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
 ) {
+    //TODO: Implement form state and navigation data forwarding logic
+
     SimpleQuizBackground(modifier = Modifier, label = "Создать квиз", type = "quiz", navHostController)
 
     Column(
@@ -68,7 +70,7 @@ fun CreateQuizScreen(
             modifier = Modifier
                 .padding(top = 31.dp, start = 201.dp),
             text = "Далее"
-        ) { navHostController.navigate(Destinations.CreateQuestion)}
+        ) { navHostController.navigate(Destinations.CreateQuestion(0))} //TODO: track id
     }
 }
 

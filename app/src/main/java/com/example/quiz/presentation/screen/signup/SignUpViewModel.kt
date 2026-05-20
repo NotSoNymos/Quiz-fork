@@ -5,7 +5,9 @@ import com.example.quiz.DemoViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class SignUpViewModel(demoViewModel: DemoViewModel) : ViewModel() {
+class SignUpViewModel(
+    private val _demoViewModel: DemoViewModel
+) : ViewModel() {
     private val _login = MutableStateFlow("")
     val login: StateFlow<String> = _login
     private var _password = MutableStateFlow("")

@@ -10,14 +10,14 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
-    private val demoViewModel: DemoViewModel
+    private val _demoViewModel: DemoViewModel
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(ProfileState())
     val uiState = _uiState.asStateFlow()
 
     fun submitFormState(formState: ProfileFormState) {
         viewModelScope.launch(Dispatchers.IO) {
-            demoViewModel.updateUserInfo(
+            _demoViewModel.updateUserInfo(
                 profile = formState.toUser()
             )
         }
@@ -25,7 +25,7 @@ class ProfileViewModel(
 
     fun getProfileInfo() {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = demoViewModel.getUserInfo()
+            val result = _demoViewModel.getUserInfo()
 
             _uiState.update {
                 ProfileState(

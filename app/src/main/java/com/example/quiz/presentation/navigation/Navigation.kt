@@ -8,14 +8,15 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.example.quiz.DemoViewModel
 import com.example.quiz.presentation.screen.create.CreateScreen
 import com.example.quiz.presentation.screen.create.createbook.CreateBookScreen
 import com.example.quiz.presentation.screen.create.createbook.CreateBookViewModel
 import com.example.quiz.presentation.screen.create.createbook.CreateParagraph
-import com.example.quiz.presentation.screen.create.createquiz.CreateQuestion
 import com.example.quiz.presentation.screen.create.createquiz.CreateQuizScreen
-import com.example.quiz.presentation.screen.create.createquiz.CreateQuizViewModel
+import com.example.quiz.presentation.screen.create.createquiz.createquestion.CreateQuestionScreen
+import com.example.quiz.presentation.screen.create.createquiz.createquestion.CreateQuestionViewModel
 import com.example.quiz.presentation.screen.login.LoginScreen
 import com.example.quiz.presentation.screen.mywork.workquiz.MyWorkScreen
 import com.example.quiz.presentation.screen.mywork.workquiz.MyWorkViewModel
@@ -45,7 +46,7 @@ fun NavigationGraph(
             val myWorkViewModel: MyWorkViewModel =
                 viewModel(factory = viewModelFactory {
                     initializer {
-                        MyWorkViewModel(demoViewModel)
+                        MyWorkViewModel(_demoViewModel = demoViewModel)
                     }
                 })
 
@@ -55,17 +56,22 @@ fun NavigationGraph(
                 navHostController = navController,
             )
         }
-        composable<Destinations.CreateQuestion> {
-            val createQuizViewModel: CreateQuizViewModel =
+        composable<Destinations.CreateQuestion> { currentBackStack ->
+            val route = currentBackStack.toRoute<Destinations.CreateQuestion>()
+
+            val createQuestionViewModel: CreateQuestionViewModel =
                 viewModel(factory = viewModelFactory {
                     initializer {
-                        CreateQuizViewModel(demoViewModel)
+                        CreateQuestionViewModel(
+                            _demoViewModel = demoViewModel,
+                            quizId = route.id //TODO: Or change to Quiz object to pass whole data
+                        )
                     }
                 })
 
-            CreateQuestion(
+            CreateQuestionScreen(
                 modifier = Modifier,
-                viewModel = createQuizViewModel,
+                viewModel = createQuestionViewModel,
                 navHostController = navController,
             )
         }
@@ -85,7 +91,7 @@ fun NavigationGraph(
             val resolvedWorkViewModel: ResolvedWorkViewModel =
                 viewModel(factory = viewModelFactory {
                     initializer {
-                        ResolvedWorkViewModel(demoViewModel)
+                        ResolvedWorkViewModel(_demoViewModel = demoViewModel)
                     }
                 })
 
@@ -100,7 +106,7 @@ fun NavigationGraph(
             val profileViewModel: ProfileViewModel =
                 viewModel(factory = viewModelFactory {
                     initializer {
-                        ProfileViewModel(demoViewModel)
+                        ProfileViewModel(_demoViewModel = demoViewModel)
                     }
                 })
 
@@ -129,7 +135,7 @@ fun NavigationGraph(
             val signUpViewModel: SignUpViewModel =
                 viewModel(factory = viewModelFactory {
                     initializer {
-                        SignUpViewModel(demoViewModel)
+                        SignUpViewModel(_demoViewModel = demoViewModel)
                     }
                 })
 
@@ -144,7 +150,7 @@ fun NavigationGraph(
             val createBookViewModel: CreateBookViewModel =
                 viewModel(factory = viewModelFactory {
                     initializer {
-                        CreateBookViewModel(demoViewModel)
+                        CreateBookViewModel(_demoViewModel = demoViewModel)
                     }
                 })
 
@@ -166,7 +172,7 @@ fun NavigationGraph(
             val createBookViewModel: CreateBookViewModel =
                 viewModel(factory = viewModelFactory {
                     initializer {
-                        CreateBookViewModel(demoViewModel)
+                        CreateBookViewModel(_demoViewModel = demoViewModel)
                     }
                 })
 

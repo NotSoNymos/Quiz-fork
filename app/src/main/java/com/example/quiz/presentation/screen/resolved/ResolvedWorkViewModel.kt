@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class ResolvedWorkViewModel(
-    demoViewModel: DemoViewModel
+    private val _demoViewModel: DemoViewModel
 ) : ViewModel() {
     private val _quizList = MutableStateFlow(
         listOf(

@@ -6,7 +6,9 @@ import com.example.quiz.data.model.Paragraph
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class CreateBookViewModel(demoViewModel: DemoViewModel) : ViewModel() {
+class CreateBookViewModel(
+    private val _demoViewModel: DemoViewModel
+) : ViewModel() {
     private val _isChecked = MutableStateFlow(false)
     val isChecked: StateFlow<Boolean> = _isChecked
     private val _title = MutableStateFlow("")
