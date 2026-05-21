@@ -6,6 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.quiz.DemoViewModel
 import com.example.quiz.data.model.Question
 import com.example.quiz.data.model.Quiz
+import com.example.quiz.repository.QuizRepository
+
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,12 +17,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MyWorkViewModel(
+@HiltViewModel
+class MyWorkViewModel @Inject constructor(
+    //private val quizRepository: QuizRepository
     private val _demoViewModel: DemoViewModel
-) : ViewModel() {
+) :
+    ViewModel() {
     private val _uiState = MutableStateFlow(MyWorkState())
 
-    val uiState = _uiState.asStateFlow()
+    val uiState = _uiState.asStateFlow(
+        )
 
     fun updateQuizList(){
         viewModelScope.launch(Dispatchers.IO) {

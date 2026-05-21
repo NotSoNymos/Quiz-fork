@@ -22,6 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.quiz.presentation.composables.ButtonAddParagraph
@@ -47,6 +49,7 @@ fun CreateQuestionScreen(
 @Composable
 fun CreateQuestionScreenContent(
     modifier: Modifier = Modifier,
+    viewModel: CreateQuizViewModel = hiltViewModel(),
     navHostController: NavHostController,
     onSubmitAction: (CreateQuestionFormState) -> Unit = {},
 ) {

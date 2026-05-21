@@ -17,7 +17,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.quiz.presentation.composables.bars.AppBottomNavigationBar
 import com.example.quiz.presentation.navigation.NavigationGraph
 import com.example.quiz.ui.theme.QuizTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -19,7 +20,7 @@ import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun OneReadBookScreen(modifier: Modifier = Modifier, viewModel: ReadBookViewModel = viewModel(), navHostController: NavHostController) {
+fun OneReadBookScreen(modifier: Modifier = Modifier, viewModel: ReadBookViewModel = hiltViewModel(), navHostController: NavHostController) {
     SimpleQuizBackground(Modifier, "Чтение ", "book", navHostController)
     Column(
         modifier = Modifier
@@ -31,7 +32,7 @@ fun OneReadBookScreen(modifier: Modifier = Modifier, viewModel: ReadBookViewMode
             description = viewModel.description.collectAsState().value,
             title = viewModel.title.collectAsState().value
         )
-        SimpleButton(Modifier.padding(top = 15.dp, start = 160.dp), "Далее") { }
+        SimpleButton(Modifier.padding(top = 10.dp, start = 160.dp), "Далее") { }
     }
 }
 

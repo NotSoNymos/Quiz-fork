@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -19,7 +20,11 @@ import com.example.quiz.ui.theme.QuizTheme
 //TODO: Unused..
 
 @Composable
-fun MyWorkScreen(modifier: Modifier = Modifier, viewModel: WorkBookViewModel = viewModel(), navHostController: NavHostController) {
+fun MyWorkScreen(
+    modifier: Modifier = Modifier,
+    viewModel: WorkBookViewModel = hiltViewModel(),
+    navHostController: NavHostController
+) {
     SimpleCreateBackground(Modifier, "Мои работы", navHostController)
 
     LazyColumn(
@@ -34,12 +39,12 @@ fun MyWorkScreen(modifier: Modifier = Modifier, viewModel: WorkBookViewModel = v
     }
 }
 
-//@Preview
-//@Composable
-//private fun WorkBookPreview() {
-//    QuizTheme {
-//        MyWorkScreenContent(
-//            modifier = Modifier, rememberNavController()
-//        )
-//    }
-//}
+@Preview
+@Composable
+private fun WorkBookPreview() {
+    QuizTheme {
+        MyWorkScreen(
+            modifier = Modifier, navHostController = rememberNavController()
+        )
+    }
+}
