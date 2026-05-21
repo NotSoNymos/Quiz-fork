@@ -13,11 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.quiz.DemoViewModel
 import com.example.quiz.presentation.composables.BackgroundLogin
-
 import com.example.quiz.presentation.composables.EditLoginRegistration
 import com.example.quiz.presentation.composables.EditPasswordRegistration
 import com.example.quiz.presentation.composables.SimpleButton

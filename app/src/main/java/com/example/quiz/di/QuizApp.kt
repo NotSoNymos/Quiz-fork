@@ -1,4 +1,4 @@
-package com.example.quiz
+package com.example.quiz.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

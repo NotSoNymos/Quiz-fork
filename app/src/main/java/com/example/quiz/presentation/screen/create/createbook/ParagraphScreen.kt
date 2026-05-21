@@ -17,10 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.quiz.DemoViewModel
 import com.example.quiz.data.model.Paragraph
 import com.example.quiz.presentation.composables.ButtonAddParagraph
 import com.example.quiz.presentation.composables.SimpleButton

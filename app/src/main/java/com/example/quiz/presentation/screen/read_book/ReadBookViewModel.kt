@@ -1,7 +1,8 @@
 package com.example.quiz.presentation.screen.read_book
 
 import androidx.lifecycle.ViewModel
-import com.example.quiz.repository.BookRepository
+import com.example.quiz.domain.repository.DomainRepository
+import com.example.quiz.domain.repository.DomainRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 @HiltViewModel
 class ReadBookViewModel @Inject constructor(
-    //private val bookRepository: BookRepository
+    private val _domainRepository: DomainRepositoryImpl
 ) : ViewModel() {
     private val _title = MutableStateFlow("Лукоморье")
     private val _description = MutableStateFlow(

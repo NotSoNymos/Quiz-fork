@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,8 +27,19 @@ import com.example.quiz.ui.theme.White
 @Composable
 fun CreateQuizScreen(
     modifier: Modifier = Modifier,
+    viewModel: CreateQuizViewModel,
     navHostController: NavHostController,
 ) {
+
+    CreateQuizScreenContent(modifier, navHostController)
+}
+
+@Composable
+fun CreateQuizScreenContent(
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController,
+) {
+    val formState = rememberSaveable { CreateQuizFormState() }
     //TODO: Implement form state and navigation data forwarding logic
 
     SimpleQuizBackground(modifier = Modifier, label = "Создать квиз", type = "quiz", navHostController)
@@ -43,9 +55,9 @@ fun CreateQuizScreen(
         Box(modifier = Modifier.width(346.dp)) {
             SimpleOutlinedText(
                 Modifier.padding(top = 41.dp),
-                "",
+                formState.title,
                 "Название",
-                {},
+                { formState.title = it },
                 MaterialTheme.colorScheme.secondary,
                 shape = 20
             )
@@ -58,9 +70,9 @@ fun CreateQuizScreen(
                     .padding(top = 12.dp)
                     .width(355.dp)
                     .height(406.dp),
-                "",
+                formState.description,
                 "Описание",
-                {},
+                { formState.description = it },
                 MaterialTheme.colorScheme.primaryContainer,
                 shape = 10
             )
@@ -77,5 +89,10 @@ fun CreateQuizScreen(
 @Preview
 @Composable
 private fun CreateQuizScreenPreview() {
-    QuizTheme { CreateQuizScreen(Modifier,rememberNavController()) }
+    QuizTheme {
+        CreateQuizScreenContent(
+            Modifier,
+            rememberNavController()
+        )
+    }
 }

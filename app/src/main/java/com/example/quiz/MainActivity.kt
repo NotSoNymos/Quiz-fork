@@ -27,7 +27,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
-            val demoViewModel = viewModel<DemoViewModel>()
 
             QuizTheme {
                 Scaffold(
@@ -42,7 +41,6 @@ class MainActivity : ComponentActivity() {
                             .padding(contentPadding)
                             .fillMaxSize(),
                         navController = navController,
-                        demoViewModel = demoViewModel,
                     )
                 }
             }

@@ -11,13 +11,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.quiz.data.model.Quiz
 import com.example.quiz.presentation.composables.CardWork
 import com.example.quiz.presentation.composables.SimpleCreateBackground
 import com.example.quiz.ui.theme.QuizTheme
+import java.util.UUID
 
 @Composable
 fun MyWorkScreen(
@@ -68,7 +68,7 @@ private fun MyWorkPreview() {
             uiState = MyWorkState(
                 quizList = listOf(
                     Quiz(
-                        0,
+                        UUID.randomUUID(),
                         title = "Превосходный квиз",
                         description = "Описание",
                         questions = listOf()

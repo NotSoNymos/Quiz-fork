@@ -2,14 +2,11 @@ package com.example.quiz.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.example.quiz.DemoViewModel
 import com.example.quiz.presentation.screen.create.CreateScreen
 import com.example.quiz.presentation.screen.create.createbook.CreateBookScreen
 import com.example.quiz.presentation.screen.create.createbook.CreateBookViewModel
@@ -35,7 +32,6 @@ fun NavigationGraph(
     modifier: Modifier,
     navController: NavHostController,
     startDestination: Destinations = Destinations.Home,
-    demoViewModel: DemoViewModel
 ) {
     NavHost(
         modifier = modifier,
@@ -43,12 +39,7 @@ fun NavigationGraph(
         startDestination = startDestination
     ) {
         composable<Destinations.Home> {
-            val myWorkViewModel: MyWorkViewModel =
-                viewModel(factory = viewModelFactory {
-                    initializer {
-                        MyWorkViewModel(_demoViewModel = demoViewModel)
-                    }
-                })
+            val myWorkViewModel: MyWorkViewModel = hiltViewModel()
 
             MyWorkScreen(
                 modifier = Modifier,
@@ -60,14 +51,9 @@ fun NavigationGraph(
             val route = currentBackStack.toRoute<Destinations.CreateQuestion>()
 
             val createQuestionViewModel: CreateQuestionViewModel =
-                viewModel(factory = viewModelFactory {
-                    initializer {
-                        CreateQuestionViewModel(
-                            _demoViewModel = demoViewModel,
-                            quizId = route.id //TODO: Or change to Quiz object to pass whole data
-                        )
-                    }
-                })
+                hiltViewModel { factory: CreateQuestionViewModel.Factory ->
+                    factory.create(route.id)
+                }
 
             CreateQuestionScreen(
                 modifier = Modifier,
@@ -88,12 +74,7 @@ fun NavigationGraph(
         }
 
         composable<Destinations.Look> {
-            val resolvedWorkViewModel: ResolvedWorkViewModel =
-                viewModel(factory = viewModelFactory {
-                    initializer {
-                        ResolvedWorkViewModel(_demoViewModel = demoViewModel)
-                    }
-                })
+            val resolvedWorkViewModel: ResolvedWorkViewModel = hiltViewModel()
 
             ResolvedWorkScreen(
                 modifier = Modifier,
@@ -103,12 +84,7 @@ fun NavigationGraph(
         }
 
         composable<Destinations.Profile> {
-            val profileViewModel: ProfileViewModel =
-                viewModel(factory = viewModelFactory {
-                    initializer {
-                        ProfileViewModel(_demoViewModel = demoViewModel)
-                    }
-                })
+            val profileViewModel: ProfileViewModel = hiltViewModel()
 
             ProfileScreen(
                 modifier = Modifier,
@@ -132,12 +108,7 @@ fun NavigationGraph(
         }
 
         composable<Destinations.SignUp> {
-            val signUpViewModel: SignUpViewModel =
-                viewModel(factory = viewModelFactory {
-                    initializer {
-                        SignUpViewModel(_demoViewModel = demoViewModel)
-                    }
-                })
+            val signUpViewModel: SignUpViewModel = hiltViewModel()
 
             SignUpScreen(
                 modifier = Modifier,
@@ -147,12 +118,7 @@ fun NavigationGraph(
         }
 
         composable<Destinations.CreateParagraph> {
-            val createBookViewModel: CreateBookViewModel =
-                viewModel(factory = viewModelFactory {
-                    initializer {
-                        CreateBookViewModel(_demoViewModel = demoViewModel)
-                    }
-                })
+            val createBookViewModel: CreateBookViewModel = hiltViewModel()
 
             CreateParagraph(
                 modifier = Modifier,
@@ -169,12 +135,7 @@ fun NavigationGraph(
         }
 
         composable<Destinations.Paragraph> {
-            val createBookViewModel: CreateBookViewModel =
-                viewModel(factory = viewModelFactory {
-                    initializer {
-                        CreateBookViewModel(_demoViewModel = demoViewModel)
-                    }
-                })
+            val createBookViewModel: CreateBookViewModel = hiltViewModel()
 
             CreateParagraph(
                 viewModel = createBookViewModel,

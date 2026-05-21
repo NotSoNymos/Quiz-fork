@@ -1,23 +1,23 @@
 package com.example.quiz.presentation.screen.create.createbook
 
 import androidx.lifecycle.ViewModel
-import com.example.quiz.DemoViewModel
 import com.example.quiz.data.model.Paragraph
-import com.example.quiz.repository.BookRepository
+import com.example.quiz.domain.repository.DomainRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
-
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class CreateBookViewModel @Inject constructor(
-    private val _demoViewModel: DemoViewModel
+    private val _domainRepositoryImpl: DomainRepositoryImpl
 ): ViewModel() {
     private val _isChecked = MutableStateFlow(false)
     val isChecked: StateFlow<Boolean> = _isChecked
+
     private val _title = MutableStateFlow("")
     val login: StateFlow<String> = _title
+
     private var _description = MutableStateFlow("")
     val password: StateFlow<String> = _description
 

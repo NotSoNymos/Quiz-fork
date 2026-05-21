@@ -21,7 +21,11 @@ import com.example.quiz.data.model.Question
 import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.ui.theme.QuizTheme
 @Composable
-fun ReadQuizScreen(modifier: Modifier = Modifier, viewModel: ReadQuizViewModel = hiltViewModel(), navHostController: NavHostController) {
+fun ReadQuizScreen(
+    modifier: Modifier = Modifier,
+    viewModel: ReadQuizViewModel = hiltViewModel(),
+    navHostController: NavHostController
+) {
     val variants = viewModel.variants.collectAsState().value
     SimpleQuizBackground(Modifier, label = "Решить квиз", "quiz", navHostController )
     Column(

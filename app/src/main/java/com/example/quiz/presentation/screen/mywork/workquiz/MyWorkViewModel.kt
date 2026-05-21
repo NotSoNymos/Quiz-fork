@@ -1,26 +1,20 @@
 package com.example.quiz.presentation.screen.mywork.workquiz
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.quiz.DemoViewModel
-import com.example.quiz.data.model.Question
-import com.example.quiz.data.model.Quiz
-import com.example.quiz.repository.QuizRepository
-
+import com.example.quiz.domain.repository.DomainRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class MyWorkViewModel @Inject constructor(
     //private val quizRepository: QuizRepository
-    private val _demoViewModel: DemoViewModel
+    private val _domainRepositoryImpl: DomainRepositoryImpl
 ) :
     ViewModel() {
     private val _uiState = MutableStateFlow(MyWorkState())
@@ -30,7 +24,7 @@ class MyWorkViewModel @Inject constructor(
 
     fun updateQuizList(){
         viewModelScope.launch(Dispatchers.IO) {
-            val result = _demoViewModel.getQuizList()
+            val result = _domainRepositoryImpl.getQuizList()
 
             _uiState.update { it.copy(quizList = result) }
         }

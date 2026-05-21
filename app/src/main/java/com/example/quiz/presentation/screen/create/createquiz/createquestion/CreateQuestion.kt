@@ -49,7 +49,6 @@ fun CreateQuestionScreen(
 @Composable
 fun CreateQuestionScreenContent(
     modifier: Modifier = Modifier,
-    viewModel: CreateQuizViewModel = hiltViewModel(),
     navHostController: NavHostController,
     onSubmitAction: (CreateQuestionFormState) -> Unit = {},
 ) {
@@ -188,7 +187,7 @@ fun CreateQuestionScreenContent(
 private fun CreateQuestionScreenContentScreen() {
     QuizTheme {
         CreateQuestionScreenContent(
-            navHostController = rememberNavController(),
+            navHostController = rememberNavController()
         )
     }
 }

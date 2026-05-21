@@ -6,9 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,7 +14,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,6 +32,7 @@ import com.example.quiz.R
 import com.example.quiz.data.model.Quiz
 import com.example.quiz.ui.theme.Black
 import com.example.quiz.ui.theme.QuizTheme
+import java.util.UUID
 
 @Composable
 fun CardWork(
@@ -293,7 +290,9 @@ fun ReadBookCard(modifier: Modifier = Modifier, description: String, title: Stri
         Text(
             text = description,
             style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.padding(top = 101.dp, start = 10.dp, end = 10.dp).height(500.dp)
+            modifier = Modifier
+                .padding(top = 101.dp, start = 10.dp, end = 10.dp)
+                .height(500.dp)
         )
     }
 }
@@ -351,7 +350,19 @@ private fun CardVariableVariantPreview() {
 @Preview
 @Composable
 private fun Preview() {
-    QuizTheme { CardWorkQuiz(Modifier, Quiz(0,"Title", "Description", listOf()), {}, "16") }
+    QuizTheme {
+        CardWorkQuiz(
+            modifier = Modifier,
+            quiz = Quiz(
+                id = UUID.randomUUID(),
+                title = "Title",
+                description = "Description",
+                questions = listOf()
+            ),
+            onClick = {},
+            count = "16"
+        )
+    }
 }
 
 @Preview

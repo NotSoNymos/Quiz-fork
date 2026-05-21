@@ -1,4 +1,4 @@
-package com.example.quiz.data.database
+package com.example.quiz.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
