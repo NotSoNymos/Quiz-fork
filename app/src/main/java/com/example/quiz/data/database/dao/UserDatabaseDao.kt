@@ -24,4 +24,7 @@ interface UserDatabaseDao {
 
     @Delete
     suspend fun deleteUser(userEntity: UserEntity)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertUserIfNotExists(user: UserEntity)
 }

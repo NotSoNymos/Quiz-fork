@@ -31,4 +31,8 @@ class UserRepository @Inject constructor(
 
         _userDatabaseDao.deleteUser(entity)
     }
+
+    suspend fun insertUserIfNotExists(user: User) {
+        _userDatabaseDao.insertUserIfNotExists(UserEntity.fromUser(user).copy(email = "test"))
+    }
 }

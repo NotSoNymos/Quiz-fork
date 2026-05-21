@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 
 interface DomainRepository {
+    suspend fun initializeDefaultUser()
+
     suspend fun getQuizList(): List<Quiz>
 
     suspend fun createQuiz(quiz: Quiz)

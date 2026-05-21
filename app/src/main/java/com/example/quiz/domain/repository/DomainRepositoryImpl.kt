@@ -8,7 +8,6 @@ import com.example.quiz.data.repository.QuizRepository
 import com.example.quiz.data.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.toList
 import java.util.UUID
 import javax.inject.Inject
 
@@ -18,6 +17,20 @@ class DomainRepositoryImpl @Inject constructor(
     private val _userRepository: UserRepository,
 
 ): DomainRepository {
+    override suspend fun initializeDefaultUser() {
+        val defaultUser = User(
+            surname = "Default",
+            name = "User",
+            patronymic = "",
+            gender = "Not specified",
+            age = "0",
+            education = "None",
+            town = "Unknown"
+        )
+
+        _userRepository.insertUserIfNotExists(defaultUser)
+    }
+
     override suspend fun getQuizList(): List<Quiz> {
         val result = _quizRepository.getAllQuiz().first()
         return result
