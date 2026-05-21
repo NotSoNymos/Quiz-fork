@@ -12,7 +12,7 @@ sealed class Destinations(val icon: Int? = null) {
     data object Login : Destinations()
 
     @Serializable
-    data class CreateQuestion(val id: Int) : Destinations()
+    data class CreateQuestion(val title: String, val description: String) : Destinations()
 
     @Serializable
     data object CreateQuiz : Destinations()

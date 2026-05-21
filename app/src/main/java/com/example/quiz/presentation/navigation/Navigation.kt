@@ -11,7 +11,9 @@ import com.example.quiz.presentation.screen.create.CreateScreen
 import com.example.quiz.presentation.screen.create.createbook.CreateBookScreen
 import com.example.quiz.presentation.screen.create.createbook.CreateBookViewModel
 import com.example.quiz.presentation.screen.create.createbook.CreateParagraph
+import com.example.quiz.presentation.screen.create.createquiz.CreateQuizFormState
 import com.example.quiz.presentation.screen.create.createquiz.CreateQuizScreen
+import com.example.quiz.presentation.screen.create.createquiz.CreateQuizViewModel
 import com.example.quiz.presentation.screen.create.createquiz.createquestion.CreateQuestionScreen
 import com.example.quiz.presentation.screen.create.createquiz.createquestion.CreateQuestionViewModel
 import com.example.quiz.presentation.screen.login.LoginScreen
@@ -52,7 +54,7 @@ fun NavigationGraph(
 
             val createQuestionViewModel: CreateQuestionViewModel =
                 hiltViewModel { factory: CreateQuestionViewModel.Factory ->
-                    factory.create(route.id)
+                    factory.create(CreateQuizFormState(title = route.title, description = route.description))
                 }
 
             CreateQuestionScreen(
@@ -97,8 +99,10 @@ fun NavigationGraph(
         }
 
         composable<Destinations.CreateQuiz> {
+            val viewModel: CreateQuizViewModel = hiltViewModel()
             CreateQuizScreen(
                 modifier = Modifier,
+                viewModel = viewModel,
                 navHostController = navController
             )
         }

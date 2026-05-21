@@ -14,10 +14,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.ui.unit.dp
 import com.example.quiz.data.model.Info
 import com.example.quiz.presentation.composables.BackgroundProfile
@@ -47,7 +47,7 @@ fun ProfileScreenContent(
     uiState: ProfileState,
     onSubmitAction: ((ProfileFormState) -> Unit) = {}
 ) {
-    val formState by rememberSaveable {
+    var formState by rememberSaveable {
         mutableStateOf(uiState.formState)
     }
 
@@ -56,43 +56,43 @@ fun ProfileScreenContent(
             Modifier,
             formState.surname,
             "Фамилия",
-            { formState.surname = it },
+            { formState = formState.copy(surname = it) },
             MaterialTheme.colorScheme.secondary
         ), Info(
             Modifier.padding(top = 15.dp),
             formState.name,
             "Имя",
-            { formState.name = it },
+            { formState = formState.copy(name = it) },
             MaterialTheme.colorScheme.secondary
         ), Info(
             Modifier.padding(top = 15.dp),
             formState.patronymic,
             "Отчество",
-            { formState.patronymic = it },
+            { formState = formState.copy(patronymic = it) },
             MaterialTheme.colorScheme.secondary
         ), Info(
             Modifier.padding(top = 15.dp),
             formState.gender,
             "Пол",
-            { formState.gender = it },
+            { formState = formState.copy(gender = it) },
             MaterialTheme.colorScheme.secondary
         ), Info(
             Modifier.padding(top = 15.dp),
             formState.age,
             "Возраст",
-            { formState.age = it },
+            { formState = formState.copy(age = it) },
             MaterialTheme.colorScheme.secondary
         ), Info(
             Modifier.padding(top = 15.dp),
             formState.education,
             "Образование",
-            { formState.education },
+            { formState = formState.copy(education = it) },
             MaterialTheme.colorScheme.secondary
         ), Info(
             Modifier.padding(top = 15.dp),
             formState.town,
             "Город",
-            { formState.town = it },
+            { formState = formState.copy(town = it) },
             MaterialTheme.colorScheme.secondary
         )
     )

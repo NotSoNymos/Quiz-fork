@@ -10,7 +10,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,10 +42,15 @@ fun CreateQuizScreenContent(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
 ) {
-    val formState = rememberSaveable { CreateQuizFormState() }
+    var formState by rememberSaveable { mutableStateOf(CreateQuizFormState()) }
     //TODO: Implement form state and navigation data forwarding logic
 
-    SimpleQuizBackground(modifier = Modifier, label = "Создать квиз", type = "quiz", navHostController)
+    SimpleQuizBackground(
+        modifier = Modifier,
+        label = "Создать квиз",
+        type = "quiz",
+        navHostController = navHostController
+    )
 
     Column(
         modifier = Modifier
@@ -51,17 +59,17 @@ fun CreateQuizScreenContent(
             .background(color = White, shape = RoundedCornerShape(topEnd = 30.dp, topStart = 30.dp)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Box(modifier = Modifier.width(346.dp)) {
             SimpleOutlinedText(
                 Modifier.padding(top = 41.dp),
                 formState.title,
                 "Название",
-                { formState.title = it },
+                { formState = formState.copy(title = it) },
                 MaterialTheme.colorScheme.secondary,
                 shape = 20
             )
         }
+
         Box(modifier = Modifier
             .width(355.dp)
             .height(406.dp)) {
@@ -72,7 +80,7 @@ fun CreateQuizScreenContent(
                     .height(406.dp),
                 formState.description,
                 "Описание",
-                { formState.description = it },
+                { formState = formState.copy(description = it) },
                 MaterialTheme.colorScheme.primaryContainer,
                 shape = 10
             )
@@ -82,7 +90,14 @@ fun CreateQuizScreenContent(
             modifier = Modifier
                 .padding(top = 31.dp, start = 201.dp),
             text = "Далее"
-        ) { navHostController.navigate(Destinations.CreateQuestion(0))} //TODO: track id
+        ) {
+            navHostController.navigate(
+                Destinations.CreateQuestion(
+                    formState.title,
+                    formState.description
+                )
+            )
+        } //TODO: track id
     }
 }
 
