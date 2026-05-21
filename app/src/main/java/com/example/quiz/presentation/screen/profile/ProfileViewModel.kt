@@ -15,7 +15,7 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val _domainRepositoryImpl: DomainRepositoryImpl
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(ProfileState())
+    private val _uiState = MutableStateFlow(ProfileState(isLoading = true))
     val uiState = _uiState.asStateFlow()
 
     fun submitFormState(formState: ProfileFormState) {
@@ -32,6 +32,7 @@ class ProfileViewModel @Inject constructor(
 
             _uiState.update {
                 ProfileState(
+                    isLoading = false,
                     formState = ProfileFormState().fromUser(result)
                 )
             }

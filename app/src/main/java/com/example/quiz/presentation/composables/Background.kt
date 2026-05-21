@@ -275,7 +275,7 @@ private fun BackgroundProfilePrevContent() {
     QuizTheme {
         BackgroundProfile(
             Modifier, R.drawable.ic_launcher_background,
-            { ProfileScreenContent(Modifier, ProfileState()) }
+            { ProfileScreenContent(Modifier, ProfileState(false)) }
         )
     }
 }
