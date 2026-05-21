@@ -1,0 +1,14 @@
+package com.example.quiz.presentation.splash
+
+import android.window.SplashScreen
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+
+@Composable
+fun SplashScreen(modifier: Modifier = Modifier) {
+    Column(modifier = Modifier.fillMaxSize()) {
+
+    }
+}

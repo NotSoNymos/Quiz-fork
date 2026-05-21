@@ -1,5 +1,6 @@
 package com.example.quiz
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,19 +12,35 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.quiz.presentation.composables.bars.AppBottomNavigationBar
+import com.example.quiz.presentation.navigation.NavigationGraph
 import com.example.quiz.ui.theme.QuizTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val navController = rememberNavController()
             QuizTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        AppBottomNavigationBar(navController)
+                    }
+                ) {
+                    contentPadding ->
+                    NavigationGraph(
+                        modifier = Modifier
+                            .padding(contentPadding)
+                            .fillMaxSize(),
+                        navController = navController
                     )
+
                 }
             }
         }
