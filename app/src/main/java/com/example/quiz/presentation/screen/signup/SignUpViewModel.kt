@@ -1,13 +1,16 @@
 package com.example.quiz.presentation.screen.signup
 
 import androidx.lifecycle.ViewModel
+import com.example.quiz.domain.repository.DomainRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(): ViewModel() {
+class SignUpViewModel @Inject constructor(
+    private val _domainRepositoryImpl: DomainRepositoryImpl
+) : ViewModel() {
     private val _login = MutableStateFlow("")
     val login: StateFlow<String> = _login
     private var _password = MutableStateFlow("")
@@ -26,7 +29,6 @@ class SignUpViewModel @Inject constructor(): ViewModel() {
     fun onEmailChange(newText: String){
         _login.value = newText
     }
-
 
 
 //    fun ValidPassword(password: String) : Boolean {

@@ -1,4 +1,4 @@
-package com.example.quiz.data.database
+package com.example.quiz.data.database.utils
 
 import androidx.room.TypeConverter
 import com.example.quiz.data.database.entity.BookEntity

@@ -1,50 +1,36 @@
 package com.example.quiz.presentation.screen.mywork.workquiz
 
 import androidx.lifecycle.ViewModel
-import com.example.quiz.data.model.Question
-import com.example.quiz.data.model.Quiz
-import com.example.quiz.repository.QuizRepository
-
+import androidx.lifecycle.viewModelScope
+import com.example.quiz.domain.repository.DomainRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class MyWorkViewModel @Inject constructor(
     //private val quizRepository: QuizRepository
+    private val _domainRepositoryImpl: DomainRepositoryImpl
 ) :
     ViewModel() {
+    private val _uiState = MutableStateFlow(MyWorkState())
 
-    private val _listQuiz = MutableStateFlow(
-        listOf(
-            Quiz(
-                "Quiz",
-                "quiz",
-                listOf(
-                    Question("", "", listOf(""))
-                )
-            ),
-            Quiz(
-                "Quiz",
-                "quiz",
-                listOf(
-                    Question("", "", listOf(""))
-                )
-            ),
-            Quiz(
-                "Quiz",
-                "quiz",
-                listOf(
-                    Question("", "", listOf(""))
-                )
-            )
+    val uiState = _uiState.asStateFlow(
         )
 
-    )
-    val listQuiz: StateFlow<List<Quiz>> = _listQuiz
+    fun updateQuizList(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = _domainRepositoryImpl.getQuizList()
 
-    fun onListQuizChange(newListQuiz: List<Quiz>) {
-        _listQuiz.value = newListQuiz
+            _uiState.update { it.copy(quizList = result) }
+        }
+    }
+
+    init {
+        updateQuizList()
     }
 }

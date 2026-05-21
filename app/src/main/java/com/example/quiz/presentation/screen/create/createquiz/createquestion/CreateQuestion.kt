@@ -1,4 +1,4 @@
-package com.example.quiz.presentation.screen.create.createquiz
+package com.example.quiz.presentation.screen.create.createquiz.createquestion
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,9 +16,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,30 +29,46 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.quiz.data.model.InputField
 import com.example.quiz.presentation.composables.ButtonAddParagraph
 import com.example.quiz.presentation.composables.ButtonAddVariableAnswer
 import com.example.quiz.presentation.composables.SimpleAnswerText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
+import com.example.quiz.presentation.screen.create.InputField
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun CreateQuestion(
+fun CreateQuestionScreen(
     modifier: Modifier = Modifier,
-    viewModel: CreateQuizViewModel = hiltViewModel(),
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    viewModel: CreateQuestionViewModel,
 ) {
-    val fields = remember { mutableStateListOf<InputField>() }
-    val question = remember { mutableStateOf("") }
-    val answer = remember { mutableStateOf("") }
+    CreateQuestionScreenContent(
+        modifier = modifier,
+        navHostController = navHostController,
+        onSubmitAction = { viewModel.submitQuiz(formState = it) }
+    )
+}
+
+@Composable
+fun CreateQuestionScreenContent(
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController,
+    onSubmitAction: (CreateQuestionFormState) -> Unit = {},
+) {
+    var formState by rememberSaveable { mutableStateOf(CreateQuestionFormState()) }
 
 
-    val listVariants = mutableListOf<String>()
-    SimpleQuizBackground(Modifier, "Создать квиз", "quiz", navHostController)
+    //val listVariants = mutableListOf<String>()
 
+    SimpleQuizBackground(
+        modifier = Modifier,
+        label = "Создать квиз",
+        type = "quiz",
+        navHostController = navHostController
+    )
 
     LazyColumn(
-        modifier = Modifier
+        modifier = modifier
             .padding(top = 210.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -59,8 +76,8 @@ fun CreateQuestion(
     ) {
         item {
             OutlinedTextField(
-                value = question.value,
-                onValueChange = { question.value = it },
+                value = formState.question,
+                onValueChange = { formState = formState.copy(question = it) },
                 modifier = Modifier
                     .width(355.dp)
                     .height(80.dp),
@@ -85,8 +102,8 @@ fun CreateQuestion(
 
         item {
             OutlinedTextField(
-                value = answer.value,
-                onValueChange = { answer.value = it },
+                value = formState.answer,
+                onValueChange = { formState = formState.copy(answer = it) },
                 modifier = Modifier
                     .padding(top = 25.dp)
                     .width(355.dp)
@@ -114,7 +131,7 @@ fun CreateQuestion(
 
 
 
-        itemsIndexed(fields) { index, field ->
+        itemsIndexed(formState.fields) { index, field ->
             SimpleAnswerText(
                 Modifier
                     .width(355.dp)
@@ -124,13 +141,12 @@ fun CreateQuestion(
                 "Вариант №${index + 1}",
                 onTextChange = { newValue ->
                     // Обновляем текст внутри конкретного объекта по индексу
-                    fields[index] = field.copy(text = newValue)
+                    formState.fields[index] = field.copy(text = newValue)
                 },
                 color = MaterialTheme.colorScheme.secondary,
                 onDeleteClick = {
-                    fields.removeAt(index)
+                    formState.fields.removeAt(index)
                 },
-
                 )
         }
 
@@ -141,7 +157,11 @@ fun CreateQuestion(
                     .padding(top = 7.dp)
                     .width(355.dp)
                     .height(70.dp),
-                { fields.add(InputField(id = fields.size)) },
+                {
+                    formState.fields.add(
+                        InputField(id = formState.fields.size)
+                    )
+                },
                 "Добавить вариант ответа",
                 MaterialTheme.colorScheme.primary
             )
@@ -155,7 +175,9 @@ fun CreateQuestion(
                     .padding(top = 90.dp)
                     .width(355.dp)
                     .height(65.dp),
-                { },
+                {
+                    onSubmitAction.invoke(formState)
+                },
                 "Сохранить квиз",
                 MaterialTheme.colorScheme.secondaryContainer
             )
@@ -165,6 +187,10 @@ fun CreateQuestion(
 
 @Preview
 @Composable
-private fun CreateQuestionScreen() {
-    QuizTheme { CreateQuestion(Modifier, navHostController = rememberNavController()) }
+private fun CreateQuestionScreenContentScreen() {
+    QuizTheme {
+        CreateQuestionScreenContent(
+            navHostController = rememberNavController()
+        )
+    }
 }

@@ -10,15 +10,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.quiz.presentation.composables.SimpleButton
-
 import com.example.quiz.presentation.composables.SimpleOutlinedText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.presentation.navigation.Destinations
@@ -26,8 +28,30 @@ import com.example.quiz.ui.theme.QuizTheme
 import com.example.quiz.ui.theme.White
 
 @Composable
-fun CreateQuizScreen(modifier: Modifier = Modifier, navHostController: NavHostController) {
-    SimpleQuizBackground(modifier = Modifier, label = "Создать квиз", type = "quiz", navHostController)
+fun CreateQuizScreen(
+    modifier: Modifier = Modifier,
+    viewModel: CreateQuizViewModel,
+    navHostController: NavHostController,
+) {
+
+    CreateQuizScreenContent(modifier, navHostController)
+}
+
+@Composable
+fun CreateQuizScreenContent(
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController,
+) {
+    var formState by rememberSaveable { mutableStateOf(CreateQuizFormState()) }
+    //TODO: Implement form state and navigation data forwarding logic
+
+    SimpleQuizBackground(
+        modifier = Modifier,
+        label = "Создать квиз",
+        type = "quiz",
+        navHostController = navHostController
+    )
+
     Column(
         modifier = Modifier
             .padding(top = 160.dp)
@@ -35,17 +59,17 @@ fun CreateQuizScreen(modifier: Modifier = Modifier, navHostController: NavHostCo
             .background(color = White, shape = RoundedCornerShape(topEnd = 30.dp, topStart = 30.dp)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Box(modifier = Modifier.width(346.dp)) {
             SimpleOutlinedText(
                 Modifier.padding(top = 41.dp),
-                "",
+                formState.title,
                 "Название",
-                {},
+                { formState = formState.copy(title = it) },
                 MaterialTheme.colorScheme.secondary,
                 shape = 20
             )
         }
+
         Box(modifier = Modifier
             .width(355.dp)
             .height(406.dp)) {
@@ -54,9 +78,9 @@ fun CreateQuizScreen(modifier: Modifier = Modifier, navHostController: NavHostCo
                     .padding(top = 12.dp)
                     .width(355.dp)
                     .height(406.dp),
-                "",
+                formState.description,
                 "Описание",
-                {},
+                { formState = formState.copy(description = it) },
                 MaterialTheme.colorScheme.primaryContainer,
                 shape = 10
             )
@@ -66,12 +90,24 @@ fun CreateQuizScreen(modifier: Modifier = Modifier, navHostController: NavHostCo
             modifier = Modifier
                 .padding(top = 31.dp, start = 201.dp),
             text = "Далее"
-        ) { navHostController.navigate(Destinations.CreateQuestion)}
+        ) {
+            navHostController.navigate(
+                Destinations.CreateQuestion(
+                    formState.title,
+                    formState.description
+                )
+            )
+        } //TODO: track id
     }
 }
 
 @Preview
 @Composable
 private fun CreateQuizScreenPreview() {
-    QuizTheme { CreateQuizScreen(Modifier,rememberNavController()) }
+    QuizTheme {
+        CreateQuizScreenContent(
+            Modifier,
+            rememberNavController()
+        )
+    }
 }

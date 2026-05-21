@@ -1,0 +1,73 @@
+package com.example.quiz.domain.repository
+
+import com.example.quiz.data.model.Book
+import com.example.quiz.data.model.Quiz
+import com.example.quiz.data.model.User
+import com.example.quiz.data.repository.BookRepository
+import com.example.quiz.data.repository.QuizRepository
+import com.example.quiz.data.repository.UserRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import java.util.UUID
+import javax.inject.Inject
+
+class DomainRepositoryImpl @Inject constructor(
+    private val _bookRepository: BookRepository,
+    private val _quizRepository: QuizRepository,
+    private val _userRepository: UserRepository,
+
+): DomainRepository {
+    override suspend fun initializeDefaultUser() {
+        val defaultUser = User(
+            surname = "Default",
+            name = "User",
+            patronymic = "",
+            gender = "Not specified",
+            age = "0",
+            education = "None",
+            town = "Unknown"
+        )
+
+        _userRepository.insertUserIfNotExists(defaultUser)
+    }
+
+    override suspend fun getQuizList(): List<Quiz> {
+        val result = _quizRepository.getAllQuiz().first()
+        return result
+    }
+
+    override suspend fun createQuiz(quiz: Quiz) {
+        _quizRepository.addQuiz(quiz)
+    }
+
+    override suspend fun removeQuiz(id: UUID) {
+        _quizRepository.deleteQuiz(id)
+    }
+
+    override suspend fun addBook(book: Book) {
+        _bookRepository.addBook(book)
+    }
+
+    override suspend fun deleteBook(id: String) {
+        _bookRepository.deleteBook(id)
+    }
+
+    override suspend fun updateBook(id: String, book: Book) {
+        _bookRepository.updateBook(id, book)
+    }
+
+    override fun getBooks(): Flow<List<Book>> {
+        return _bookRepository.getBooks()
+    }
+
+    override suspend fun getUserInfo(): User {
+        val result = _userRepository.getUserInfo()
+
+        return result
+    }
+
+    override suspend fun updateUserInfo(profile: User) {
+        _userRepository.updateUserInfo(profile)
+    }
+
+}

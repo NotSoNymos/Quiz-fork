@@ -17,17 +17,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.quiz.R
 import com.example.quiz.presentation.composables.ButtonCreate
 import com.example.quiz.presentation.navigation.Destinations
+import com.example.quiz.ui.theme.QuizTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun CreateScreen(
-    modifier: Modifier = Modifier,navHostController: NavHostController
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController
 ) {
     Scaffold(containerColor = MaterialTheme.colorScheme.primary) {
         Column(
@@ -63,13 +67,11 @@ fun CreateScreen(
             )
 
         }
-
-
     }
 }
 
-//@Preview
-//@Composable
-//private fun CreateScreenPreview() {
-//    QuizTheme { CreateScreen(Modifier) }
-//}
+@Preview
+@Composable
+private fun CreateScreenPreview() {
+    QuizTheme { CreateScreen(Modifier, rememberNavController()) }
+}
