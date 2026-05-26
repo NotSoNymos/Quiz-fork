@@ -1,4 +1,4 @@
-package com.example.quiz.presentation.screen.read_book
+package com.example.quiz.presentation.screen.read_book.paragraphs
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,27 +15,27 @@ import androidx.navigation.NavHostController
 import com.example.quiz.presentation.composables.ReadBookCard
 import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.presentation.composables.SimpleQuizBackground
-import com.example.quiz.presentation.navigation.Destinations
+import com.example.quiz.presentation.screen.read_book.ReadBookViewModel
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun OneReadBookScreen(
+fun ReadBookParagraphsScreen(
     modifier: Modifier = Modifier,
     viewModel: ReadBookViewModel = hiltViewModel(),
     navHostController: NavHostController,
 ) {
-    val state by viewModel.uiState.collectAsState()
+    val state by viewModel.paragraphState.collectAsState()
 
-    OneReadBookScreenContent(
+    ReadBookParagraphsContent(
         modifier = modifier,
         uiState = state,
         onNavigateBackAction = { navHostController.popBackStack() },
         onNextPageAction = { viewModel.readNextPage() })
 }
 @Composable
-fun OneReadBookScreenContent(
+fun ReadBookParagraphsContent(
     modifier: Modifier = Modifier,
-    uiState: ReadBookState,
+    uiState: ReadBookParagraphsState,
     onNavigateBackAction: () -> Unit,
     onNextPageAction: () -> Unit,
 ) {
@@ -63,10 +63,10 @@ fun OneReadBookScreenContent(
 
 @Preview
 @Composable
-private fun OneReadBookScreenContentPreview() {
+private fun ReadBookParagraphsContentScreenPreview() {
     QuizTheme {
-        OneReadBookScreenContent(
-            modifier = Modifier, uiState = ReadBookState(
+        ReadBookParagraphsContent(
+            modifier = Modifier, uiState = ReadBookParagraphsState(
                 title = "Лукоморье", paragraphText = """
                 У лукоморья дуб зелёный;
                 Златая цепь на дубе том:

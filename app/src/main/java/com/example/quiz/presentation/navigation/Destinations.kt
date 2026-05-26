@@ -15,7 +15,10 @@ sealed class Destinations(val icon: Int? = null) {
     data class CreateQuestion(val title: String, val description: String) : Destinations()
 
     @Serializable
-    data class ReadBook(val bookId: String) : Destinations()
+    data class ReadBookParagraphs(val bookId: String) : Destinations()
+
+    @Serializable
+    data class ReadBookDetails(val bookId: String) : Destinations()
 
     @Serializable
     data object CreateQuiz : Destinations()
