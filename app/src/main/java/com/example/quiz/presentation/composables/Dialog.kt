@@ -1,6 +1,7 @@
 package com.example.quiz.presentation.composables
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,7 +34,13 @@ import com.example.quiz.ui.theme.Black
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
-fun DialogResolvedWork(modifier: Modifier = Modifier, stateWindow: Boolean) {
+fun DialogResolvedWork(
+    modifier: Modifier = Modifier,
+    stateWindow: Boolean,
+    onClickLook: () -> Unit,
+    onClickDelete: () -> Unit
+) {
+
     var showDialog by remember { mutableStateOf(stateWindow) }
 
     if (showDialog) {
@@ -53,7 +60,7 @@ fun DialogResolvedWork(modifier: Modifier = Modifier, stateWindow: Boolean) {
                 ) {
                     Row(
                         modifier = Modifier
-
+                            .clickable(onClick = onClickLook)
                             .width(250.dp)
                             .height(60.dp)
                             .background(
@@ -66,7 +73,7 @@ fun DialogResolvedWork(modifier: Modifier = Modifier, stateWindow: Boolean) {
                         Icon(
                             painter = painterResource(R.drawable.ic_book_open),
                             contentDescription = null,
-                            modifier = Modifier.padding( start = 5.dp),
+                            modifier = Modifier.padding(start = 5.dp),
                             tint = Black
                         )
                         Text(
@@ -80,6 +87,7 @@ fun DialogResolvedWork(modifier: Modifier = Modifier, stateWindow: Boolean) {
 
                     Row(
                         modifier = Modifier
+                            .clickable(onClick = onClickDelete)
                             .padding(top = 20.dp)
                             .width(250.dp)
                             .height(60.dp)
@@ -93,7 +101,7 @@ fun DialogResolvedWork(modifier: Modifier = Modifier, stateWindow: Boolean) {
                         Icon(
                             painter = painterResource(R.drawable.ic_delete),
                             contentDescription = null,
-                            modifier = Modifier.padding( start = 5.dp),
+                            modifier = Modifier.padding(start = 5.dp),
                             tint = Black
                         )
                         Text(
@@ -112,5 +120,5 @@ fun DialogResolvedWork(modifier: Modifier = Modifier, stateWindow: Boolean) {
 @Preview
 @Composable
 private fun PreviewDialog() {
-    QuizTheme { DialogResolvedWork(Modifier, true) }
+    QuizTheme { DialogResolvedWork(Modifier, true, {}, {}) }
 }
