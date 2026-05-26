@@ -57,7 +57,6 @@ fun CreateQuestionScreenContent(
 ) {
     var formState by rememberSaveable { mutableStateOf(CreateQuestionFormState()) }
 
-
     //val listVariants = mutableListOf<String>()
 
     SimpleQuizBackground(
