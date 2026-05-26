@@ -85,8 +85,7 @@ fun BackgroundLogin(title: String, navHostController: NavHostController) {
                 .padding(innerPadding)
                 .fillMaxSize()
                 .background(
-                    color = White,
-                    shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
+                    color = White, shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
                 )
         ) {
 
@@ -95,11 +94,37 @@ fun BackgroundLogin(title: String, navHostController: NavHostController) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: String, navHostController: NavHostController) {
-    Scaffold(containerColor = MaterialTheme.colorScheme.primary, topBar = {
+@Deprecated(
+    "Passing navHostController inside composable element is discouraged. Use variant with exposed onNavigateBackAction.",
+    replaceWith = ReplaceWith("SimpleQuizBackground(modifier = modifier, label = label, type = type, onNavigateBackAction = {navHostController.popBackStack()})")
+)
+fun SimpleQuizBackground(
+    modifier: Modifier = Modifier, label: String, type: String, navHostController: NavHostController
+) {
+    SimpleQuizBackgroundContent(
+        modifier = modifier,
+        label = label,
+        type = type,
+        onNavigateBackAction = { navHostController.popBackStack() })
+}
+
+@Composable
+fun SimpleQuizBackground(
+    modifier: Modifier = Modifier, label: String, type: String, onNavigateBackAction: () -> Unit
+) {
+    SimpleQuizBackgroundContent(
+        modifier = modifier, label = label, type = type, onNavigateBackAction = onNavigateBackAction
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+fun SimpleQuizBackgroundContent(
+    modifier: Modifier = Modifier, label: String, type: String, onNavigateBackAction: () -> Unit
+) {
+    Scaffold(containerColor = MaterialTheme.colorScheme.primary,
+        topBar = {
         TopAppBar(
             title = {
                 Row(
@@ -120,7 +145,8 @@ fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: Str
                     )
                     Image(
                         painter = painterResource(if (type == "book") R.drawable.create_book else R.drawable.create_quiz),
-                        contentDescription = null, modifier = Modifier
+                        contentDescription = null,
+                        modifier = Modifier
                             .width(135.dp)
                             .height(100.dp)
                     )
@@ -136,7 +162,7 @@ fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: Str
                         .padding(start = 20.dp, top = 55.dp)
                         .width(43.dp)
                         .height(34.dp)
-                        .clickable(onClick = { navHostController.popBackStack() }),
+                        .clickable(onClick = { }),
                     tint = White
                 )
             },
@@ -144,17 +170,14 @@ fun SimpleQuizBackground(modifier: Modifier = Modifier, label: String, type: Str
             colors = TopAppBarDefaults.topAppBarColors(MaterialTheme.colorScheme.primary)
         )
     }) { innerPadding ->
-
         Column(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
                 .background(
-                    color = White,
-                    shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
+                    color = White, shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
                 )
-        ) {
-        }
+        ) {}
     }
 }
 
@@ -195,8 +218,7 @@ fun BackgroundProfile(
                 .padding(top = 55.dp)
                 .fillMaxSize()
                 .background(
-                    color = White,
-                    shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
+                    color = White, shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
                 )
         ) {
             Spacer(Modifier.padding(top = 40.dp))
@@ -243,8 +265,7 @@ fun SimpleCreateBackground(
                 .padding(top = 22.dp)
                 .fillMaxSize()
                 .background(
-                    color = White,
-                    shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
+                    color = White, shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
                 )
         ) {
 

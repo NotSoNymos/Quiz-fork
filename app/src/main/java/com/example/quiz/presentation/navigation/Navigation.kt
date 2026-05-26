@@ -22,6 +22,8 @@ import com.example.quiz.presentation.screen.mywork.workquiz.MyWorkViewModel
 import com.example.quiz.presentation.screen.noconnection.NoConnectionScreen
 import com.example.quiz.presentation.screen.profile.ProfileScreen
 import com.example.quiz.presentation.screen.profile.ProfileViewModel
+import com.example.quiz.presentation.screen.read_book.OneReadBookScreen
+import com.example.quiz.presentation.screen.read_book.ReadBookViewModel
 import com.example.quiz.presentation.screen.resolved.ResolvedWorkScreen
 import com.example.quiz.presentation.screen.resolved.ResolvedWorkViewModel
 import com.example.quiz.presentation.screen.search.SerchScreen
@@ -144,6 +146,20 @@ fun NavigationGraph(
             CreateParagraph(
                 viewModel = createBookViewModel,
                 navHostController = navController,
+            )
+        }
+
+        composable<Destinations.ReadBook> { backStackEntry ->
+            val route = backStackEntry.toRoute<Destinations.ReadBook>()
+            val readBookViewModel: ReadBookViewModel =
+                hiltViewModel { factory: ReadBookViewModel.ReadBookViewModelFactory ->
+                    factory.create(bookId = route.bookId)
+                }
+
+            OneReadBookScreen(
+                viewModel = readBookViewModel,
+                modifier = Modifier,
+                navHostController = navController
             )
         }
     }

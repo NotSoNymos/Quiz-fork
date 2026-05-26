@@ -34,7 +34,7 @@ fun ReadDescriptionBook(modifier: Modifier = Modifier, viewModel: ReadBookViewMo
             Modifier
                 .width(346.dp)
                 .height(71.dp),
-            viewModel.title.collectAsState().value,
+            "",//viewModel.title.collectAsState().value,
             color = MaterialTheme.colorScheme.primary
         )
 
@@ -43,7 +43,7 @@ fun ReadDescriptionBook(modifier: Modifier = Modifier, viewModel: ReadBookViewMo
                 .padding(top = 20.dp)
                 .width(346.dp)
                 .height(371.dp),
-            viewModel.description.collectAsState().value,
+            "",//viewModel.description.collectAsState().value,
             color = MaterialTheme.colorScheme.secondary
         )
 
