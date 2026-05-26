@@ -24,6 +24,7 @@ import com.example.quiz.presentation.composables.ButtonAddParagraph
 import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.presentation.composables.SimpleOutlinedText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
+import com.example.quiz.presentation.navigation.Destinations
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
@@ -69,6 +70,7 @@ fun CreateParagraph(
 
                     title.value = ""
                     description.value = ""
+                    viewModel.onParagraphsChange(Paragraph(title.value, description.value))
                 })
 
             SimpleButton(
@@ -78,7 +80,7 @@ fun CreateParagraph(
                     .width(226.dp),
                 "Сохранить"
             ) {
-                viewModel.onParagraphsChange(Paragraph(title.value, description.value))
+                navHostController.navigate(Destinations.Profile)
             }
         }
     }

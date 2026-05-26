@@ -56,8 +56,8 @@ class DomainRepositoryImpl @Inject constructor(
         _bookRepository.updateBook(id, book)
     }
 
-    override fun getBooks(): Flow<List<Book>> {
-        return _bookRepository.getBooks()
+    override suspend fun getBooks(): List<Book> {
+        return _bookRepository.getBooks().first()
     }
 
     override suspend fun getUserInfo(): User {

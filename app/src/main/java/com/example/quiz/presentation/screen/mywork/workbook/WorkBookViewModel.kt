@@ -13,7 +13,6 @@ import javax.inject.Inject
 class WorkBookViewModel @Inject constructor(
     private val bookRepository: BookRepository
 ) : ViewModel() {
-
     private val _listBooks =
         MutableStateFlow(
             listOf(

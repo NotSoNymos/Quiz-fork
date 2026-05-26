@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.quiz.R
+import com.example.quiz.data.model.Book
 import com.example.quiz.data.model.Quiz
 import com.example.quiz.ui.theme.Black
 import com.example.quiz.ui.theme.QuizTheme
@@ -301,6 +302,24 @@ fun ReadBookCard(modifier: Modifier = Modifier, description: String, title: Stri
 fun CardWorkQuiz(modifier: Modifier = Modifier, quiz: Quiz, onClick: () -> Unit, count: String) {
     Box(){
         CardWork(title = quiz.title, text = quiz.description, onClick = {}, flagSettings = false)
+        Box(
+            modifier = Modifier
+                .padding(top = 24.dp, start = 206.dp)
+                .width(107.dp)
+                .height(58.dp)
+        ) {
+            CardTitle(title = count, color = MaterialTheme.colorScheme.primary)
+        }
+    }
+
+
+}
+
+
+@Composable
+fun CardWorkBook(modifier: Modifier = Modifier, book: Book, onClick: () -> Unit, count: String) {
+    Box(){
+        CardWork(title = book.title, text = book.description, onClick = {}, flagSettings = false)
         Box(
             modifier = Modifier
                 .padding(top = 24.dp, start = 206.dp)

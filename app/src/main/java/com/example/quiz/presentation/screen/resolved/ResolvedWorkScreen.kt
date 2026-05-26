@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.quiz.presentation.composables.CardWorkBook
 import com.example.quiz.presentation.composables.CardWorkQuiz
 import com.example.quiz.presentation.composables.SimpleCreateBackground
 
@@ -19,17 +20,17 @@ fun ResolvedWorkScreen(
     viewModel: ResolvedWorkViewModel,
     navHostController: NavHostController,
 ) {
-    SimpleCreateBackground(Modifier, "Мои работы", navHostController)
+    SimpleCreateBackground(Modifier, "Решенные \n квизы", navHostController)
 
     Column(modifier = Modifier.fillMaxSize()) {
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .padding(top = 150.dp, bottom = 100.dp)
+                .padding(top = 150.dp)
                 .fillMaxSize()
         ) {
             items(viewModel.quizList.value) { item ->
-                CardWorkQuiz(Modifier, item, {}, count = "10" )
+                CardWorkBook(Modifier, item, {}, count = "10" )
             }
 
         }

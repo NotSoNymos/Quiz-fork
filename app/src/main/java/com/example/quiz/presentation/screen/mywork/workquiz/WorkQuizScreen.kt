@@ -45,7 +45,7 @@ fun MyWorkScreenContent(
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .padding(top = 150.dp, bottom = 100.dp)
+            .padding(top = 150.dp)
             .fillMaxSize()
     ) {
         items(uiState.quizList) { quiz ->

@@ -57,9 +57,6 @@ fun CreateQuestionScreenContent(
 ) {
     var formState by rememberSaveable { mutableStateOf(CreateQuestionFormState()) }
 
-
-    //val listVariants = mutableListOf<String>()
-
     SimpleQuizBackground(
         modifier = Modifier,
         label = "Создать квиз",
@@ -158,9 +155,15 @@ fun CreateQuestionScreenContent(
                     .width(355.dp)
                     .height(70.dp),
                 {
-                    formState.fields.add(
-                        InputField(id = formState.fields.size)
-                    )
+                    val newFieldId = System.currentTimeMillis().toInt()
+                    val newField = InputField(id = newFieldId, text = "")
+
+                    // Добавляем новое поле в список и обновляем стейт формы
+                    formState = formState.copy(fields = (formState.fields + newField).toMutableList())
+//                         formState.fields.add(
+//                        InputField(id = formState.fields.size)
+//                    )
+                    println(formState.fields.size)
                 },
                 "Добавить вариант ответа",
                 MaterialTheme.colorScheme.primary

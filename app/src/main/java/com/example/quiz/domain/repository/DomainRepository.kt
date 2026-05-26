@@ -17,7 +17,7 @@ interface DomainRepository {
     suspend fun addBook(book: Book)
     suspend fun deleteBook(id: String)
     suspend fun updateBook(id: String, book: Book)
-    fun getBooks(): Flow<List<Book>>
+    suspend fun getBooks(): List<Book>
 
     suspend fun getUserInfo(): User
     suspend fun updateUserInfo(profile: User)
