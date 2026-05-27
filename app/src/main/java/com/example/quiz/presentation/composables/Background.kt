@@ -162,7 +162,7 @@ fun SimpleQuizBackgroundContent(
                         .padding(start = 20.dp, top = 55.dp)
                         .width(43.dp)
                         .height(34.dp)
-                        .clickable(onClick = { }),
+                        .clickable(onClick = onNavigateBackAction),
                     tint = White
                 )
             },
@@ -243,7 +243,10 @@ fun SimpleCreateBackground(
                 .padding(top = 46.dp)
                 .fillMaxWidth()
         ) {
-            IconButton(onClick = {navHostController.popBackStack()}, modifier = Modifier.padding(start = 20.dp)) {
+            IconButton(
+                onClick = { navHostController.popBackStack() },
+                modifier = Modifier.padding(start = 20.dp)
+            ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_left),
                     contentDescription = null,

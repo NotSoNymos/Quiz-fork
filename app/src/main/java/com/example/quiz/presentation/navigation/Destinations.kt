@@ -1,5 +1,7 @@
 package com.example.quiz.presentation.navigation
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.navigation.NavBackStackEntry
 import com.example.quiz.R
 import kotlinx.serialization.Serializable
 
@@ -19,6 +21,9 @@ sealed class Destinations(val icon: Int? = null) {
 
     @Serializable
     data class ReadBookDetails(val bookId: String) : Destinations()
+
+    @Serializable
+    data class ReadQuiz(val quizId: String): Destinations()
 
     @Serializable
     data object CreateQuiz : Destinations()

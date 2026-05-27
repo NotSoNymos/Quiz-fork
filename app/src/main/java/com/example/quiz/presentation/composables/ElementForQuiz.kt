@@ -18,7 +18,7 @@ fun CardForChecked(modifier: Modifier = Modifier, title: String) {
     Row(modifier = Modifier
         .width(346.dp)
         .height(68.dp), horizontalArrangement = Arrangement.SpaceBetween){
-        SimpleCheckbox(Modifier.padding(start = 11.dp), {})
+        SimpleCheckbox(Modifier.padding(start = 11.dp), onValueChange = {})
         Text(text = title, modifier = Modifier.padding(end = 250.dp))
     }
 }

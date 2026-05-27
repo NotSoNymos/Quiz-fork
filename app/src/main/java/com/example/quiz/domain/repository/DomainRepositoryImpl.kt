@@ -1,6 +1,7 @@
 package com.example.quiz.domain.repository
 
 import com.example.quiz.data.model.Book
+import com.example.quiz.data.model.Question
 import com.example.quiz.data.model.Quiz
 import com.example.quiz.data.model.User
 import com.example.quiz.data.repository.BookRepository
@@ -29,11 +30,49 @@ class DomainRepositoryImpl @Inject constructor(
         )
 
         _userRepository.insertUserIfNotExists(defaultUser)
+        _quizRepository.addQuiz(
+            Quiz(
+                id = UUID.fromString("40e8ece3-5a11-4388-95fb-9895afef4bfa"),
+                "Проверочный квиз!",
+                description = "Описание проверочного квиза!",
+                questions = listOf(
+                    Question(
+                        "Первый вопрос",
+                        "Правильный ответ!",
+                        listOf(
+                            "Неправильный ответ",
+                            "Правильный ответ!",
+                            "Ещё один неправильный ответ",
+                            "Ну точно неправильный ответ"
+                        )
+                    ),
+                    Question(
+                        question = "Второй вопрос!",
+                        answer = "Точно-точно правильный ответ",
+                        variableAnswers = listOf(
+                            "Точно-точно правильный ответ",
+                            "Может быть неправильный ответ",
+                            "Неверный ответ",
+                            "Некорректный ответ"
+                        )
+                    ),
+                    Question(
+                        question = "Сова!",
+                        answer = "Сова",
+                        variableAnswers = listOf("Сова", "Сова"),
+                    )
+                )
+            )
+        )
     }
 
     override suspend fun getQuizList(): List<Quiz> {
         val result = _quizRepository.getAllQuiz().first()
         return result
+    }
+
+    override suspend fun getQuizById(id: String): Quiz {
+        return _quizRepository.getQuizById(id)
     }
 
     override suspend fun createQuiz(quiz: Quiz) {
@@ -60,7 +99,7 @@ class DomainRepositoryImpl @Inject constructor(
         return _bookRepository.getBookById(id)
     }
 
-    override fun getBooks(): Flow<List<Book>> {
+    override suspend fun getBooks(): Flow<List<Book>> {
         return _bookRepository.getBooks()
     }
 
@@ -72,5 +111,9 @@ class DomainRepositoryImpl @Inject constructor(
 
     override suspend fun updateUserInfo(profile: User) {
         _userRepository.updateUserInfo(profile)
+    }
+
+    override suspend fun updateQuiz(quizToSave: Quiz) {
+        _quizRepository.updateQuiz(quizToSave)
     }
 }
