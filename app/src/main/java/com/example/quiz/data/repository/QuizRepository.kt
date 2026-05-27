@@ -42,6 +42,7 @@ class QuizRepository @Inject constructor(
 
         quizDatabaseDao.updateQuiz(quizEntity)
     }
+    // flow - это диинамический список
 
     fun getAllQuiz(): Flow<List<Quiz>> {
         return quizDatabaseDao.getAllQuiz().flowOn(Dispatchers.IO).map {

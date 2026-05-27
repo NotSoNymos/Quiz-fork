@@ -21,16 +21,16 @@ class ResolvedWorkViewModel @Inject constructor(
     private val _quizList = MutableStateFlow<List<Book>>(listOf())
     val quizList: StateFlow<List<Book>> = _quizList
 
-    fun getQuizList(){
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = _domainRepositoryImpl.getBooks()
-
-            _quizList.update { result }
-        }
-
-    }
-
-    init {
-        getQuizList()
-    }
+//    fun getQuizList(){
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val result = _domainRepositoryImpl.getBooks()
+//
+//            _quizList.update { result }
+//        }
+//
+//    }
+//
+//    init {
+//        getQuizList()
+//    }
 }

@@ -59,23 +59,23 @@ fun MyWorkScreenContent(
     }
 }
 
-@Preview
-@Composable
-private fun MyWorkPreview() {
-    QuizTheme {
-        MyWorkScreenContent(
-            modifier = Modifier,
-            uiState = MyWorkState(
-                quizList = listOf(
-                    Quiz(
-                        UUID.randomUUID(),
-                        title = "Превосходный квиз",
-                        description = "Описание",
-                        questions = listOf()
-                    )
-                )
-            ),
-            navHostController = rememberNavController()
-        )
-    }
-}
+//@Preview
+//@Composable
+//private fun MyWorkPreview() {
+//    QuizTheme {
+//        MyWorkScreenContent(
+//            modifier = Modifier,
+//            uiState = MyWorkState(
+//                quizList = listOf(
+//                    Quiz(
+//                        UUID.randomUUID(),
+//                        title = "Превосходный квиз",
+//                        description = "Описание",
+//                        questions = listOf()
+//                    )
+//                )
+//            ),
+//            navHostController = rememberNavController()
+//        )
+//    }
+//}

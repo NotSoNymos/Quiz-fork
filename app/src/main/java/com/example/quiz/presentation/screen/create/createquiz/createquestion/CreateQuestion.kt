@@ -25,8 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.quiz.presentation.composables.ButtonAddParagraph
@@ -36,6 +34,8 @@ import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.presentation.screen.create.InputField
 import com.example.quiz.ui.theme.QuizTheme
 
+// логика выносится отдельно, чтобы превью работал
+// screen and content
 @Composable
 fun CreateQuestionScreen(
     modifier: Modifier = Modifier,
@@ -43,9 +43,11 @@ fun CreateQuestionScreen(
     viewModel: CreateQuestionViewModel,
 ) {
     CreateQuestionScreenContent(
+
         modifier = modifier,
         navHostController = navHostController,
         onSubmitAction = { viewModel.submitQuiz(formState = it) }
+
     )
 }
 

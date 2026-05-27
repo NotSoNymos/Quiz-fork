@@ -7,6 +7,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,7 +28,7 @@ class MyWorkViewModel @Inject constructor(
 
     fun updateQuizList(){
         viewModelScope.launch(Dispatchers.IO) {
-            val result = _domainRepositoryImpl.getQuizList()
+            val result = _domainRepositoryImpl.getBooks().first()
 
             _uiState.update { it.copy(quizList = result) }
         }

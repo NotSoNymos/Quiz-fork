@@ -20,7 +20,7 @@ class WorkBookViewModel @Inject constructor(
                     uuid = UUID.randomUUID(),
                     title = "",
                     description = "",
-                    list = listOf()
+                    list = listOf(),
                 )
             )
         )

@@ -49,7 +49,7 @@ class BookRepository @Inject constructor(
                         uuid = book.id,
                         title = book.title,
                         description = book.description,
-                        list = book.list
+                        list = book.list,
                     )
                 )
             }

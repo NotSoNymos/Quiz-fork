@@ -9,11 +9,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.example.quiz.presentation.screen.create.CreateScreen
 import com.example.quiz.presentation.screen.create.createbook.CreateBookScreen
-import com.example.quiz.presentation.screen.create.createbook.CreateBookViewModel
-import com.example.quiz.presentation.screen.create.createbook.CreateParagraph
+import com.example.quiz.presentation.screen.create.createbook.createbook.CreateBookViewModel
+import com.example.quiz.presentation.screen.create.createbook.createbook.CreateParagraph
+import com.example.quiz.presentation.screen.create.createbook.createbook.CreateBookFormState
 import com.example.quiz.presentation.screen.create.createquiz.CreateQuizFormState
 import com.example.quiz.presentation.screen.create.createquiz.CreateQuizScreen
-import com.example.quiz.presentation.screen.create.createquiz.CreateQuizViewModel
+import com.example.quiz.presentation.screen.create.createquiz.delete.CreateQuizViewModel
 import com.example.quiz.presentation.screen.create.createquiz.createquestion.CreateQuestionScreen
 import com.example.quiz.presentation.screen.create.createquiz.createquestion.CreateQuestionViewModel
 import com.example.quiz.presentation.screen.login.LoginScreen
@@ -50,11 +51,21 @@ fun NavigationGraph(
             )
         }
         composable<Destinations.CreateQuestion> { currentBackStack ->
+            // currentBackStack.toRoute преобразовать в текущее значение
+            // .toRoute позволяет собрать значения в CreateQuestion
+            // пытается вернуть , то что в скобках
+            // восстанавливает значения предыдущего класса
             val route = currentBackStack.toRoute<Destinations.CreateQuestion>()
 
+            // создание ViewModel с доп параметром
             val createQuestionViewModel: CreateQuestionViewModel =
                 hiltViewModel { factory: CreateQuestionViewModel.Factory ->
-                    factory.create(CreateQuizFormState(title = route.title, description = route.description))
+                    factory.create(
+                        CreateQuizFormState(
+                            title = route.title,
+                            description = route.description
+                        )
+                    )
                 }
 
             CreateQuestionScreen(
@@ -63,6 +74,31 @@ fun NavigationGraph(
                 navHostController = navController,
             )
         }
+
+
+        composable<Destinations.CreateBook> {
+            CreateBookScreen(modifier = Modifier, navController)
+        }
+
+        composable<Destinations.CreateParagraph> { currentBackStack ->
+            val route = currentBackStack.toRoute<Destinations.CreateParagraph>()
+            val createBookViewModel: CreateBookViewModel =
+                hiltViewModel { factory: CreateBookViewModel.Factory ->
+                    factory.create(
+                        CreateBookFormState(
+                            title = route.title,
+                            description = route.description
+                        )
+                    )
+                }
+            CreateParagraph(
+                modifier = Modifier,
+                viewModel = createBookViewModel,
+                navHostController = navController,
+
+                )
+        }
+
 
         composable<Destinations.Search> {
             SerchScreen()
@@ -121,22 +157,6 @@ fun NavigationGraph(
             )
         }
 
-        composable<Destinations.CreateParagraph> {
-            val createBookViewModel: CreateBookViewModel = hiltViewModel()
-
-            CreateParagraph(
-                modifier = Modifier,
-                viewModel = createBookViewModel,
-                navHostController = navController,
-            )
-        }
-
-        composable<Destinations.CreateBook> {
-            CreateBookScreen(
-                modifier = Modifier,
-                navHostController = navController
-            )
-        }
 
         composable<Destinations.Paragraph> {
             val createBookViewModel: CreateBookViewModel = hiltViewModel()

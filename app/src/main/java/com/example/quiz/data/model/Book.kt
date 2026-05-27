@@ -6,5 +6,6 @@ data class Book(
     val uuid: UUID,
     val title: String,
     val description: String,
-    val list: List<Paragraph>
+    val list: List<Paragraph>,
+
 )

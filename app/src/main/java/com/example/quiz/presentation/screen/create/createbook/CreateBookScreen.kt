@@ -28,14 +28,20 @@ import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.presentation.composables.SimpleOutlinedText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.presentation.navigation.Destinations
+import com.example.quiz.presentation.screen.create.createbook.createbook.CreateBookViewModel
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
 fun CreateBookScreen(
     modifier: Modifier = Modifier,
-    viewModel: CreateBookViewModel = hiltViewModel(),
     navHostController: NavHostController
 ) {
+    CreateBookScreenContent(Modifier, navHostController)
+}
+
+
+@Composable
+fun CreateBookScreenContent(modifier: Modifier = Modifier, navHostController: NavHostController) {
     var checked by remember { mutableStateOf(false) }
     val title = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
@@ -89,10 +95,15 @@ fun CreateBookScreen(
                 .width(226.dp),
             "Далее"
         ) {
-            navHostController.navigate(Destinations.CreateParagraph)
-            viewModel.onIsCheckedChange(checked)
-            viewModel.onTitleChange(title.value)
-            viewModel.onDescriptionChange(description.value)
+            navHostController.navigate(
+                Destinations.CreateParagraph(
+                    title = title.value,
+                    description = description.value
+                )
+            )
+//            viewModel.onIsCheckedChange(checked)
+//            viewModel.onTitleChange(title.value)
+//            viewModel.onDescriptionChange(description.value)
         }
     }
 }
@@ -100,6 +111,6 @@ fun CreateBookScreen(
 @Preview
 @Composable
 private fun CreateBookPreview() {
-    QuizTheme { CreateBookScreen(Modifier, navHostController = rememberNavController()) }
+    QuizTheme { CreateBookScreenContent(Modifier, navHostController = rememberNavController()) }
 
 }
