@@ -36,7 +36,7 @@ class CreateBookViewModel @AssistedInject constructor(
     fun submitBook(formState: CreateParagraphFormState) {
         viewModelScope.launch(Dispatchers.IO) {
             val book = Book(
-                uuid = UUID.randomUUID(),
+                id = UUID.randomUUID(),
                 title = bookFormState.title,
                 description = bookFormState.description,
                 list = listOf(

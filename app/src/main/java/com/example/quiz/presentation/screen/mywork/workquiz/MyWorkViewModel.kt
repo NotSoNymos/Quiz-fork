@@ -27,7 +27,7 @@ class MyWorkViewModel @Inject constructor(
 
     fun updateQuizList(){
         viewModelScope.launch(Dispatchers.IO) {
-            val result = _domainRepositoryImpl.getBooks().first()
+            val result = _domainRepositoryImpl.getQuizList()
 
             _uiState.update { it.copy(quizList = result) }
         }

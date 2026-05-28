@@ -328,8 +328,13 @@ fun CardWorkBook(modifier: Modifier = Modifier, book: Book, onClick: () -> Unit,
 
 
 @Composable
-fun CardVariableVariant(modifier: Modifier = Modifier, text: String) {
-    Box(
+fun CardVariableVariant(
+    modifier: Modifier = Modifier,
+    text: String = "",
+    isChecked: Boolean = false,
+    onValueChange: (value: Boolean) -> Unit = {},
+) {
+    Row(
         modifier = Modifier
             .wrapContentHeight()
             .width(346.dp)

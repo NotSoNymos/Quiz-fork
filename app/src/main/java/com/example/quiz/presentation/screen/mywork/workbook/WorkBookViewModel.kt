@@ -17,7 +17,7 @@ class WorkBookViewModel @Inject constructor(
         MutableStateFlow(
             listOf(
                 Book(
-                    uuid = UUID.randomUUID(),
+                    id = UUID.randomUUID(),
                     title = "",
                     description = "",
                     list = listOf(),

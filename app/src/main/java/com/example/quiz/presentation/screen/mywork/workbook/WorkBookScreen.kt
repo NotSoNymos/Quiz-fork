@@ -19,7 +19,7 @@ import com.example.quiz.ui.theme.QuizTheme
 //TODO: Unused..
 
 @Composable
-fun MyWorkScreen(
+fun MyWorkScreenBook(
     modifier: Modifier = Modifier,
     viewModel: WorkBookViewModel = hiltViewModel(),
     navHostController: NavHostController
@@ -42,7 +42,7 @@ fun MyWorkScreen(
 @Composable
 private fun WorkBookPreview() {
     QuizTheme {
-        MyWorkScreen(
+        MyWorkScreenBook(
             modifier = Modifier, navHostController = rememberNavController()
         )
     }

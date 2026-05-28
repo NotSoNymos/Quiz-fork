@@ -46,7 +46,7 @@ class BookRepository @Inject constructor(
             it.forEach { book ->
                 list.add(
                     Book(
-                        uuid = book.id,
+                        id = book.id,
                         title = book.title,
                         description = book.description,
                         list = book.list,
@@ -60,7 +60,7 @@ class BookRepository @Inject constructor(
     suspend fun getBookById(id: String): Book {
         val bookEntity = bookDatabaseDao.getBookById(id)
         return Book(
-            uuid = bookEntity.id,
+            id = bookEntity.id,
             title = bookEntity.title,
             description = bookEntity.description,
             list = bookEntity.list

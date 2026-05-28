@@ -4,5 +4,5 @@ import com.example.quiz.data.model.Book
 import com.example.quiz.data.model.Quiz
 
 data class MyWorkState(
-    val quizList: List<Book> = listOf(),
+    val quizList: List<Quiz> = listOf(),
 )

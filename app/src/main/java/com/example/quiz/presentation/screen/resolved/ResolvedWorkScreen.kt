@@ -1,38 +1,60 @@
 package com.example.quiz.presentation.screen.resolved
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.quiz.presentation.composables.CardWorkBook
-import com.example.quiz.presentation.composables.CardWorkQuiz
+import com.example.quiz.presentation.composables.CardWork
 import com.example.quiz.presentation.composables.SimpleCreateBackground
+import com.example.quiz.presentation.navigation.Destinations
 
 @Composable
-fun ResolvedWorkScreen(
+fun MyWorkScreenBook(
     modifier: Modifier = Modifier,
     viewModel: ResolvedWorkViewModel,
     navHostController: NavHostController,
 ) {
-    SimpleCreateBackground(Modifier, "Решенные \n квизы", navHostController)
+    val uiState by viewModel.uiState.collectAsState()
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(top = 150.dp)
-                .fillMaxSize()
-        ) {
-            items(viewModel.quizList.value) { item ->
-                CardWorkBook(Modifier, item, {}, count = "10" )
-            }
+    MyWorkScreenBookContent(
+        modifier = modifier,
+        uiState = uiState,
+        navHostController = navHostController,
+        onCardNavigateAction = {
+            navHostController.navigate(Destinations.ReadBookDetails(it))
+        }
+    )
+}
 
+@Composable
+fun MyWorkScreenBookContent(
+    modifier: Modifier = Modifier,
+    uiState: WorkBookState,
+    onCardNavigateAction: (quizId: String) -> Unit = {},
+    navHostController: NavHostController,
+) {
+    SimpleCreateBackground(modifier, "Мои работы", navHostController)
+
+    LazyColumn(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .padding(top = 150.dp)
+            .fillMaxSize()
+    ) {
+        items(uiState.bookList) {book ->
+            CardWork(
+                modifier = Modifier, title = book.title,
+                text = book.description,
+                onClick = { onCardNavigateAction.invoke(book.id.toString()) },
+                flagSettings = true
+            )
         }
     }
 }

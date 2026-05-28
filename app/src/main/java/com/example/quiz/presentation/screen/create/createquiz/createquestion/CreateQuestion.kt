@@ -139,12 +139,17 @@ fun CreateQuestionScreenContent(
                 field.text,
                 "Вариант №${index + 1}",
                 onTextChange = { newValue ->
-                    // Обновляем текст внутри конкретного объекта по индексу
-                    formState.fields[index] = field.copy(text = newValue)
+                    // РЕШЕНИЕ: Создаем копию списка с обновленным элементом
+                    val updatedFields = formState.fields.toMutableList()
+                    updatedFields[index] = field.copy(text = newValue)
+                    formState = formState.copy(fields = updatedFields)
                 },
                 color = MaterialTheme.colorScheme.secondary,
                 onDeleteClick = {
-                    formState.fields.removeAt(index)
+                    // РЕШЕНИЕ: Создаем копию списка без удаленного элемента
+                    val updatedFields = formState.fields.toMutableList()
+                    updatedFields.removeAt(index)
+                    formState = formState.copy(fields = updatedFields)
                 },
                 )
         }

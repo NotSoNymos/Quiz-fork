@@ -8,7 +8,7 @@ class BookDataSource {
     fun loadNotes(): List<Book> {
         return listOf<Book>(
             Book(
-                uuid = UUID.randomUUID(),
+                id = UUID.randomUUID(),
                 title = "Title",
                 description = "Description",
                 list = listOf<Paragraph>(Paragraph("", "")),

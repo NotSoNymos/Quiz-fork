@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
@@ -20,13 +21,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.quiz.R
 import com.example.quiz.presentation.composables.ButtonCreate
+import com.example.quiz.presentation.navigation.Destinations
 import com.example.quiz.ui.theme.QuizTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun AllWorkScreen(modifier: Modifier = Modifier) {
+fun AllWorkScreen(modifier: Modifier = Modifier, navHostController: NavHostController) {
     Scaffold(containerColor = MaterialTheme.colorScheme.primary) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -39,11 +43,13 @@ fun AllWorkScreen(modifier: Modifier = Modifier) {
             )
             Box(modifier = Modifier.padding(top = 52.dp)) {
                 ButtonCreate(title = "Квиз", onClick = {
-
+                    navHostController.navigate(Destinations.Home)
                 })
             }
             Box(modifier = Modifier.padding(top = 37.dp)) {
-                ButtonCreate(title = "Учебник", onClick = {})
+                ButtonCreate(title = "Учебник", onClick = {
+                  
+                })
             }
             Spacer(modifier = Modifier.weight(1f))
 
@@ -63,5 +69,5 @@ fun AllWorkScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun AllWorkScreenPreview() {
-    QuizTheme { AllWorkScreen() }
+    QuizTheme { AllWorkScreen(Modifier,rememberNavController()) }
 }

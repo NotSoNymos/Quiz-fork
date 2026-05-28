@@ -28,7 +28,7 @@ import com.example.quiz.presentation.screen.read_book.details.ReadBookDetailsScr
 import com.example.quiz.presentation.screen.read_book.paragraphs.ReadBookParagraphsScreen
 import com.example.quiz.presentation.screen.read_quiz.ReadQuizScreen
 import com.example.quiz.presentation.screen.read_quiz.ReadQuizViewModel
-import com.example.quiz.presentation.screen.resolved.ResolvedWorkScreen
+import com.example.quiz.presentation.screen.resolved.MyWorkScreenBook
 import com.example.quiz.presentation.screen.resolved.ResolvedWorkViewModel
 import com.example.quiz.presentation.screen.search.SerchScreen
 import com.example.quiz.presentation.screen.signup.SignUpScreen
@@ -109,6 +109,11 @@ fun NavigationGraph(
             SerchScreen()
         }
 
+
+        composable<Destinations.Search> {
+            SerchScreen()
+        }
+
         composable<Destinations.Create> {
             CreateScreen(
                 modifier = Modifier,
@@ -119,7 +124,7 @@ fun NavigationGraph(
         composable<Destinations.Look> {
             val resolvedWorkViewModel: ResolvedWorkViewModel = hiltViewModel()
 
-            ResolvedWorkScreen(
+            MyWorkScreenBook(
                 modifier = Modifier,
                 viewModel = resolvedWorkViewModel,
                 navHostController = navController
