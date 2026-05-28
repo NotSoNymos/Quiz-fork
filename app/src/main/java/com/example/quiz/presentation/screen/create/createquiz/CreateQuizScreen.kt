@@ -24,6 +24,7 @@ import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.presentation.composables.SimpleOutlinedText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.presentation.navigation.Destinations
+import com.example.quiz.presentation.screen.create.createquiz.delete.CreateQuizViewModel
 import com.example.quiz.ui.theme.QuizTheme
 import com.example.quiz.ui.theme.White
 
@@ -33,6 +34,11 @@ fun CreateQuizScreen(
     viewModel: CreateQuizViewModel,
     navHostController: NavHostController,
 ) {
+    // вытащить все поля, дата класс
+    // дата класс соднржит все поля
+    // screen question --- view model,  здесь нет
+    // не работает с возвращением назад , потом навигация с сохранениями данных
+    // если прокидывать, то не класс , а примитивные данные, навхост работает только с примитивными данными
 
     CreateQuizScreenContent(modifier, navHostController)
 }

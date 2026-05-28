@@ -11,7 +11,7 @@ class BookDataSource {
                 uuid = UUID.randomUUID(),
                 title = "Title",
                 description = "Description",
-                list = listOf<Paragraph>(Paragraph("", ""))
+                list = listOf<Paragraph>(Paragraph("", "")),
             )
         )
     }

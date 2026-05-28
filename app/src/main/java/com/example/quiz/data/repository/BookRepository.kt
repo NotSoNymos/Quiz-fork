@@ -40,7 +40,7 @@ class BookRepository @Inject constructor(
         bookDatabaseDao.updateBook(bookEntity)
     }
 
-    fun getBooks(): Flow<List<Book>> {
+    suspend fun getBooks(): Flow<List<Book>> {
         return bookDatabaseDao.getBooks().flowOn(Dispatchers.IO).map {
             val list = mutableListOf<Book>()
             it.forEach { book ->
@@ -49,7 +49,7 @@ class BookRepository @Inject constructor(
                         uuid = book.id,
                         title = book.title,
                         description = book.description,
-                        list = book.list
+                        list = book.list,
                     )
                 )
             }

@@ -50,7 +50,7 @@ fun MyWorkScreenContent(
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .padding(top = 150.dp, bottom = 100.dp)
+            .padding(top = 150.dp)
             .fillMaxSize()
     ) {
         items(uiState.quizList) { quiz ->
@@ -64,23 +64,23 @@ fun MyWorkScreenContent(
     }
 }
 
-@Preview
-@Composable
-private fun MyWorkPreview() {
-    QuizTheme {
-        MyWorkScreenContent(
-            modifier = Modifier,
-            uiState = MyWorkState(
-                quizList = listOf(
-                    Quiz(
-                        UUID.randomUUID(),
-                        title = "Превосходный квиз",
-                        description = "Описание",
-                        questions = listOf()
-                    )
-                )
-            ),
-            navHostController = rememberNavController()
-        )
-    }
-}
+//@Preview
+//@Composable
+//private fun MyWorkPreview() {
+//    QuizTheme {
+//        MyWorkScreenContent(
+//            modifier = Modifier,
+//            uiState = MyWorkState(
+//                quizList = listOf(
+//                    Quiz(
+//                        UUID.randomUUID(),
+//                        title = "Превосходный квиз",
+//                        description = "Описание",
+//                        questions = listOf()
+//                    )
+//                )
+//            ),
+//            navHostController = rememberNavController()
+//        )
+//    }
+//}

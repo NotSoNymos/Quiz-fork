@@ -12,7 +12,7 @@ sealed class Destinations(val icon: Int? = null) {
 
     @Serializable
     data object Login : Destinations()
-
+// если передавать с полями , то data class
     @Serializable
     data class CreateQuestion(val title: String, val description: String) : Destinations()
 
@@ -50,10 +50,10 @@ sealed class Destinations(val icon: Int? = null) {
     data object NoConnection : Destinations()
 
     @Serializable
-    data object CreateBook : Destinations()
+    data object CreateBook: Destinations()
 
     @Serializable
-    data object CreateParagraph : Destinations()
+    data class CreateParagraph (val title: String = "", val description: String= "") : Destinations()
 
     @Serializable
     data object Paragraph : Destinations()

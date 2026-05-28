@@ -41,6 +41,7 @@ class QuizRepository @Inject constructor(
 
         quizDatabaseDao.updateQuiz(quizEntity)
     }
+    // flow - это диинамический список
 
     suspend fun getQuizById(id: String): Quiz {
         val quizEntity = quizDatabaseDao.getQuizById(UUID.fromString(id))

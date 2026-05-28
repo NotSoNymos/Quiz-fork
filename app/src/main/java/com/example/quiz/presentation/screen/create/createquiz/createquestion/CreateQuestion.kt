@@ -25,8 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.quiz.presentation.composables.ButtonAddParagraph
@@ -36,6 +34,8 @@ import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.presentation.screen.create.InputField
 import com.example.quiz.ui.theme.QuizTheme
 
+// логика выносится отдельно, чтобы превью работал
+// screen and content
 @Composable
 fun CreateQuestionScreen(
     modifier: Modifier = Modifier,
@@ -43,9 +43,11 @@ fun CreateQuestionScreen(
     viewModel: CreateQuestionViewModel,
 ) {
     CreateQuestionScreenContent(
+
         modifier = modifier,
         navHostController = navHostController,
         onSubmitAction = { viewModel.submitQuiz(formState = it) }
+
     )
 }
 
@@ -56,8 +58,6 @@ fun CreateQuestionScreenContent(
     onSubmitAction: (CreateQuestionFormState) -> Unit = {},
 ) {
     var formState by rememberSaveable { mutableStateOf(CreateQuestionFormState()) }
-
-    //val listVariants = mutableListOf<String>()
 
     SimpleQuizBackground(
         modifier = Modifier,
@@ -157,9 +157,15 @@ fun CreateQuestionScreenContent(
                     .width(355.dp)
                     .height(70.dp),
                 {
-                    formState.fields.add(
-                        InputField(id = formState.fields.size)
-                    )
+                    val newFieldId = System.currentTimeMillis().toInt()
+                    val newField = InputField(id = newFieldId, text = "")
+
+                    // Добавляем новое поле в список и обновляем стейт формы
+                    formState = formState.copy(fields = (formState.fields + newField).toMutableList())
+//                         formState.fields.add(
+//                        InputField(id = formState.fields.size)
+//                    )
+                    println(formState.fields.size)
                 },
                 "Добавить вариант ответа",
                 MaterialTheme.colorScheme.primary

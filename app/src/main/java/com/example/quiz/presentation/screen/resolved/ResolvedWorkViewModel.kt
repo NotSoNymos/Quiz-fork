@@ -2,6 +2,7 @@ package com.example.quiz.presentation.screen.resolved
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.quiz.data.model.Book
 import com.example.quiz.data.model.Question
 import com.example.quiz.data.model.Quiz
 import com.example.quiz.domain.repository.DomainRepositoryImpl
@@ -17,19 +18,19 @@ import javax.inject.Inject
 class ResolvedWorkViewModel @Inject constructor(
     private val _domainRepositoryImpl: DomainRepositoryImpl
 ) : ViewModel() {
-    private val _quizList = MutableStateFlow<List<Quiz>>(listOf())
-    val quizList: StateFlow<List<Quiz>> = _quizList
+    private val _quizList = MutableStateFlow<List<Book>>(listOf())
+    val quizList: StateFlow<List<Book>> = _quizList
 
-    fun getQuizList(){
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = _domainRepositoryImpl.getQuizList()
-
-            _quizList.update { result }
-        }
-
-    }
-
-    init {
-        getQuizList()
-    }
+//    fun getQuizList(){
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val result = _domainRepositoryImpl.getBooks()
+//
+//            _quizList.update { result }
+//        }
+//
+//    }
+//
+//    init {
+//        getQuizList()
+//    }
 }

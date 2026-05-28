@@ -1,4 +1,4 @@
-package com.example.quiz.presentation.screen.create.createbook
+package com.example.quiz.presentation.screen.create.createquiz.delete
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
