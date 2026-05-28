@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.quiz.data.model.Quiz
 import com.example.quiz.presentation.composables.CardWork
 import com.example.quiz.presentation.composables.SimpleCreateBackground
+import com.example.quiz.presentation.navigation.Destinations
 import com.example.quiz.ui.theme.QuizTheme
 import java.util.UUID
 
@@ -30,7 +31,10 @@ fun MyWorkScreen(
     MyWorkScreenContent(
         modifier = modifier,
         uiState = uiState,
-        navHostController = navHostController
+        navHostController = navHostController,
+        onCardNavigateAction = {
+            navHostController.navigate(Destinations.ReadQuiz(it))
+        }
     )
 }
 
@@ -38,6 +42,7 @@ fun MyWorkScreen(
 fun MyWorkScreenContent(
     modifier: Modifier = Modifier,
     uiState: MyWorkState,
+    onCardNavigateAction: (quizId: String) -> Unit = {},
     navHostController: NavHostController,
 ) {
     SimpleCreateBackground(modifier, "Мои работы", navHostController)
@@ -52,7 +57,7 @@ fun MyWorkScreenContent(
             CardWork(
                 modifier = Modifier, title = quiz.title,
                 text = quiz.description,
-                onClick = {},
+                onClick = { onCardNavigateAction.invoke(quiz.id.toString()) },
                 flagSettings = true
             )
         }

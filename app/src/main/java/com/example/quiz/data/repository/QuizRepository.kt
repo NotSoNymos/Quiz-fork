@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import java.util.UUID
 import javax.inject.Inject
-import kotlin.uuid.Uuid
 
 class QuizRepository @Inject constructor(
     private val quizDatabaseDao: QuizDatabaseDao
@@ -27,7 +26,7 @@ class QuizRepository @Inject constructor(
     }
 
     suspend fun deleteQuiz(uuid: UUID) {
-        val quizEntity = quizDatabaseDao.getQuizById(uuid.toString())
+        val quizEntity = quizDatabaseDao.getQuizById(uuid)
 
         quizDatabaseDao.deleteQuiz(quizEntity)
     }
@@ -43,6 +42,17 @@ class QuizRepository @Inject constructor(
         quizDatabaseDao.updateQuiz(quizEntity)
     }
     // flow - это диинамический список
+
+    suspend fun getQuizById(id: String): Quiz {
+        val quizEntity = quizDatabaseDao.getQuizById(UUID.fromString(id))
+
+        return Quiz(
+            id = quizEntity.id,
+            title = quizEntity.title,
+            description = quizEntity.description,
+            questions = quizEntity.questions,
+        )
+    }
 
     fun getAllQuiz(): Flow<List<Quiz>> {
         return quizDatabaseDao.getAllQuiz().flowOn(Dispatchers.IO).map {

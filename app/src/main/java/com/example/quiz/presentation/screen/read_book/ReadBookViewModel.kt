@@ -1,43 +1,67 @@
 package com.example.quiz.presentation.screen.read_book
 
 import androidx.lifecycle.ViewModel
-import com.example.quiz.domain.repository.DomainRepository
+import androidx.lifecycle.viewModelScope
+import com.example.quiz.data.model.Book
+import com.example.quiz.data.model.Paragraph
 import com.example.quiz.domain.repository.DomainRepositoryImpl
+import com.example.quiz.presentation.screen.read_book.details.ReadBookDetailsState
+import com.example.quiz.presentation.screen.read_book.paragraphs.ReadBookParagraphsState
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-@HiltViewModel
-class ReadBookViewModel @Inject constructor(
-    private val _domainRepository: DomainRepositoryImpl
+//TODO: Should be probably splitted into two separate ViewModels....
+
+@HiltViewModel(assistedFactory = ReadBookViewModel.ReadBookViewModelFactory::class)
+class ReadBookViewModel @AssistedInject constructor(
+    @Assisted private val bookId: String,
+    private val _domainRepository: DomainRepositoryImpl,
 ) : ViewModel() {
-    private val _title = MutableStateFlow("Лукоморье")
-    private val _description = MutableStateFlow(
-        "У лукоморья дуб зелёный;\n" +
-                "Златая цепь на дубе том:\n" +
-                "И днём и ночью кот учёный\n" +
-                "Всё ходит по цепи кругом;\n" +
-                "Идёт направо — песнь заводит,\n" +
-                "Налево — сказку говорит.\n" +
-                "Там чудеса: там леший бродит,\n" +
-                "Русалка на ветвях сидит;\n" +
-                "Там на неведомых дорожках\n" +
-                "Следы невиданных зверей;\n" +
-                "Избушка там на курьих ножках\n" +
-                "Стоит без окон, без дверей;\n" +
-                "Там лес и дол видений полны;" +
-                "На брег песчаный и пустой,\n" +
-                "И тридцать витязей прекрасных\n" +
-                "Чредой из вод выходят ясных,\n" +
-                "И с ними дядька их морской;"
-    )
+    private val _detailsState = MutableStateFlow(ReadBookDetailsState(bookId))
+    val detailsState = _detailsState.asStateFlow()
 
-    val title: StateFlow<String> = _title
-    val description: StateFlow<String> = _description
+    private val _paragraphState = MutableStateFlow(ReadBookParagraphsState())
+    val paragraphState = _paragraphState.asStateFlow()
 
-    fun onTitleChange(newText: String) {
-        _title.value = newText
+    private var nextPageIndex: Int = 0
+    private var currentBook: Book = Book()
+
+    fun readNextPage() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _paragraphState.update {
+                it.copy(
+                    title = currentBook.title,
+                    paragraphText = currentBook.list.getOrElse(nextPageIndex) { Paragraph() }.description
+                )
+            }
+            nextPageIndex += 1
+        }
     }
 
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            currentBook = _domainRepository.getBookById(bookId)
+
+            _detailsState.update {
+                it.copy(
+                    title = currentBook.title,
+                    description = currentBook.description
+                )
+            }
+
+            readNextPage()
+        }
+    }
+
+    @AssistedFactory
+    interface ReadBookViewModelFactory {
+        fun create(bookId: String): ReadBookViewModel
+    }
 }

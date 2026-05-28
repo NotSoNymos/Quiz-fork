@@ -23,8 +23,7 @@ class MyWorkViewModel @Inject constructor(
     ViewModel() {
     private val _uiState = MutableStateFlow(MyWorkState())
 
-    val uiState = _uiState.asStateFlow(
-        )
+    val uiState = _uiState.asStateFlow()
 
     fun updateQuizList(){
         viewModelScope.launch(Dispatchers.IO) {

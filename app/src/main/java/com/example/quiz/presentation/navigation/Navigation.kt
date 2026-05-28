@@ -23,6 +23,11 @@ import com.example.quiz.presentation.screen.mywork.workquiz.MyWorkViewModel
 import com.example.quiz.presentation.screen.noconnection.NoConnectionScreen
 import com.example.quiz.presentation.screen.profile.ProfileScreen
 import com.example.quiz.presentation.screen.profile.ProfileViewModel
+import com.example.quiz.presentation.screen.read_book.ReadBookViewModel
+import com.example.quiz.presentation.screen.read_book.details.ReadBookDetailsScreen
+import com.example.quiz.presentation.screen.read_book.paragraphs.ReadBookParagraphsScreen
+import com.example.quiz.presentation.screen.read_quiz.ReadQuizScreen
+import com.example.quiz.presentation.screen.read_quiz.ReadQuizViewModel
 import com.example.quiz.presentation.screen.resolved.ResolvedWorkScreen
 import com.example.quiz.presentation.screen.resolved.ResolvedWorkViewModel
 import com.example.quiz.presentation.screen.search.SerchScreen
@@ -164,6 +169,48 @@ fun NavigationGraph(
             CreateParagraph(
                 viewModel = createBookViewModel,
                 navHostController = navController,
+            )
+        }
+
+        composable<Destinations.ReadBookParagraphs> { backStackEntry ->
+            val route = backStackEntry.toRoute<Destinations.ReadBookParagraphs>()
+            val readBookViewModel: ReadBookViewModel =
+                hiltViewModel { factory: ReadBookViewModel.ReadBookViewModelFactory ->
+                    factory.create(bookId = route.bookId)
+                }
+
+            ReadBookParagraphsScreen(
+                viewModel = readBookViewModel,
+                modifier = Modifier,
+                navHostController = navController
+            )
+        }
+
+        composable<Destinations.ReadBookDetails> { backStackEntry ->
+            val route = backStackEntry.toRoute<Destinations.ReadBookDetails>()
+            val readBookViewModel: ReadBookViewModel =
+                hiltViewModel { factory: ReadBookViewModel.ReadBookViewModelFactory ->
+                    factory.create(bookId = route.bookId)
+                }
+
+            ReadBookDetailsScreen(
+                viewModel = readBookViewModel,
+                modifier = Modifier,
+                navHostController = navController,
+            )
+        }
+
+        composable<Destinations.ReadQuiz> { backStackEntry ->
+            val route = backStackEntry.toRoute<Destinations.ReadQuiz>()
+            val readQuizViewModel: ReadQuizViewModel =
+                hiltViewModel { factory: ReadQuizViewModel.Factory ->
+                    factory.create(route.quizId)
+                }
+
+            ReadQuizScreen(
+                navHostController = navController,
+                modifier = Modifier,
+                viewModel = readQuizViewModel
             )
         }
     }
