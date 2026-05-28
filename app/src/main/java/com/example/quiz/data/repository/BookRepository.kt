@@ -56,4 +56,14 @@ class BookRepository @Inject constructor(
             return@map list.toList()
         }.conflate()
     }
+
+    suspend fun getBookById(id: String): Book {
+        val bookEntity = bookDatabaseDao.getBookById(id)
+        return Book(
+            uuid = bookEntity.id,
+            title = bookEntity.title,
+            description = bookEntity.description,
+            list = bookEntity.list
+        )
+    }
 }

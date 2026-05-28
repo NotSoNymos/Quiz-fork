@@ -3,14 +3,18 @@ package com.example.quiz.presentation.composables
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -46,11 +50,11 @@ fun CardWork(
     Box(
         modifier = Modifier
             .padding(bottom = 20.dp)
+            .clickable(onClick = onClick)
             .width(333.dp)
             .height(105.dp)
             .background(
-                color = MaterialTheme.colorScheme.secondary,
-                shape = RoundedCornerShape(20.dp)
+                color = MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(20.dp)
             )
 
     ) {
@@ -142,8 +146,7 @@ fun CardLookSolvedWork(modifier: Modifier = Modifier, onClick: () -> Unit) {
             .height(53.dp)
 
             .background(
-                color = MaterialTheme.colorScheme.secondary,
-                shape = RoundedCornerShape(20.dp)
+                color = MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(20.dp)
             ), verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -173,8 +176,7 @@ fun CardDeleteSolvedWork(modifier: Modifier = Modifier, onClick: () -> Unit) {
             .height(53.dp)
 
             .background(
-                color = MaterialTheme.colorScheme.secondary,
-                shape = RoundedCornerShape(20.dp)
+                color = MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(20.dp)
             ), verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -202,8 +204,7 @@ fun CardNotFound(modifier: Modifier = Modifier) {
             .width(274.dp)
             .height(391.dp)
             .background(
-                color = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(45.dp)
+                color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(45.dp)
             )
     ) {
         Image(
@@ -229,24 +230,19 @@ fun CardNotFound(modifier: Modifier = Modifier) {
 
 @Composable
 fun CardTitle(modifier: Modifier = Modifier, title: String, color: Color) {
-    
     Box(
         modifier = modifier
             .background(
-                color = color,
-                shape = RoundedCornerShape(15.dp)
+                color = color, shape = RoundedCornerShape(15.dp)
             )
+            .fillMaxWidth()
+            .height(60.dp), contentAlignment = Alignment.Center
     ) {
-
         Text(
             text = title,
             style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp),
-            modifier = Modifier
-                .padding(top = 20.dp)
-                .fillMaxSize(),
             textAlign = TextAlign.Center
         )
-
     }
 }
 
@@ -258,8 +254,7 @@ fun CardDescription(modifier: Modifier = Modifier, description: String) {
             .width(346.dp)
             .verticalScroll(scrollState)
             .background(
-                color = MaterialTheme.colorScheme.secondary,
-                shape = RoundedCornerShape(15.dp)
+                color = MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(15.dp)
             )
     ) {
         Text(text = description, style = MaterialTheme.typography.bodySmall)
@@ -271,26 +266,24 @@ fun CardDescription(modifier: Modifier = Modifier, description: String) {
 fun ReadBookCard(modifier: Modifier = Modifier, description: String, title: String) {
     val scrollState = rememberScrollState()
     Box(
-        modifier = Modifier
+        modifier = modifier
             .width(367.dp)
             .verticalScroll(scrollState)
             .background(
-                color = MaterialTheme.colorScheme.secondary,
-                shape = RoundedCornerShape(15.dp)
-            )
+                color = MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(15.dp)
+            ),
     ) {
         Box(
             modifier = Modifier
                 .padding(top = 16.dp, start = 16.dp)
-                .width(335.dp)
+                .width(335.dp),
+            contentAlignment = Alignment.Center
         ) {
             CardTitle(title = title, color = MaterialTheme.colorScheme.primary)
         }
 
         Text(
-            text = description,
-            style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier
+            text = description, style = MaterialTheme.typography.bodySmall, modifier = modifier
                 .padding(top = 101.dp, start = 10.dp, end = 10.dp)
                 .height(500.dp)
         )
@@ -316,27 +309,34 @@ fun CardWorkQuiz(modifier: Modifier = Modifier, quiz: Quiz, onClick: () -> Unit,
 
 
 @Composable
-fun CardVariableVariant(modifier: Modifier = Modifier, text: String) {
-    Box(
+fun CardVariableVariant(
+    modifier: Modifier = Modifier,
+    text: String = "",
+    isChecked: Boolean = false,
+    onValueChange: (value: Boolean) -> Unit = {},
+) {
+    Row(
         modifier = Modifier
+            .wrapContentHeight()
             .width(346.dp)
-            .height(68.dp)
             .background(
                 color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(15.dp)
-            )
+            ),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         SimpleCheckbox(
             Modifier
-                .padding(start = 11.dp, top = 3.dp)
-                .fillMaxSize(), {}
+                .padding(start = 11.dp),
+            isChecked = isChecked,
+            onValueChange = onValueChange,
         )
         Text(
             text = text,
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.heightIn(min = 80.dp)
                 .padding(start = 60.dp, top = 19.dp),
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center
         )
     }
 }

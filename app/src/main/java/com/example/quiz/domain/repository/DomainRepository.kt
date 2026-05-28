@@ -11,14 +11,17 @@ interface DomainRepository {
 
     suspend fun getQuizList(): List<Quiz>
 
+    suspend fun getQuizById(id: String): Quiz
     suspend fun createQuiz(quiz: Quiz)
     suspend fun removeQuiz(id: UUID)
 
     suspend fun addBook(book: Book)
     suspend fun deleteBook(id: String)
     suspend fun updateBook(id: String, book: Book)
-    fun getBooks(): Flow<List<Book>>
+    suspend fun getBookById(id: String) : Book
+    suspend fun getBooks(): Flow<List<Book>>
 
     suspend fun getUserInfo(): User
     suspend fun updateUserInfo(profile: User)
+    suspend fun updateQuiz(quizToSave: Quiz)
 }
