@@ -33,7 +33,7 @@ import com.example.quiz.ui.theme.QuizTheme
 fun CreateParagraphContent(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
-    onSubmitAction: (Paragraph) -> Unit = {},
+    onSubmitAction: () -> Unit = {},
     onAddNewParagraph: (Paragraph) -> Unit = {}
 ) {
     var formState by rememberSaveable { mutableStateOf(Paragraph()) }
@@ -82,7 +82,7 @@ fun CreateParagraphContent(
                     .width(226.dp),
                 "Сохранить"
             ) {
-                onSubmitAction.invoke(formState)
+                onSubmitAction()
                 navHostController.navigate(Destinations.Profile)
                 //viewModel.submitBook()
             }
@@ -100,7 +100,7 @@ fun CreateParagraph(
     CreateParagraphContent(
         modifier = Modifier,
         navHostController,
-        onSubmitAction = { viewModel.submitBook(formState = it) },
+        onSubmitAction = { viewModel.submitBook() },
         onAddNewParagraph = { viewModel.onChangeListParagraph(newItem = it) })
 }
 

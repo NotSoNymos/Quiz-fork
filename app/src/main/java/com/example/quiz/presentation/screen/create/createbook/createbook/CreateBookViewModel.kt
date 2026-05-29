@@ -33,7 +33,7 @@ class CreateBookViewModel @AssistedInject constructor(
 //        }
 //    }
 
-    fun submitBook(formState: Paragraph) {
+    fun submitBook() {
         viewModelScope.launch(Dispatchers.IO) {
             val book = Book(
                 id = UUID.randomUUID(),
