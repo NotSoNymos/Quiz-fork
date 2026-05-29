@@ -32,6 +32,14 @@ class ResolvedWorkViewModel @Inject constructor(
         }
     }
 
+    fun deleteBook(id: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _domainRepositoryImpl.deleteBook(id)
+
+            updateBookList()
+        }
+    }
+
     init {
         updateBookList()
     }

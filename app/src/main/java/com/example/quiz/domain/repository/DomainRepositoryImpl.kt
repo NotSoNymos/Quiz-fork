@@ -91,7 +91,7 @@ class DomainRepositoryImpl @Inject constructor(
         _bookRepository.addBook(book)
     }
 
-    override suspend fun deleteBook(id: String) {
+    override suspend  fun deleteBook(id: String) {
         _bookRepository.deleteBook(id)
     }
 

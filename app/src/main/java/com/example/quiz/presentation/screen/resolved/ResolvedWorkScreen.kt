@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.quiz.presentation.composables.CardWork
 import com.example.quiz.presentation.composables.SimpleCreateBackground
@@ -29,7 +30,9 @@ fun MyWorkScreenBook(
         navHostController = navHostController,
         onCardNavigateAction = {
             navHostController.navigate(Destinations.ReadBookDetails(it))
-        }
+        },
+        onDelete =  {viewModel.deleteBook(id = it)}
+
     )
 }
 
@@ -39,6 +42,7 @@ fun MyWorkScreenBookContent(
     uiState: WorkBookState,
     onCardNavigateAction: (quizId: String) -> Unit = {},
     navHostController: NavHostController,
+    onDelete:(id: String)->Unit={}
 ) {
     SimpleCreateBackground(modifier, "Мои работы", navHostController)
 
@@ -53,7 +57,7 @@ fun MyWorkScreenBookContent(
                 modifier = Modifier, title = book.title,
                 text = book.description,
                 onClick = { onCardNavigateAction.invoke(book.id.toString()) },
-                flagSettings = true,{}
+                flagSettings = true,{ onDelete.invoke(book.id.toString()) }
             )
         }
     }

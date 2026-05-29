@@ -64,7 +64,7 @@ fun CardWork(
     ) {
         if (flagSettings) {
             Icon(
-                painter = painterResource(R.drawable.ic_setting_config),
+                painter = painterResource(R.drawable.ic_delete),
                 contentDescription = null,
                 modifier = Modifier
                     .clickable(
