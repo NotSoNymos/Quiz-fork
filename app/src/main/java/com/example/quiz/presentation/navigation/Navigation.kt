@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import com.example.quiz.presentation.composables.DialogResolvedWork
 import com.example.quiz.presentation.screen.create.CreateScreen
 import com.example.quiz.presentation.screen.create.createbook.CreateBookScreen
 import com.example.quiz.presentation.screen.create.createbook.createbook.CreateBookViewModel
@@ -143,6 +144,11 @@ fun NavigationGraph(
         composable<Destinations.Login> {
             LoginScreen()
         }
+
+//        composable<Destinations.DialogResolvedWorkClass> { backStackEntry ->
+//            val route = backStackEntry.toRoute<Destinations.DialogResolvedWorkClass>()
+//            DialogResolvedWork(Modifier, true, route.onClickLook, route.onClickDelete)
+//        }
 
         composable<Destinations.CreateQuiz> {
             val viewModel: CreateQuizViewModel = hiltViewModel()

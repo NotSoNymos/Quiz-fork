@@ -59,10 +59,7 @@ fun AllWorkScreen(modifier: Modifier = Modifier, navHostController: NavHostContr
                 modifier = Modifier.width(304.dp),
                 contentScale = ContentScale.Crop
             )
-
         }
-
-
     }
 }
 

@@ -41,13 +41,14 @@ fun CreateQuestionScreen(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
     viewModel: CreateQuestionViewModel,
+
 ) {
     CreateQuestionScreenContent(
 
         modifier = modifier,
         navHostController = navHostController,
-        onSubmitAction = { viewModel.submitQuiz(formState = it) }
-
+        onSubmitAction = { viewModel.submitQuiz() },
+        addNewQuestion ={viewModel.addNewQuestion(newQuestion = it)}
     )
 }
 
@@ -55,7 +56,8 @@ fun CreateQuestionScreen(
 fun CreateQuestionScreenContent(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
-    onSubmitAction: (CreateQuestionFormState) -> Unit = {},
+    onSubmitAction: () -> Unit = {},
+    addNewQuestion :(CreateQuestionFormState) -> Unit = {},
 ) {
     var formState by rememberSaveable { mutableStateOf(CreateQuestionFormState()) }
 
@@ -139,14 +141,13 @@ fun CreateQuestionScreenContent(
                 field.text,
                 "Вариант №${index + 1}",
                 onTextChange = { newValue ->
-                    // РЕШЕНИЕ: Создаем копию списка с обновленным элементом
                     val updatedFields = formState.fields.toMutableList()
                     updatedFields[index] = field.copy(text = newValue)
                     formState = formState.copy(fields = updatedFields)
                 },
                 color = MaterialTheme.colorScheme.secondary,
                 onDeleteClick = {
-                    // РЕШЕНИЕ: Создаем копию списка без удаленного элемента
+
                     val updatedFields = formState.fields.toMutableList()
                     updatedFields.removeAt(index)
                     formState = formState.copy(fields = updatedFields)
@@ -167,17 +168,17 @@ fun CreateQuestionScreenContent(
 
                     // Добавляем новое поле в список и обновляем стейт формы
                     formState = formState.copy(fields = (formState.fields + newField).toMutableList())
-//                         formState.fields.add(
-//                        InputField(id = formState.fields.size)
-//                    )
-                    println(formState.fields.size)
+                    //formState. = ""
+                    
                 },
                 "Добавить вариант ответа",
                 MaterialTheme.colorScheme.primary
             )
 
             Box(modifier = Modifier.fillMaxWidth()) {
-                ButtonAddParagraph(modifier = Modifier.padding(top = 30.dp, start = 280.dp)) { }
+                ButtonAddParagraph(modifier = Modifier.padding(top = 30.dp, start = 280.dp)) {
+                    addNewQuestion.invoke(formState)
+                }
             }
 
             ButtonAddVariableAnswer(
@@ -186,7 +187,7 @@ fun CreateQuestionScreenContent(
                     .width(355.dp)
                     .height(65.dp),
                 {
-                    onSubmitAction.invoke(formState)
+                    onSubmitAction()
                 },
                 "Сохранить квиз",
                 MaterialTheme.colorScheme.secondaryContainer

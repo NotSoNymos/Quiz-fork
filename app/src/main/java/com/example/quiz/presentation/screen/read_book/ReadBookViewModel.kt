@@ -26,10 +26,8 @@ class ReadBookViewModel @AssistedInject constructor(
 ) : ViewModel() {
     private val _detailsState = MutableStateFlow(ReadBookDetailsState(bookId))
     val detailsState = _detailsState.asStateFlow()
-
     private val _paragraphState = MutableStateFlow(ReadBookParagraphsState())
     val paragraphState = _paragraphState.asStateFlow()
-
     private var nextPageIndex: Int = 0
     private var currentBook: Book = Book()
 
@@ -44,22 +42,18 @@ class ReadBookViewModel @AssistedInject constructor(
             nextPageIndex += 1
         }
     }
-
     init {
         viewModelScope.launch(Dispatchers.IO) {
             currentBook = _domainRepository.getBookById(bookId)
-
             _detailsState.update {
                 it.copy(
                     title = currentBook.title,
                     description = currentBook.description
                 )
             }
-
             readNextPage()
         }
     }
-
     @AssistedFactory
     interface ReadBookViewModelFactory {
         fun create(bookId: String): ReadBookViewModel

@@ -12,9 +12,16 @@ sealed class Destinations(val icon: Int? = null) {
 
     @Serializable
     data object Login : Destinations()
-// если передавать с полями , то data class
+
+    // если передавать с полями , то data class
     @Serializable
     data class CreateQuestion(val title: String, val description: String) : Destinations()
+
+    @Serializable
+    data class DialogResolvedWorkClass(
+        val onClickLook: () -> Unit,
+        val onClickDelete: () -> Unit
+    ) : Destinations()
 
     @Serializable
     data class ReadBookParagraphs(val bookId: String) : Destinations()
@@ -23,7 +30,7 @@ sealed class Destinations(val icon: Int? = null) {
     data class ReadBookDetails(val bookId: String) : Destinations()
 
     @Serializable
-    data class ReadQuiz(val quizId: String): Destinations()
+    data class ReadQuiz(val quizId: String) : Destinations()
 
     @Serializable
     data object CreateQuiz : Destinations()
@@ -50,10 +57,11 @@ sealed class Destinations(val icon: Int? = null) {
     data object NoConnection : Destinations()
 
     @Serializable
-    data object CreateBook: Destinations()
+    data object CreateBook : Destinations()
 
     @Serializable
-    data class CreateParagraph (val title: String = "", val description: String= "") : Destinations()
+    data class CreateParagraph(val title: String = "", val description: String = "") :
+        Destinations()
 
     @Serializable
     data object Paragraph : Destinations()

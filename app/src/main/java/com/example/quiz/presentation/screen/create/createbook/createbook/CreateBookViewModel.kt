@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.quiz.data.model.Book
 import com.example.quiz.data.model.Paragraph
 import com.example.quiz.domain.repository.DomainRepositoryImpl
-import com.example.quiz.presentation.screen.create.createbook.InputParagraph
+import com.example.quiz.presentation.navigation.Destinations
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -33,24 +33,20 @@ class CreateBookViewModel @AssistedInject constructor(
 //        }
 //    }
 
-    fun submitBook(formState: CreateParagraphFormState) {
+    fun submitBook(formState: Paragraph) {
         viewModelScope.launch(Dispatchers.IO) {
             val book = Book(
                 id = UUID.randomUUID(),
                 title = bookFormState.title,
                 description = bookFormState.description,
-                list = listOf(
-                    Paragraph(
-                        title = formState.title,
-                        description = formState.description
-                    )
+                list = listParagraph.value
                 )
-            )
+
             _domainRepositoryImpl.addBook(book)
         }
     }
 
-    fun onChangeListParagraph(newItem: InputParagraph) {
+    fun onChangeListParagraph(newItem: Paragraph) {
         _listParagraph.value += Paragraph(newItem.title, newItem.description)
     }
 

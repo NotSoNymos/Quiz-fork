@@ -28,7 +28,6 @@ fun MyWorkScreen(
     navHostController: NavHostController,
 ) {
     val uiState by viewModel.uiState.collectAsState()
-
     MyWorkScreenContent(
         modifier = modifier,
         uiState = uiState,

@@ -32,6 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import com.example.quiz.R
 import com.example.quiz.data.model.Book
 import com.example.quiz.data.model.Quiz
@@ -64,6 +65,9 @@ fun CardWork(
                 painter = painterResource(R.drawable.ic_setting_config),
                 contentDescription = null,
                 modifier = Modifier
+                    .clickable(
+                        onClick ={})
+
                     .padding(start = 294.dp, top = 15.dp)
                     .size(24.dp),
                 tint = Black
@@ -293,7 +297,7 @@ fun ReadBookCard(modifier: Modifier = Modifier, description: String, title: Stri
 
 @Composable
 fun CardWorkQuiz(modifier: Modifier = Modifier, quiz: Quiz, onClick: () -> Unit, count: String) {
-    Box(){
+    Box() {
         CardWork(title = quiz.title, text = quiz.description, onClick = {}, flagSettings = false)
         Box(
             modifier = Modifier
@@ -311,7 +315,7 @@ fun CardWorkQuiz(modifier: Modifier = Modifier, quiz: Quiz, onClick: () -> Unit,
 
 @Composable
 fun CardWorkBook(modifier: Modifier = Modifier, book: Book, onClick: () -> Unit, count: String) {
-    Box(){
+    Box() {
         CardWork(title = book.title, text = book.description, onClick = {}, flagSettings = false)
         Box(
             modifier = Modifier
@@ -352,7 +356,8 @@ fun CardVariableVariant(
         )
         Text(
             text = text,
-            modifier = Modifier.heightIn(min = 80.dp)
+            modifier = Modifier
+                .heightIn(min = 80.dp)
                 .padding(start = 60.dp, top = 19.dp),
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center

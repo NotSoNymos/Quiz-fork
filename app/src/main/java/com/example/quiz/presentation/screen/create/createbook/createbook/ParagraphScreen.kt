@@ -16,28 +16,27 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.quiz.data.model.Paragraph
 import com.example.quiz.presentation.composables.ButtonAddParagraph
 import com.example.quiz.presentation.composables.SimpleButton
 import com.example.quiz.presentation.composables.SimpleOutlinedText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
 import com.example.quiz.presentation.navigation.Destinations
-import com.example.quiz.presentation.screen.create.createbook.InputParagraph
 import com.example.quiz.ui.theme.QuizTheme
 
 @Composable
 fun CreateParagraphContent(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
-    onSubmitAction: (CreateParagraphFormState) -> Unit = {},
-    onAddNewParagraph:()-> Unit={}
+    onSubmitAction: (Paragraph) -> Unit = {},
+    onAddNewParagraph: (Paragraph) -> Unit = {}
 ) {
-    var formState by rememberSaveable { mutableStateOf(CreateParagraphFormState()) }
+    var formState by rememberSaveable { mutableStateOf(Paragraph()) }
     SimpleQuizBackground(modifier = Modifier, "Создать учебник", "book", navHostController)
     Column(
         modifier = Modifier
@@ -53,7 +52,7 @@ fun CreateParagraphContent(
                 .width(335.dp),
             formState.title,
             "Название",
-            { formState = formState.copy(title = it)},
+            { formState = formState.copy(title = it) },
             MaterialTheme.colorScheme.primaryContainer,
             shape = 20
         )
@@ -71,7 +70,9 @@ fun CreateParagraphContent(
             )
 
             ButtonAddParagraph(
-                Modifier.padding(top = 470.dp, start = 260.dp), {
+                Modifier.padding(top = 470.dp, start = 260.dp),
+                {
+                    onAddNewParagraph.invoke(Paragraph())
                 })
 
             SimpleButton(
@@ -84,11 +85,9 @@ fun CreateParagraphContent(
                 onSubmitAction.invoke(formState)
                 navHostController.navigate(Destinations.Profile)
                 //viewModel.submitBook()
-
             }
         }
     }
-
 }
 
 
@@ -101,7 +100,8 @@ fun CreateParagraph(
     CreateParagraphContent(
         modifier = Modifier,
         navHostController,
-        onSubmitAction = { viewModel.submitBook(formState = it) })
+        onSubmitAction = { viewModel.submitBook(formState = it) },
+        onAddNewParagraph = { viewModel.onChangeListParagraph(newItem = it) })
 }
 
 
@@ -110,4 +110,3 @@ fun CreateParagraph(
 private fun CreateParagraphPreview() {
     QuizTheme { CreateParagraph(navHostController = rememberNavController()) }
 }
-

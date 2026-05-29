@@ -36,4 +36,5 @@ class MyWorkViewModel @Inject constructor(
     init {
         updateQuizList()
     }
+
 }
