@@ -57,11 +57,13 @@ class ReadQuizViewModel @AssistedInject constructor(
 
         val answer = currentAnswers.filter { it.second }[0]
 
-        savedQuestionsData[currentQuestionIndex - 1] = Question(
+        savedQuestionsData[currentQuestionIndex] = Question(
             question = currentQuestionText,
             answer = answer.first,
             variableAnswers = currentAnswers.map { it.first }
         )
+
+        currentQuestionIndex += 1
 
         return true
     }
@@ -96,8 +98,6 @@ class ReadQuizViewModel @AssistedInject constructor(
 
                 return@launch
             }
-
-            currentQuestionIndex += 1
 
             if (!saveTempAnswers()) {
                 //TODO: handle message - user should select only one answer!
