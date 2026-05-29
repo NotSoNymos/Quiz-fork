@@ -31,9 +31,9 @@ class ReadBookViewModel @AssistedInject constructor(
     private var nextPageIndex: Int = 0
     private var currentBook: Book = Book()
 
-//    fun isLast():Boolean{
-//        if (nextPageIndex == )
-//    }
+    fun isLast():Boolean{
+        return if (nextPageIndex == currentBook.list.size) true else false
+    }
     fun readNextPage() {
         viewModelScope.launch(Dispatchers.IO) {
             _paragraphState.update {
