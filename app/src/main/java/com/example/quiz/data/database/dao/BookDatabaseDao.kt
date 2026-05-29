@@ -26,4 +26,7 @@ interface BookDatabaseDao {
 
     @Delete
     suspend fun deleteBook(bookEntity: BookEntity)
+
+    @Query("SELECT * FROM book_tbl WHERE LOWER(title) LIKE '%' || LOWER(:searchQuery) || '%'")
+    fun searchBooks(searchQuery: String): Flow<List<BookEntity>>
 }

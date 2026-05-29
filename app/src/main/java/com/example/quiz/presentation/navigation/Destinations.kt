@@ -17,11 +17,11 @@ sealed class Destinations(val icon: Int? = null) {
     @Serializable
     data class CreateQuestion(val title: String, val description: String) : Destinations()
 
-    @Serializable
-    data class DialogResolvedWorkClass(
-        val onClickLook: () -> Unit,
-        val onClickDelete: () -> Unit
-    ) : Destinations()
+//    @Serializable
+//    data class DialogResolvedWorkClass(
+//        val onClickLook: () -> Unit,
+//        val onClickDelete: () -> Unit
+//    ) : Destinations()
 
     @Serializable
     data class ReadBookParagraphs(val bookId: String) : Destinations()
@@ -46,6 +46,11 @@ sealed class Destinations(val icon: Int? = null) {
 
     @Serializable
     data object Search : Destinations(icon = R.drawable.ic_search)
+    @Serializable
+    data object SearchBook : Destinations()
+    @Serializable
+    data object SearchQuiz : Destinations()
+
 
     @Serializable
     data object Look : Destinations(icon = R.drawable.ic_all_application)

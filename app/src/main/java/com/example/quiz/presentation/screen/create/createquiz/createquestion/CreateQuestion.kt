@@ -31,6 +31,7 @@ import com.example.quiz.presentation.composables.ButtonAddParagraph
 import com.example.quiz.presentation.composables.ButtonAddVariableAnswer
 import com.example.quiz.presentation.composables.SimpleAnswerText
 import com.example.quiz.presentation.composables.SimpleQuizBackground
+import com.example.quiz.presentation.navigation.Destinations
 import com.example.quiz.presentation.screen.create.InputField
 import com.example.quiz.ui.theme.QuizTheme
 
@@ -177,7 +178,11 @@ fun CreateQuestionScreenContent(
 
             Box(modifier = Modifier.fillMaxWidth()) {
                 ButtonAddParagraph(modifier = Modifier.padding(top = 30.dp, start = 280.dp)) {
+
                     addNewQuestion.invoke(formState)
+                    formState = formState.copy(answer = "")
+                    formState = formState.copy(question = "")
+                    formState = formState.copy(fields = emptyList<InputField>().toMutableList())
                 }
             }
 
@@ -187,7 +192,9 @@ fun CreateQuestionScreenContent(
                     .width(355.dp)
                     .height(65.dp),
                 {
+                    addNewQuestion.invoke(formState)
                     onSubmitAction()
+                    navHostController.navigate(Destinations.Home)
                 },
                 "Сохранить квиз",
                 MaterialTheme.colorScheme.secondaryContainer

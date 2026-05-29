@@ -31,7 +31,11 @@ import com.example.quiz.presentation.screen.read_quiz.ReadQuizScreen
 import com.example.quiz.presentation.screen.read_quiz.ReadQuizViewModel
 import com.example.quiz.presentation.screen.resolved.MyWorkScreenBook
 import com.example.quiz.presentation.screen.resolved.ResolvedWorkViewModel
-import com.example.quiz.presentation.screen.search.SerchScreen
+import com.example.quiz.presentation.screen.search.VariantScreen
+import com.example.quiz.presentation.screen.search.searchbook.SearchBookViewModel
+import com.example.quiz.presentation.screen.search.searchbook.SearchContent
+import com.example.quiz.presentation.screen.search.searchquiz.SearchQuizScreen
+import com.example.quiz.presentation.screen.search.searchquiz.SearchQuizViewModel
 import com.example.quiz.presentation.screen.signup.SignUpScreen
 import com.example.quiz.presentation.screen.signup.SignUpViewModel
 
@@ -86,6 +90,15 @@ fun NavigationGraph(
             CreateBookScreen(modifier = Modifier, navController)
         }
 
+        composable<Destinations.SearchBook> {
+            val viewModel: SearchBookViewModel=hiltViewModel()
+            SearchContent(Modifier, navController,viewModel)
+        }
+        composable<Destinations.SearchQuiz> {
+            val viewModel: SearchQuizViewModel=hiltViewModel()
+            SearchQuizScreen(Modifier, navController,viewModel)
+        }
+
         composable<Destinations.CreateParagraph> { currentBackStack ->
             val route = currentBackStack.toRoute<Destinations.CreateParagraph>()
             val createBookViewModel: CreateBookViewModel =
@@ -105,15 +118,16 @@ fun NavigationGraph(
                 )
         }
 
+//        composable<Destinations.DialogResolvedWorkClass> { currentBackStack ->
+//            val route = currentBackStack.toRoute<Destinations.DialogResolvedWorkClass>()
+//            DialogResolvedWork(Modifier,true,route.onClickLook, route.onClickDelete)
+//        }
+
 
         composable<Destinations.Search> {
-            SerchScreen()
+            VariantScreen(Modifier, navController)
         }
 
-
-        composable<Destinations.Search> {
-            SerchScreen()
-        }
 
         composable<Destinations.Create> {
             CreateScreen(

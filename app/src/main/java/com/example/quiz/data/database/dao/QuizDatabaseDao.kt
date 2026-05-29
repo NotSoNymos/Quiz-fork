@@ -6,7 +6,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.example.quiz.data.database.entity.BookEntity
 import com.example.quiz.data.database.entity.QuizEntity
+import com.example.quiz.data.model.Quiz
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 
@@ -26,4 +28,7 @@ interface QuizDatabaseDao {
 
     @Delete
     suspend fun deleteQuiz(quizEntity: QuizEntity)
+
+    @Query("SELECT * FROM quiz_tbl WHERE LOWER(title) LIKE '%' || LOWER(:searchQuery) || '%'")
+    fun searchQuiz(searchQuery: String): Flow<List<QuizEntity>>
 }

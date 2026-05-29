@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,6 +32,9 @@ class MyWorkViewModel @Inject constructor(
 
             _uiState.update { it.copy(quizList = result) }
         }
+    }
+    suspend fun deleteQuiz(id: UUID){
+        _domainRepositoryImpl.removeQuiz(id)
     }
 
     init {

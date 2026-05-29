@@ -69,4 +69,8 @@ class BookRepository @Inject constructor(
             list = bookEntity.list
         )
     }
+
+    fun searchBooks(query: String): Flow<List<BookEntity>> {
+        return bookDatabaseDao.searchBooks(query)
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.quiz.data.repository
 
 import com.example.quiz.data.database.dao.QuizDatabaseDao
+import com.example.quiz.data.database.entity.BookEntity
 import com.example.quiz.data.database.entity.QuizEntity
 import com.example.quiz.data.model.Quiz
 import kotlinx.coroutines.Dispatchers
@@ -71,5 +72,9 @@ class QuizRepository @Inject constructor(
 
             return@map list.toList()
         }.conflate()
+    }
+
+    fun searchQuiz(query: String): Flow<List<QuizEntity>> {
+        return quizDatabaseDao.searchQuiz(query)
     }
 }

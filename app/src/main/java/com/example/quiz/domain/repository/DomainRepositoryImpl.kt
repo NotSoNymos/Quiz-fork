@@ -1,5 +1,7 @@
 package com.example.quiz.domain.repository
 
+import com.example.quiz.data.database.entity.BookEntity
+import com.example.quiz.data.database.entity.QuizEntity
 import com.example.quiz.data.model.Book
 import com.example.quiz.data.model.Question
 import com.example.quiz.data.model.Quiz
@@ -117,6 +119,13 @@ class DomainRepositoryImpl @Inject constructor(
 
     override suspend fun updateQuiz(quizToSave: Quiz) {
         _quizRepository.updateQuiz(quizToSave)
+    }
+
+     fun searchBook(query: String): Flow<List<BookEntity>>{
+        return _bookRepository.searchBooks(query)
+    }
+    fun searchQuiz(query: String): Flow<List<QuizEntity>>{
+        return _quizRepository.searchQuiz(query)
     }
 
 

@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.room.Delete
 import com.example.quiz.R
 import com.example.quiz.data.model.Book
 import com.example.quiz.data.model.Quiz
@@ -47,8 +48,9 @@ fun CardWork(
     text: String,
     onClick: () -> Unit,
     flagSettings: Boolean,
+    onDelete: () -> Unit
 
-    ) {
+) {
     Box(
         modifier = Modifier
             .padding(bottom = 20.dp)
@@ -66,7 +68,7 @@ fun CardWork(
                 contentDescription = null,
                 modifier = Modifier
                     .clickable(
-                        onClick ={})
+                        onClick = onDelete)
 
                     .padding(start = 294.dp, top = 15.dp)
                     .size(24.dp),
@@ -298,7 +300,12 @@ fun ReadBookCard(modifier: Modifier = Modifier, description: String, title: Stri
 @Composable
 fun CardWorkQuiz(modifier: Modifier = Modifier, quiz: Quiz, onClick: () -> Unit, count: String) {
     Box() {
-        CardWork(title = quiz.title, text = quiz.description, onClick = {}, flagSettings = false)
+        CardWork(
+            title = quiz.title,
+            text = quiz.description,
+            onClick = {},
+            flagSettings = false,
+            onDelete = {})
         Box(
             modifier = Modifier
                 .padding(top = 24.dp, start = 206.dp)
@@ -316,7 +323,12 @@ fun CardWorkQuiz(modifier: Modifier = Modifier, quiz: Quiz, onClick: () -> Unit,
 @Composable
 fun CardWorkBook(modifier: Modifier = Modifier, book: Book, onClick: () -> Unit, count: String) {
     Box() {
-        CardWork(title = book.title, text = book.description, onClick = {}, flagSettings = false)
+        CardWork(
+            title = book.title,
+            text = book.description,
+            onClick = {},
+            flagSettings = false,
+            onDelete = {})
         Box(
             modifier = Modifier
                 .padding(top = 24.dp, start = 206.dp)
@@ -535,7 +547,7 @@ private fun ButtonDelete() {
 @Preview
 @Composable
 private fun CardWorkPrev() {
-    QuizTheme { CardWork(modifier = Modifier, "Title", "description", {}, false) }
+    QuizTheme { CardWork(modifier = Modifier, "Title", "description", {}, false, {}) }
 }
 
 @Preview

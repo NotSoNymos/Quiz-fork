@@ -44,6 +44,7 @@ fun MyWorkScreenContent(
     uiState: MyWorkState,
     onCardNavigateAction: (quizId: String) -> Unit = {},
     navHostController: NavHostController,
+
 ) {
     SimpleCreateBackground(modifier, "Мои работы", navHostController)
 
@@ -58,7 +59,8 @@ fun MyWorkScreenContent(
                 modifier = Modifier, title = quiz.title,
                 text = quiz.description,
                 onClick = { onCardNavigateAction.invoke(quiz.id.toString()) },
-                flagSettings = true
+                flagSettings = true,
+                onDelete = {}
             )
         }
     }

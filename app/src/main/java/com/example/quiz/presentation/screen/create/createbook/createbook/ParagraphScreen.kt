@@ -73,6 +73,9 @@ fun CreateParagraphContent(
                 Modifier.padding(top = 470.dp, start = 260.dp),
                 {
                     onAddNewParagraph.invoke(Paragraph(formState.title, formState.description))
+                    formState = formState.copy(title ="")
+                    formState = formState.copy(description ="")
+
                 })
 
             SimpleButton(
@@ -82,8 +85,9 @@ fun CreateParagraphContent(
                     .width(226.dp),
                 "Сохранить"
             ) {
+                onAddNewParagraph.invoke(Paragraph(formState.title, formState.description))
                 onSubmitAction()
-                navHostController.navigate(Destinations.Profile)
+                navHostController.navigate(Destinations.Home)
                 //viewModel.submitBook()
             }
         }

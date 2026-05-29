@@ -33,7 +33,7 @@ fun MyWorkScreenBook(
             .fillMaxSize()
     ) {
         items(viewModel.listBooks.value) { item ->
-            CardWork(Modifier, item.title, item.description, {}, true)
+            CardWork(Modifier, item.title, item.description, {}, true, {})
         }
     }
 }

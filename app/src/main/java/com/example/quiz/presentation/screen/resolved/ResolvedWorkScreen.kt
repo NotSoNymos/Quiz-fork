@@ -53,7 +53,7 @@ fun MyWorkScreenBookContent(
                 modifier = Modifier, title = book.title,
                 text = book.description,
                 onClick = { onCardNavigateAction.invoke(book.id.toString()) },
-                flagSettings = true
+                flagSettings = true,{}
             )
         }
     }
