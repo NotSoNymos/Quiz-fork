@@ -44,7 +44,7 @@ fun MyWorkScreenBookContent(
     navHostController: NavHostController,
     onDelete:(id: String)->Unit={}
 ) {
-    SimpleCreateBackground(modifier, "Мои работы", navHostController)
+    SimpleCreateBackground(modifier, "Мои учебники", navHostController)
 
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,

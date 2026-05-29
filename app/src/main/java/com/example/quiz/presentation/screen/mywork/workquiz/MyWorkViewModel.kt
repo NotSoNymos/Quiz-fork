@@ -33,8 +33,12 @@ class MyWorkViewModel @Inject constructor(
             _uiState.update { it.copy(quizList = result) }
         }
     }
-    suspend fun deleteQuiz(id: UUID){
-        _domainRepositoryImpl.removeQuiz(id)
+    fun deleteQuiz(id: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            _domainRepositoryImpl.removeQuiz(UUID.fromString(id))
+            updateQuizList()
+        }
+
     }
 
     init {

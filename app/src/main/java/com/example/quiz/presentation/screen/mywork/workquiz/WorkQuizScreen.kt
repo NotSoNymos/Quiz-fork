@@ -34,7 +34,8 @@ fun MyWorkScreen(
         navHostController = navHostController,
         onCardNavigateAction = {
             navHostController.navigate(Destinations.ReadQuiz(it))
-        }
+        },
+        onDeleteCard ={ id -> viewModel.deleteQuiz(id = id)}
     )
 }
 
@@ -44,9 +45,10 @@ fun MyWorkScreenContent(
     uiState: MyWorkState,
     onCardNavigateAction: (quizId: String) -> Unit = {},
     navHostController: NavHostController,
+    onDeleteCard:(id: String)-> Unit={}
 
 ) {
-    SimpleCreateBackground(modifier, "Мои работы", navHostController)
+    SimpleCreateBackground(modifier, "Мои квизы", navHostController)
 
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -60,7 +62,7 @@ fun MyWorkScreenContent(
                 text = quiz.description,
                 onClick = { onCardNavigateAction.invoke(quiz.id.toString()) },
                 flagSettings = true,
-                onDelete = {}
+                onDelete = {onDeleteCard.invoke(quiz.id.toString())}
             )
         }
     }
