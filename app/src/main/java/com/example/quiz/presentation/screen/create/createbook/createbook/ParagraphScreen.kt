@@ -72,7 +72,7 @@ fun CreateParagraphContent(
             ButtonAddParagraph(
                 Modifier.padding(top = 470.dp, start = 260.dp),
                 {
-                    onAddNewParagraph.invoke(Paragraph())
+                    onAddNewParagraph.invoke(Paragraph(formState.title, formState.description))
                 })
 
             SimpleButton(

@@ -31,11 +31,14 @@ class ReadBookViewModel @AssistedInject constructor(
     private var nextPageIndex: Int = 0
     private var currentBook: Book = Book()
 
+//    fun isLast():Boolean{
+//        if (nextPageIndex == )
+//    }
     fun readNextPage() {
         viewModelScope.launch(Dispatchers.IO) {
             _paragraphState.update {
                 it.copy(
-                    title = currentBook.title,
+                    title = currentBook.list.getOrElse(nextPageIndex) { Paragraph() }.title,
                     paragraphText = currentBook.list.getOrElse(nextPageIndex) { Paragraph() }.description
                 )
             }
