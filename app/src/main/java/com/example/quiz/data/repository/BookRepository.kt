@@ -3,6 +3,7 @@ package com.example.quiz.data.repository
 import com.example.quiz.data.database.dao.BookDatabaseDao
 import com.example.quiz.data.database.entity.BookEntity
 import com.example.quiz.data.model.Book
+import com.example.quiz.data.model.Quiz
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.conflate
@@ -25,7 +26,7 @@ class BookRepository @Inject constructor(
     }
 
     suspend fun deleteBook(id: String) {
-        val bookEntity = bookDatabaseDao.getBookById(id)
+        val bookEntity = bookDatabaseDao.getBookById(UUID.fromString(id))
 
         bookDatabaseDao.deleteBook(bookEntity)
     }
@@ -57,8 +58,10 @@ class BookRepository @Inject constructor(
         }.conflate()
     }
 
+
+
     suspend fun getBookById(id: String): Book {
-        val bookEntity = bookDatabaseDao.getBookById(id)
+        val bookEntity = bookDatabaseDao.getBookById(UUID.fromString(id))
         return Book(
             id = bookEntity.id,
             title = bookEntity.title,
