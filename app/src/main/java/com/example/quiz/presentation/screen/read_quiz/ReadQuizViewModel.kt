@@ -85,6 +85,7 @@ class ReadQuizViewModel @AssistedInject constructor(
         viewModelScope.launch(Dispatchers.IO) {
 
             if (!currentQuestionIterator.hasNext()) {
+                saveTempAnswers()
                 saveAllAnswers()
 
                 _uiState.update {

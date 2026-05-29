@@ -37,9 +37,9 @@ class DomainRepositoryImpl @Inject constructor(
                 description = "Описание проверочного квиза!",
                 questions = listOf(
                     Question(
-                        "Первый вопрос",
-                        "Правильный ответ!",
-                        listOf(
+                        question = "Первый вопрос",
+                        //answer = "Правильный ответ!",
+                        variableAnswers = listOf(
                             "Неправильный ответ",
                             "Правильный ответ!",
                             "Ещё один неправильный ответ",
@@ -48,7 +48,7 @@ class DomainRepositoryImpl @Inject constructor(
                     ),
                     Question(
                         question = "Второй вопрос!",
-                        answer = "Точно-точно правильный ответ",
+                        //answer = "Точно-точно правильный ответ",
                         variableAnswers = listOf(
                             "Точно-точно правильный ответ",
                             "Может быть неправильный ответ",
@@ -58,8 +58,8 @@ class DomainRepositoryImpl @Inject constructor(
                     ),
                     Question(
                         question = "Сова!",
-                        answer = "Сова",
-                        variableAnswers = listOf("Сова", "Сова"),
+                        //answer = "Сова",
+                        variableAnswers = listOf("Сова", "Не сова.."),
                     )
                 )
             )
